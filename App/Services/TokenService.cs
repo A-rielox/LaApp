@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using App.interfaces;
+using App.Entities;
 
 namespace App.Services;
 

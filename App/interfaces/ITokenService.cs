@@ -1,4 +1,6 @@
-﻿namespace App.interfaces;
+﻿using App.Entities;
+
+namespace App.interfaces;
 
 public interface ITokenService
 {

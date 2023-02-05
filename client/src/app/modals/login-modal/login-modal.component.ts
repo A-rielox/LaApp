@@ -47,11 +47,11 @@ export class LoginModalComponent implements OnInit {
          },
          error: (err) => {
             // ahora mando el error desde el interceptor
-            this.notification.addNoti({
-               severity: 'error',
-               summary: 'Error al entrar.',
-               detail: err.error,
-            });
+            // this.notification.addNoti({
+            //    severity: 'error',
+            //    summary: 'Error al entrar.',
+            //    detail: err.error,
+            // });
          },
       });
 

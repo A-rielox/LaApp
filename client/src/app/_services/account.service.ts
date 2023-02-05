@@ -33,14 +33,6 @@ export class AccountService {
             console.log(res);
          })
       );
-
-      // return this.http.post<User>(this.baseUrl + 'account/login', model).pipe(
-      //    map((user) => {
-      //       if (user) {
-      //          this.setCurrentUser(user);
-      //       }
-      //    })
-      // );
    }
 
    register(model: RegisterModel) {

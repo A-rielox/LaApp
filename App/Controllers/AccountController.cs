@@ -2,11 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
 using System.Text;
-using App;
-using App.Controllers;
 using App.Data;
 using App.DTOs;
 using App.interfaces;
+using App.Entities;
 
 namespace App.Controllers;
 

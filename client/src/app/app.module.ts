@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,6 +15,10 @@ import { MessagesComponent } from './messages/messages.component';
 import { MembersModule } from './members/members.module';
 import { HomeModule } from './home/home.module';
 import { NotificationsModule } from './notifications/notifications.module';
+import { TestErrorComponent } from './errors/test-error/test-error.component';
+import { ErrorInterceptor } from './_interceptors/error.interceptor';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
 
 @NgModule({
    declarations: [
@@ -23,6 +27,9 @@ import { NotificationsModule } from './notifications/notifications.module';
       LoginModalComponent,
       LikesComponent,
       MessagesComponent,
+      TestErrorComponent,
+      NotFoundComponent,
+      ServerErrorComponent,
    ],
    imports: [
       BrowserModule,
@@ -38,7 +45,9 @@ import { NotificationsModule } from './notifications/notifications.module';
       MembersModule,
       HomeModule,
    ],
-   providers: [],
+   providers: [
+      { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+   ],
    bootstrap: [AppComponent],
 })
 export class AppModule {}

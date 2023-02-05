@@ -84,11 +84,13 @@ export class RegisterModalComponent implements OnInit {
             console.log('error: ', error);
             // los errores q vienen del interceptor
             this.validationErrors = error;
-            this.notification.addNoti({
-               severity: 'error',
-               summary: 'Error al entrar.',
-               detail: error.error,
-            });
+
+            // estoy mandando notificacion desde el interceptor de errores
+            // this.notification.addNoti({
+            //    severity: 'error',
+            //    summary: 'Error al entrar.',
+            //    detail: error.error,
+            // });
          },
       });
    }
