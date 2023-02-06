@@ -1,0 +1,53 @@
+<div
+   *ngIf="member"
+   class="relative overflow-hidden"
+   (mouseenter)="visibleMember = index!"
+   (mouseleave)="visibleMember = null"
+>
+   <img
+      src="{{ member.photoUrl || '../../assets/user.png' }}"
+      class="w-full block"
+   />
+
+   <div
+      class="absolute top-0 left-0 h-full w-full border-round fadein animation-duration-300 select-none"
+      style="background-color: rgba(0, 0, 0, 0.7)"
+      *ngIf="visibleMember === index"
+   >
+      <div class="flex flex-column p-5 h-full">
+         <span class="block font-medium text-white text-xl mb-3">{{
+            member.knownAs
+         }}</span>
+         <span class="font-medium text-400"
+            >{{ member.country }} - {{ member.city }}</span
+         >
+         <div class="mt-auto flex justify-content-around flex-wrap">
+            <!--              link user -->
+            <a
+               routerLink="/members/{{ member.userName }}"
+               tabindex="0"
+               class="cursor-pointer text-white"
+               ><i class="pi pi-user text-600 text-xl text-cyan-500"></i
+            ></a>
+
+            <!--              link like -->
+            <a
+               tabindex="0"
+               class="cursor-pointer text-white"
+               (click)="addLike(member.userName)"
+               ><i class="pi pi-heart text-600 text-xl text-pink-500"></i
+            ></a>
+
+            <!--              link mensaje -->
+            <!-- http://.../members/karen?tab=Mensajes -->
+            <a
+               tabindex="0"
+               class="cursor-pointer text-white"
+               routerLink="/members/{{ member.userName }}"
+               [queryParams]="{ tab: 'Mensajes' }"
+               ><i class="pi pi-envelope text-600 text-xl text-green-500"></i
+            ></a>
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,1 +1,151 @@
-<p>member-detail works!</p>
+<div class="surface-section px-4 py-8 md:px-6 lg:px-8" *ngIf="member">
+   <div class="grid mb-2">
+      <!--                 CARTA USUARIO -->
+      <!--                 CARTA USUARIO -->
+      <!--                 CARTA USUARIO -->
+      <div class="col-12 lg:col-4 py-3">
+         <div
+            class="flex align-items-center text-3xl font-medium text-900 mb-4"
+         >
+            {{ member.knownAs }}
+         </div>
+
+         <div class="flex justify-content-center">
+            <img
+               src="{{ member.photoUrl || '../../assets/user.png' }}"
+               alt="Image"
+               width="250"
+               class="border-round-md shadow-3"
+            />
+         </div>
+
+         <!--                 Ubicacion -->
+         <p-divider align="center">
+            <div class="inline-flex align-items-center">
+               <i class="pi pi-map-marker mr-2 text-cyan-500"></i>
+               <b class="text-500">Ubicación</b>
+            </div>
+         </p-divider>
+
+         <div class="flex flex-column justify-content-start mb-5">
+            <span class="font-bold text-900">{{ member.country }}</span>
+            <span class="text-900 font-medium text-base block">{{
+               member.city
+            }}</span>
+         </div>
+
+         <!--                 Nivel -->
+         <p-divider align="center">
+            <div class="inline-flex align-items-center">
+               <i class="pi pi-chart-line mr-2 text-cyan-500"></i>
+               <b class="text-500">Nivel</b>
+            </div>
+         </p-divider>
+         <!-- <span class="font-bold text-900">Nivel</span> -->
+         <div class="flex align-items-center justify-content-start mb-5">
+            <div class="font-bold text-900 mr-3">Plata</div>
+            <div
+               class="w-2rem h-2rem flex-shrink-0 border-circle bg-green-500"
+            ></div>
+         </div>
+
+         <!--                 Activo por última vez -->
+         <p-divider align="center">
+            <div class="inline-flex align-items-center">
+               <i class="pi pi-map-marker mr-2 text-cyan-500"></i>
+               <b class="text-500">Activo por última vez</b>
+            </div>
+         </p-divider>
+
+         <div class="flex flex-column justify-content-start mb-5">
+            <!-- <span class="font-bold text-900">{{member.lastActive + "z" | timeago}}</span> -->
+            <span class="font-bold text-900">{{
+               member.lastActive + "z"
+            }}</span>
+         </div>
+
+         <!--                 like y messages -->
+         <p-divider align="center">
+            <div class="inline-flex align-items-center">
+               <i class="pi pi-heart mr-2 text-cyan-500"></i>
+               <i class="pi pi-pencil mr-2 text-cyan-500"></i>
+            </div>
+         </p-divider>
+         <div class="p-buttonset">
+            <button
+               pButton
+               label="Like"
+               icon="pi pi-heart"
+               class="p-button-danger w-6"
+            ></button>
+
+            <button
+               pButton
+               label="Mensajes"
+               icon="pi pi-pencil"
+               class="w-6"
+               (click)="selectTab()"
+            ></button>
+         </div>
+      </div>
+
+      <!--                 TABS -->
+      <!--                 TABS -->
+      <!--                 TABS -->
+      <div class="col-12 lg:col-8 lg:pl-6">
+         <!-- (onChange)="onTabChanged($event)" -->
+         <p-tabView [(activeIndex)]="activeTabIndex">
+            <p-tabPanel header="Acerca de {{ member.knownAs }}">
+               <ul class="list-none p-0 m-0">
+                  <li class="pb-5 border-bottom-1 surface-border">
+                     <div class="text-900 font-medium text-xl my-3">
+                        Introducción
+                     </div>
+                     <p class="mx-0 mt-0 mb-3 text-700 line-height-3">
+                        {{ member.introduction }}
+                     </p>
+                  </li>
+
+                  <li class="py-5">
+                     <div class="text-900 font-medium text-xl my-3">
+                        Intereses
+                     </div>
+                     <p class="mx-0 mt-0 mb-3 text-700 line-height-3">
+                        {{ member.interests }}
+                     </p>
+                  </li>
+               </ul>
+            </p-tabPanel>
+
+            <p-tabPanel header="Fotos">
+               <p-galleria
+                  [value]="images"
+                  [responsiveOptions]="responsiveOptions"
+                  [containerStyle]="{ 'max-width': '640px' }"
+                  [numVisible]="5"
+               >
+                  <ng-template pTemplate="item" let-item>
+                     <img [src]="item.previewImageSrc" style="width: 100%" />
+                  </ng-template>
+
+                  <ng-template pTemplate="thumbnail" let-item>
+                     <div class="grid grid-nogutter justify-content-center">
+                        <img
+                           [src]="item.thumbnailImageSrc"
+                           style="height: 70px"
+                        />
+                     </div>
+                  </ng-template>
+               </p-galleria>
+            </p-tabPanel>
+
+            <p-tabPanel header="Mensajes">
+               <!-- <app-member-messages
+                  [username]="member.userName"
+                  [messages]="messages"
+               ></app-member-messages> -->
+            </p-tabPanel>
+         </p-tabView>
+      </div>
+   </div>
+</div>

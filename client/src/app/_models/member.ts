@@ -5,10 +5,8 @@ export interface Member {
    userName: string;
    email: string;
    photoUrl: string;
-   age: number;
    knownAs: string;
    lastActive: Date;
-   gender: string;
    introduction: string;
    interests: string;
    city: string;

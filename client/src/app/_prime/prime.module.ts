@@ -10,6 +10,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { AvatarModule } from 'primeng/avatar';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { DividerModule } from 'primeng/divider';
+import { TabViewModule } from 'primeng/tabview';
+import { GalleriaModule } from 'primeng/galleria';
 
 @NgModule({
    declarations: [],
@@ -23,6 +26,9 @@ import { InputTextModule } from 'primeng/inputtext';
       StyleClassModule,
       DialogModule,
       InputTextModule,
+      DividerModule,
+      TabViewModule,
+      GalleriaModule,
    ],
    exports: [
       ButtonModule,
@@ -33,6 +39,9 @@ import { InputTextModule } from 'primeng/inputtext';
       StyleClassModule,
       DialogModule,
       InputTextModule,
+      DividerModule,
+      TabViewModule,
+      GalleriaModule,
    ],
 })
 export class PrimeModule {}

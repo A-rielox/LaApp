@@ -1,6 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { AccountService } from './_services/account.service';
 import { User } from './_models/user';
 
@@ -10,25 +8,10 @@ import { User } from './_models/user';
    styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-   users: any;
-   baseUrl = environment.apiUrl;
-
-   constructor(
-      private http: HttpClient,
-      private accountService: AccountService
-   ) {}
+   constructor(private accountService: AccountService) {}
 
    ngOnInit(): void {
-      this.getUsers();
       this.setCurrentUser();
-   }
-
-   getUsers() {
-      this.http.get(this.baseUrl + 'users').subscribe({
-         next: (res) => {
-            this.users = res;
-         },
-      });
    }
 
    setCurrentUser() {

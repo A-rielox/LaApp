@@ -1,1 +1,106 @@
-<p>member-list works!</p>
+<div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+   <div class="text-center font-bold text-900 text-5xl mb-3">El Equipo</div>
+   <div class="text-center text-xl line-height-3 text-600 mb-6">
+      Todos comprometidos con mejorar nuestro estilo de vida de una forma sana y
+      natural.
+   </div>
+
+   <!-- <div class="field col-12 md:col-6"> -->
+   <!-- <div
+      class="field flex align-items-center justify-content-end"
+      *ngIf="userParams"
+   >
+      <label for="sort" class="font-normal text-900 mb-0 mr-2 text-sm"
+         >Ordenar por:</label
+      >
+      <p-selectButton
+         [options]="sortingOpts"
+         [(ngModel)]="userParams.orderBy"
+         name="sort"
+         optionLabel="label"
+         optionValue="name"
+         (onOptionClick)="loadMembers()"
+      ></p-selectButton>
+   </div> -->
+
+   <div class="grid">
+      <div
+         class="col-12 md:col-6 lg:col-3 p-3"
+         *ngFor="let member of members; let i = index"
+      >
+         <app-member-card [member]="member" [index]="i"></app-member-card>
+      </div>
+   </div>
+
+   <!-- <div class="flex justify-content-center" *ngIf="pagination && userParams">
+      <app-paginator
+         [numberOfPages]="pagination.totalPages"
+         [currentPage]="pagination.currentPage"
+         (changePage)="pageChanged($event)"
+      ></app-paginator>
+   </div> -->
+</div>
+
+<!--  -->
+<!--  -->
+<!--  -->
+
+<div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+   <div class="text-center font-bold text-900 text-5xl mb-3">El Equipo</div>
+   <div class="text-center text-xl line-height-3 text-600 mb-6">
+      Todos comprometidos con mejorar nuestro estilo de vida de una forma sana y
+      natural.
+   </div>
+
+   <div class="grid justify-content-center">
+      <!-- <div
+         class="shadow-2 p-4 mb-5 lg:mb-0 mr-0 lg:mr-5 surface-card col-12 md:col-6 lg:col-3 p-3"
+         *ngFor="let member of members"
+      > -->
+      <div
+         class="shadow-2 p-4 mb-5 mr-0 lg:mr-5 surface-card col-12 md:col-6 lg:col-3 flex flex-column"
+         *ngFor="let member of members"
+      >
+         <img
+            src="{{ member.photoUrl || '../../assets/user.png' }}"
+            class="mb-3 w-12"
+         />
+
+         <div class="flex flex-column flex-grow-1 justify-content-between">
+            <div class="pr-3">
+               <div class="text-xl text-900 font-medium mb-2">
+                  {{ member.knownAs }}
+               </div>
+               <div class="text-blue-600">
+                  {{ member.country }} - {{ member.city }}
+               </div>
+            </div>
+
+            <!--  mt-4  -->
+            <div class="flex flex-nowrap justify-content-around mt-4">
+               <button
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="pi pi-user"
+                  class="p-button-rounded p-button-help p-button-outlined"
+               ></button>
+               <button
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="pi pi-heart"
+                  class="p-button-rounded p-button-danger p-button-outlined XXXXXXD"
+               ></button>
+               <button
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="pi pi-envelope"
+                  class="p-button-rounded p-button-success p-button-outlined"
+               ></button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
