@@ -27,7 +27,9 @@ public class TokenService : ITokenService
     {
         var claims = new List<Claim>
             {
+                // este lo agarro con "ClaimTypes.NameIdentifier" (en var username = User.FindFirst(ClaimTypes.Name)?.Value;)
                 new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()),
+                // este lo agarro con "ClaimTypes.Name"
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
             };
 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using App.Interfaces;
 using AutoMapper;
 using App.DTOs;
+using System.Security.Claims;
 
 namespace App.Controllers;
 
@@ -43,4 +44,26 @@ public class UsersController : BaseApiController
 
         return Ok(member);
     }
+
+    ////////////////////////////////////////////////
+    ///////////////////////////////////////////////////
+    // PUT: api/Users/
+    [HttpPut]
+    public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
+    {
+        var username = User.FindFirst(ClaimTypes.Name)?.Value;
+        //var username = User.GetUsername();
+
+        var user = await _userRepository.GetUserByUsernameAsync(username);
+
+        if (user == null) return NotFound();
+
+        // hace el update en el user con lo q tiene el memberUpdateDto
+        _mapper.Map(memberUpdateDto, user);
+
+        if (await _userRepository.SaveAllAsync()) return NoContent();
+
+        return BadRequest("Problemas editando el usuario.");
+    }
+
 }

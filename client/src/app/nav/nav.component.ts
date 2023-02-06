@@ -22,9 +22,9 @@ export class NavComponent implements OnInit {
          {
             label: 'Editar Perfil',
             icon: 'pi pi-cog',
-            routerLink: ['/miembro/edit'],
+            routerLink: ['/members/edit'],
             // command: () => {
-            //   this.update();  routerLink="/miembro/edit"
+            //   this.update();  routerLink="/members/edit"
             // },
          },
          {

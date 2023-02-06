@@ -163,9 +163,10 @@
                   <i class="pi pi-angle-down ml-auto lg:ml-3"></i>
                </a>
             </li>
-            <p-menu #menu [popup]="true" [model]="items" class=""></p-menu>
 
             <!-- los del dropdown -->
+            <p-menu #menu [popup]="true" [model]="items" class=""></p-menu>
+            <!-- menu en pantalla chica -->
             <ng-container *ngIf="accountService.currentUser$ | async">
                <li class="block lg:hidden">
                   <a
@@ -179,11 +180,9 @@
                </li>
 
                <li (click)="logout()" class="block lg:hidden">
-                  <a
-                     [class]="aClass()"
-                     routerLink="/errors"
-                     routerLinkActive="active"
-                  >
+                  <!-- routerLink="/"
+                  routerLinkActive="active" -->
+                  <a [class]="aClass()">
                      <i class="pi pi-sign-out mr-2"></i>
                      <span class="font-medium">Salir</span>
                   </a>

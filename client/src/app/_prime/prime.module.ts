@@ -13,6 +13,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DividerModule } from 'primeng/divider';
 import { TabViewModule } from 'primeng/tabview';
 import { GalleriaModule } from 'primeng/galleria';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @NgModule({
    declarations: [],
@@ -29,6 +31,8 @@ import { GalleriaModule } from 'primeng/galleria';
       DividerModule,
       TabViewModule,
       GalleriaModule,
+      InputTextareaModule,
+      SelectButtonModule,
    ],
    exports: [
       ButtonModule,
@@ -42,6 +46,8 @@ import { GalleriaModule } from 'primeng/galleria';
       DividerModule,
       TabViewModule,
       GalleriaModule,
+      InputTextareaModule,
+      SelectButtonModule,
    ],
 })
 export class PrimeModule {}

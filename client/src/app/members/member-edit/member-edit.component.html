@@ -1,0 +1,219 @@
+<div class="surface-section px-4 py-4 md:px-6 lg:px-8" *ngIf="member">
+   <div class="grid mb-2">
+      <div class="col-12 lg:col-4 py-3">
+         <div
+            class="flex align-items-center text-3xl font-medium text-900 mb-4"
+         >
+            Tu Perfil
+         </div>
+      </div>
+
+      <div class="col-12 lg:col-8 py-3">
+         <div
+            *ngIf="editForm.dirty"
+            class="flex align-items-start px-4 py-2 bg-yellow-100 border-round border-1 border-yellow-300"
+         >
+            <i
+               class="pi pi-exclamation-triangle text-yellow-900 text-2xl mr-3"
+            ></i>
+            <div class="ml-3">
+               <p class="m-0 p-0 text-yellow-700 line-height-3">
+                  Cualquier cambio no guardado se perderá.
+               </p>
+            </div>
+         </div>
+      </div>
+
+      <!--                 CARTA USUARIO -->
+      <!--                 CARTA USUARIO -->
+      <!--                 CARTA USUARIO -->
+      <div class="col-12 lg:col-4 py-3">
+         <div
+            class="flex align-items-center text-3xl font-medium text-900 mb-4"
+         >
+            {{ member.knownAs }}
+         </div>
+
+         <div class="flex justify-content-center">
+            <img
+               src="{{ member.photoUrl || '../../assets/user.png' }}"
+               alt="Image"
+               width="250"
+               class="border-round-md shadow-3"
+            />
+         </div>
+
+         <!--                 Ubicacion -->
+         <p-divider align="left">
+            <div class="inline-flex align-items-center">
+               <i class="pi pi-map-marker mr-2 text-cyan-500"></i>
+               <b class="text-500">Ubicación</b>
+            </div>
+         </p-divider>
+
+         <div class="flex flex-column justify-content-start mb-5">
+            <span class="font-bold text-900">{{ member.country }}</span>
+            <span class="text-900 font-medium text-base block">{{
+               member.city
+            }}</span>
+         </div>
+
+         <!--                 Nivel -->
+         <p-divider align="right">
+            <div class="inline-flex align-items-center">
+               <i class="pi pi-chart-line mr-2 text-cyan-500"></i>
+               <b class="text-500">Nivel</b>
+            </div>
+         </p-divider>
+         <!-- <span class="font-bold text-900">Nivel</span> -->
+         <div class="flex align-items-center justify-content-start mb-5">
+            <div class="font-bold text-900 mr-3">Plata</div>
+            <div
+               class="w-2rem h-2rem flex-shrink-0 border-circle bg-green-500"
+            ></div>
+         </div>
+
+         <!--                 Activo por última vez -->
+         <p-divider align="center">
+            <div class="inline-flex align-items-center">
+               <i class="pi pi-map-marker mr-2 text-cyan-500"></i>
+               <b class="text-500">Activo por última vez</b>
+            </div>
+         </p-divider>
+
+         <div class="flex flex-column justify-content-start mb-5">
+            <!-- <span class="font-bold text-900">{{member.lastActive + "z" | timeago}}</span> -->
+            <span class="font-bold text-900">{{
+               member.lastActive + "z" | date
+            }}</span>
+         </div>
+
+         <!--                 boton guardar -->
+         <p-divider></p-divider>
+
+         <!-- "form="editForm"" es referencia al "id" de la form -->
+         <button
+            pButton
+            label="Guardar"
+            icon="pi pi-save"
+            class="p-button w-12"
+            [disabled]="!editForm.dirty"
+            type="submit"
+            form="editForm"
+         ></button>
+      </div>
+
+      <!--                 TABS -->
+      <!--                 TABS -->
+      <!--                 TABS -->
+      <div class="col-12 lg:col-8 lg:pl-6">
+         <p-tabView>
+            <p-tabPanel header="Acerca de {{ member.knownAs }}">
+               <form
+                  #editForm="ngForm"
+                  id="editForm"
+                  (ngSubmit)="updateMember()"
+               >
+                  <div class="grid formgrid p-fluid">
+                     <!--        NICKNAME -->
+                     <div class="field col-12 md:col-6">
+                        <label for="knownAs" class="font-medium text-900"
+                           >Nickname</label
+                        >
+                        <input
+                           id="knownAs"
+                           type="text"
+                           pInputText
+                           [(ngModel)]="member.knownAs"
+                           name="knownAs"
+                        />
+                     </div>
+
+                     <!--        EMAIL -->
+                     <div class="field col-12 md:col-6">
+                        <label for="email" class="font-medium text-900"
+                           >Email</label
+                        >
+                        <input
+                           id="email"
+                           type="text"
+                           pInputText
+                           [(ngModel)]="member.email"
+                           name="email"
+                        />
+                     </div>
+
+                     <p-divider class="col-12"></p-divider>
+
+                     <!--        INTRODUCTION -->
+                     <div class="field col-12 md:col-6">
+                        <label for="introduction" class="font-medium text-900"
+                           >Introducción</label
+                        >
+                        <textarea
+                           id="introduction"
+                           type="text"
+                           pInputTextarea
+                           rows="5"
+                           [autoResize]="true"
+                           [(ngModel)]="member.introduction"
+                           name="introduction"
+                        ></textarea>
+                     </div>
+
+                     <!--        INTERESTS -->
+                     <div class="field col-12 md:col-6">
+                        <label for="interests" class="font-medium text-900"
+                           >Intereses</label
+                        >
+                        <textarea
+                           id="interests"
+                           type="text"
+                           pInputTextarea
+                           rows="5"
+                           [autoResize]="true"
+                           [(ngModel)]="member.interests"
+                           name="interests"
+                        ></textarea>
+                     </div>
+
+                     <p-divider class="col-12"></p-divider>
+
+                     <!--        COUNTRY -->
+                     <div class="field col-12 md:col-6">
+                        <label for="country" class="font-medium text-900"
+                           >País</label
+                        >
+                        <input
+                           id="country"
+                           type="text"
+                           pInputText
+                           [(ngModel)]="member.country"
+                           name="country"
+                        />
+                     </div>
+
+                     <!--        CITY -->
+                     <div class="field col-12 md:col-6">
+                        <label for="city" class="font-medium text-900"
+                           >Ciudad</label
+                        >
+                        <input
+                           id="city"
+                           type="text"
+                           pInputText
+                           [(ngModel)]="member.city"
+                           name="city"
+                        />
+                     </div>
+                  </div>
+               </form>
+            </p-tabPanel>
+
+            <p-tabPanel header="Editar Fotos">
+               <!-- <app-photo-editor [member]="member"></app-photo-editor> -->
+            </p-tabPanel>
+         </p-tabView>
+      </div>
+   </div>
+</div>
