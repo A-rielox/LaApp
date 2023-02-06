@@ -1,4 +1,5 @@
 ﻿using App.Data;
+using App.Helpers;
 using App.Interfaces;
 using App.Services;
 using Microsoft.EntityFrameworkCore;
@@ -32,8 +33,8 @@ public static class ApplicationServiceExtensions
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-        //services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
-        //services.AddScoped<IPhotoService, PhotoService>();
+        services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+        services.AddScoped<IPhotoService, PhotoService>();
 
         //services.AddScoped<LogUserActivity>();
 
