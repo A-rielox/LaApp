@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using App.Data;
 using App.DTOs;
-using App.interfaces;
+using App.Interfaces;
 using App.Entities;
 
 namespace App.Controllers;

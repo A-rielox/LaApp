@@ -1,6 +1,6 @@
 ﻿using App.Entities;
 
-namespace App.interfaces;
+namespace App.Interfaces;
 
 public interface ITokenService
 {

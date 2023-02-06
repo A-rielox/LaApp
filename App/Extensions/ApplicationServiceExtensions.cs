@@ -1,7 +1,7 @@
 ﻿using App.Data;
+using App.Interfaces;
 using App.Services;
 using Microsoft.EntityFrameworkCore;
-using App.interfaces;
 
 namespace App.Extensions;
 
@@ -28,7 +28,7 @@ public static class ApplicationServiceExtensions
 
 
         services.AddScoped<ITokenService, TokenService>();
-        //services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
         //services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

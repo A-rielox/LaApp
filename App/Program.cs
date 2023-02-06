@@ -1,8 +1,6 @@
 using App.Data;
-using App.Entities;
 using App.Extensions;
 using App.Middleware;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -73,6 +71,7 @@ app.MapControllers();
 
 
 // para el seeding de users, va despues de MapControllers y antes de .Run
+// ( na mas ocupa la class Seed en data, el archivo .json y esto pa tener todo el seed )
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 // try-catch p' errores durante el seeding
