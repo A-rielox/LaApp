@@ -48,18 +48,17 @@ export class MemberEditComponent implements OnInit {
    }
 
    updateMember() {
-      console.log(this.editForm?.value);
+      this.memberService.updateMember(this.editForm?.value).subscribe({
+         next: () => {
+            this.notification.addNoti({
+               severity: 'success',
+               summary: 'Listo.',
+               detail: 'Perfil Editado.',
+            });
 
-      // this.memberService.updateMember(this.editForm?.value).subscribe({
-      //    next: () => {
-      //       this.notification.addNoti({
-      //          severity: 'success',
-      //          summary: 'Listo.',
-      //          detail: 'Perfil Editado.',
-      //       });
-      //       // p' quitar mensaje de advertencia y disabled el btn de guardar
-      //       this.editForm?.reset(this.member);
-      //    },
-      // });
+            // p' quitar mensaje de advertencia y disabled el btn de guardar
+            this.editForm?.reset(this.member);
+         },
+      });
    }
 }
