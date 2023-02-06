@@ -2,6 +2,8 @@
 using App.Entities;
 using Microsoft.AspNetCore.Authorization;
 using App.Interfaces;
+using AutoMapper;
+using App.DTOs;
 
 namespace App.Controllers;
 
@@ -9,10 +11,12 @@ namespace App.Controllers;
 public class UsersController : BaseApiController
 {
     private readonly IUserRepository _userRepository;
+    private readonly IMapper _mapper;
 
-    public UsersController(IUserRepository userRepository)
+    public UsersController(IUserRepository userRepository, IMapper mapper)
     {
         _userRepository = userRepository;
+        _mapper = mapper;
     }
 
 
@@ -22,22 +26,21 @@ public class UsersController : BaseApiController
     // GET: api/Users
     //[Authorize(Roles = "Admin")]
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
+    public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
     {
-        //var users = await _context.Users.ToListAsync();
-        var users = await _userRepository.GetUsersAsync();
+        var members = await _userRepository.GetMembersAsync();
 
-        return Ok(users);
+        return Ok(members);
     }
 
     ////////////////////////////////////////////////
     ///////////////////////////////////////////////////
     // GET: api/Users/username
     [HttpGet("{username}")]
-    public async Task<ActionResult<AppUser>> GetUser(string username)
+    public async Task<ActionResult<MemberDto>> GetUser(string username)
     {
-        var user = await _userRepository.GetUserByUsernameAsync(username);
+        var member = await _userRepository.GetMemberAsync(username);
 
-        return Ok(user);
+        return Ok(member);
     }
 }

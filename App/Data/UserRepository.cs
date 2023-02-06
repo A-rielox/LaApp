@@ -1,5 +1,8 @@
-﻿using App.Entities;
+﻿using App.DTOs;
+using App.Entities;
 using App.Interfaces;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace App.Data;
@@ -7,12 +10,13 @@ namespace App.Data;
 public class UserRepository : IUserRepository
 {
     private readonly DataContext _context;
+    private readonly IMapper _mapper;
 
-    public UserRepository(DataContext context)
+    public UserRepository(DataContext context,IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
-
 
 
     ////////////////////////////////////////////////
@@ -47,6 +51,42 @@ public class UserRepository : IUserRepository
                                   .ToListAsync();
 
         return users;
+    }
+
+    ////////////////////////////////////////////////
+    ///////////////////////////////////////////////////
+    //
+    public async Task<MemberDto> GetMemberAsync(string username)
+    {
+        // con la .ProjectTo NO necesito hacer el .include de las photos, lo hace solito
+        var member = await _context.Users
+                                   .Where(u => u.UserName == username)
+                                   .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                                   .FirstOrDefaultAsync();
+
+        return member;
+        /*
+        en lugar de .Project ( sin automapper )
+        .Select(u => new MemberDto
+            {
+                Id= u.Id,
+                UserName = u.UserName,
+                KnownAs= u.KnownAs,
+            }).FirstOrDefaultAsync( );
+        */
+    }
+
+
+    ////////////////////////////////////////////////
+    ///////////////////////////////////////////////////
+    //
+    public async Task<IEnumerable<MemberDto>> GetMembersAsync()
+    {
+        var members = await _context.Users
+                                    .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+                                    .ToListAsync();
+
+        return members;
     }
 
     ////////////////////////////////////////////////
