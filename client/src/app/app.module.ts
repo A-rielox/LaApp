@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NavComponent } from './nav/nav.component';
 import { PrimeModule } from './_prime/prime.module';
-import { SharedModule } from 'primeng/api';
+// import { SharedModule } from 'primeng/api';
 import { LoginModalComponent } from './modals/login-modal/login-modal.component';
 import { LikesComponent } from './likes/likes.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -20,6 +20,8 @@ import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
+import { SharedModule } from './_shared/shared.module';
+import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 
 @NgModule({
    declarations: [
@@ -39,9 +41,10 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
       HttpClientModule,
       FormsModule,
       ReactiveFormsModule,
-      SharedModule,
+      // SharedModule,
       PrimeModule,
       NotificationsModule,
+      SharedModule,
       //
       MembersModule,
       HomeModule,
@@ -49,6 +52,7 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
    providers: [
       { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
       { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
    ],
    bootstrap: [AppComponent],
 })
