@@ -116,57 +116,57 @@ public class UsersController : BaseApiController
     ////////////////////////////////////////////////
     ///////////////////////////////////////////////////
     // PUT: api/Users/set-main-photo/{photoId}
-    //[HttpPut("set-main-photo/{photoId}")]
-    //public async Task<ActionResult> SetMainPhoto(int photoId)
-    //{
-    //    var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+    [HttpPut("set-main-photo/{photoId}")]
+    public async Task<ActionResult> SetMainPhoto(int photoId)
+    {
+        var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
 
-    //    if (user == null) return NotFound();
+        if (user == null) return NotFound();
 
-    //    var photo = user.Photos.FirstOrDefault(p => p.Id == photoId);
+        var photo = user.Photos.FirstOrDefault(p => p.Id == photoId);
 
-    //    if (photo == null) return NotFound();
+        if (photo == null) return NotFound("La foto que buscas no existe.");
 
-    //    if (photo.IsMain) return BadRequest("This is already your main photo.");
+        if (photo.IsMain) return BadRequest("Esta ya es tu foto principal.");
 
-    //    var currentMain = user.Photos.FirstOrDefault(p => p.IsMain);
+        var currentMain = user.Photos.FirstOrDefault(p => p.IsMain);
 
-    //    if (currentMain != null) currentMain.IsMain = false;
+        if (currentMain != null) currentMain.IsMain = false;
 
-    //    photo.IsMain = true;
+        photo.IsMain = true;
 
-    //    if (await _userRepository.SaveAllAsync()) return NoContent();
+        if (await _userRepository.SaveAllAsync()) return NoContent();
 
-    //    return BadRequest("Problem setting the main photo");
-    //}
+        return BadRequest("Problem setting the main photo");
+    }
 
     ////////////////////////////////////////////////
     ///////////////////////////////////////////////////
     // DELETE: api/Users/delete-photo/{photoId}
-    //[HttpDelete("delete-photo/{photoId}")]
-    //public async Task<ActionResult> DeletePhoto(int photoId)
-    //{
-    //    // saco el usernane del token
-    //    var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+    [HttpDelete("delete-photo/{photoId}")]
+    public async Task<ActionResult> DeletePhoto(int photoId)
+    {
+        // saco el usernane del token
+        var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
 
-    //    var photo = user.Photos.FirstOrDefault(p => p.Id == photoId);
+        var photo = user.Photos.FirstOrDefault(p => p.Id == photoId);
 
-    //    if (photo == null) return NotFound();
+        if (photo == null) return NotFound();
 
-    //    // p' NO tener q adivinar q hacer como main foto
-    //    if (photo.IsMain) return BadRequest("You can not delete your main photo.");
+        // p' NO tener q adivinar q hacer como main foto
+        if (photo.IsMain) return BadRequest("No puedes borrar tu foto principal.");
 
-    //    // si esta en cloudinary => tiene una publicId
-    //    if (photo.PublicId != null)
-    //    {
-    //        var result = await _photoService.DeletePhotoAsync(photo.PublicId);
-    //        if (result.Error != null) return BadRequest(result.Error.Message);
-    //    }
+        // si esta en cloudinary => tiene una publicId
+        if (photo.PublicId != null)
+        {
+            var result = await _photoService.DeletePhotoAsync(photo.PublicId);
+            if (result.Error != null) return BadRequest(result.Error.Message);
+        }
 
-    //    user.Photos.Remove(photo);
+        user.Photos.Remove(photo);
 
-    //    if (await _userRepository.SaveAllAsync()) return Ok();
+        if (await _userRepository.SaveAllAsync()) return Ok();
 
-    //    return BadRequest("Failed to delete the photo.");
-    //}
+        return BadRequest("Problemas borrando tu foto.");
+    }
 }

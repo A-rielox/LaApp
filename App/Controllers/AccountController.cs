@@ -77,6 +77,7 @@ public class AccountController : BaseApiController
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
         var user = await _context.Users
+            .Include(u => u.Photos)
             .FirstOrDefaultAsync(u => u.UserName == loginDto.Username);
 
         if (user == null) return Unauthorized("El usuario no existe.");
@@ -93,6 +94,8 @@ public class AccountController : BaseApiController
         return new UserDto
         {
             UserName = user.UserName,
+            KnownAs = user.KnownAs,
+            PhotoUrl = user.Photos.FirstOrDefault(p => p.IsMain)?.Url,
             Token = _tokenService.CreateToken(user)
         };
 

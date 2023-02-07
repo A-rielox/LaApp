@@ -41,7 +41,7 @@ export class PhotoEditorComponent implements OnInit {
    }
 
    setMainPhoto(photo: Photo) {
-      /* this.memberService.setMainPhoto(photo.id).subscribe({
+      this.memberService.setMainPhoto(photo.id).subscribe({
          next: () => {
             // p' actualizar el user y member q estan almacenados aca en el front ( en el service )
             if (this.user && this.member) {
@@ -56,11 +56,11 @@ export class PhotoEditorComponent implements OnInit {
                });
             }
          },
-      }); */
+      });
    }
 
    deletePhoto(photoId: number) {
-      /* this.memberService.deletePhoto(photoId).subscribe({
+      this.memberService.deletePhoto(photoId).subscribe({
          next: () => {
             if (this.member) {
                this.member.photos = this.member.photos.filter(
@@ -68,7 +68,7 @@ export class PhotoEditorComponent implements OnInit {
                );
             }
          },
-      }); */
+      });
    }
 
    // necesito ponerle el token xq este req no va a pasar xel interceptor

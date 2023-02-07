@@ -26,8 +26,7 @@ export class AccountService {
             const user = res;
 
             if (user) {
-               localStorage.setItem('user', JSON.stringify(user));
-               this.currentUserSource.next(user);
+               this.setCurrentUser(user);
             }
          })
       );
@@ -41,7 +40,6 @@ export class AccountService {
             map((user) => {
                if (user) {
                   this.setCurrentUser(user);
-                  localStorage.setItem('user', JSON.stringify(user));
                }
 
                return user;
@@ -53,7 +51,7 @@ export class AccountService {
       // user.roles = [];
       // const roles = this.getDecodedToken(user.token).role;
       // Array.isArray(roles) ? (user.roles = roles) : user.roles.push(roles);
-      // localStorage.setItem('user', JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(user));
       this.currentUserSource.next(user);
    }
 
