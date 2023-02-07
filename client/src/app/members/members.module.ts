@@ -6,6 +6,8 @@ import { PrimeModule } from '../_prime/prime.module';
 import { MemberCardComponent } from './member-card/member-card.component';
 import { MemberEditComponent } from './member-edit/member-edit.component';
 import { FormsModule } from '@angular/forms';
+import { PhotoEditorComponent } from './photo-editor/photo-editor.component';
+import { SharedModule } from '../_shared/shared.module';
 
 @NgModule({
    declarations: [
@@ -13,8 +15,9 @@ import { FormsModule } from '@angular/forms';
       MemberDetailComponent,
       MemberCardComponent,
       MemberEditComponent,
+      PhotoEditorComponent,
    ],
-   imports: [CommonModule, PrimeModule, FormsModule],
+   imports: [CommonModule, PrimeModule, SharedModule, FormsModule],
    exports: [MemberListComponent, MemberDetailComponent],
 })
 export class MembersModule {}
