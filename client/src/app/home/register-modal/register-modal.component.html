@@ -19,102 +19,51 @@
 >
    <div class="flex">
       <div class="surface-section w-full md:w-6 p-3 md:p-4 md:pt-0 pt-0">
-         <!-- <div class="mb-5">
-            <img
-               src="assets/images/blocks/logos/hyper.svg"
-               alt="Image"
-               height="20"
-               class="mb-3"
-            />
-            <div class="text-900 text-3xl font-medium mb-3">Bienvenida!</div>
-         </div> -->
-
          <!--                 FORM            -->
-         <!-- (ngSubmit)="registerForm.valid && register()" -->
          <form
             [formGroup]="registerForm"
-            (ngSubmit)="register()"
+            (ngSubmit)="registerForm.valid && register()"
             autocomplete="off"
          >
-            <!-- USUARIO -->
-            <!-- <app-text-input
+            <!--              USUARIO -->
+
+            <app-text-input
                [formControl]="$any(registerForm.controls['username'])"
                [label]="'Nombre de usuario'"
-            ></app-text-input> -->
-            <label for="username" class="block text-900 font-medium mb-2"
-               >User</label
-            >
-            <input
-               id="username"
-               type="username"
-               pInputText
-               class="w-full mb-3 p-3"
-               formControlName="username"
-            />
+            ></app-text-input>
 
-            <!-- knownAs -->
-            <!-- <app-text-input
+            <!--              knownAs -->
+            <app-text-input
                [formControl]="$any(registerForm.controls['knownAs'])"
                [label]="'Nickname'"
-            ></app-text-input> -->
+            ></app-text-input>
 
             <!--              city -->
-            <!-- <app-text-input
+            <app-text-input
                [formControl]="$any(registerForm.controls['city'])"
                [label]="'Ciudad'"
-            ></app-text-input> -->
+            ></app-text-input>
 
             <!--              country -->
-            <!-- <app-text-input
+            <app-text-input
                [formControl]="$any(registerForm.controls['country'])"
                [label]="'País'"
-            ></app-text-input> -->
+            ></app-text-input>
 
-            <!-- PASS -->
-            <!-- <app-text-input
+            <!--              PASS -->
+            <app-text-input
                [formControl]="$any(registerForm.controls['password'])"
                [label]="'Password'"
                [type]="'password'"
             >
-            </app-text-input> -->
-            <label for="pass" class="block text-900 font-medium mb-2"
-               >Password</label
-            >
-            <input
-               id="pass"
-               type="text"
-               pInputText
-               class="w-full mb-3 p-3"
-               formControlName="password"
-            />
+            </app-text-input>
 
-            <!-- CONFIRMAR PASS -->
-            <!-- <app-text-input
+            <!--              CONFIRMAR PASS -->
+            <app-text-input
                [formControl]="$any(registerForm.controls['confirmPassword'])"
                [label]="'Confirmar password'"
                [type]="'password'"
-            ></app-text-input> -->
-            <label for="confirmPassword" class="block text-900 font-medium mb-2"
-               >confirmPassword</label
-            >
-            <input
-               id="confirmPassword"
-               type="text"
-               pInputText
-               class="w-full mb-3 p-3"
-               formControlName="confirmPassword"
-            />
-
-            <!-- <div class="flex align-items-center justify-content-between mb-6">
-               <div class="flex align-items-center">
-                  <p-checkbox
-                     id="rememberme"
-                     [binary]="true"
-                     styleClass="mr-2"
-                  ></p-checkbox>
-                  <label for="rememberme2">Soy mayor de 18 años.</label>
-               </div>
-            </div> -->
+            ></app-text-input>
 
             <!-- Estos no se deberian alcanzar, xq quiere decir q mande mal la info al server, y tengo checks de este lado ( del front ) -->
             <div
@@ -130,11 +79,11 @@
                      Validation Errors
                   </div>
 
-                  <!-- <ul class="m-0 p-0 text-pink-700 ml-3">
+                  <ul class="m-0 p-0 text-pink-700 ml-3">
                      <li class="p-1" *ngFor="let error of validationErrors">
                         {{ error }}
                      </li>
-                  </ul> -->
+                  </ul>
                </div>
 
                <!-- icono cerrar -->
@@ -151,7 +100,6 @@
             </div>
 
             <!-- BOTON -->
-            <!-- [disabled]="registerForm.invalid" -->
             <button
                pButton
                pRipple
@@ -159,11 +107,9 @@
                icon="pi pi-user-plus"
                class="w-full p-3"
                type="submit"
+               [disabled]="registerForm.invalid"
             ></button>
          </form>
-
-         <!-- <p>Form value: {{ registerForm.value | json }}</p>
-         <p>Form status: {{ registerForm.status | json }}</p> -->
       </div>
 
       <div

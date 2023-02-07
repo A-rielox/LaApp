@@ -66,12 +66,8 @@ export class RegisterModalComponent implements OnInit {
    }
 
    register() {
-      this.visibleRegister = false;
-      console.log(this.registerForm.value);
-
       this.accountService.register(this.registerForm.value).subscribe({
          next: (res) => {
-            console.log('register response: ----- ', res);
             this.router.navigateByUrl('/members');
 
             this.notification.addNoti({
@@ -79,9 +75,10 @@ export class RegisterModalComponent implements OnInit {
                summary: 'Bienvenido.',
                detail: 'Que bueno tenerte.',
             });
+
+            this.visibleRegister = false;
          },
          error: (error) => {
-            console.log('error: ', error);
             // los errores q vienen del interceptor
             this.validationErrors = error;
 
