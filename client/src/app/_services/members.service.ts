@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Member } from '../_models/member';
 import { map, of } from 'rxjs';
+import { UserParams } from '../_models/userParams';
+import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 
 @Injectable({
    providedIn: 'root',
@@ -10,23 +12,73 @@ import { map, of } from 'rxjs';
 export class MembersService {
    baseUrl = environment.apiUrl;
    members: Member[] = [];
+   memberCache = new Map();
 
-   constructor(private http: HttpClient) {}
+   userParams: UserParams | undefined; // aqui están los filtros
 
-   getMembers() {
-      if (this.members.length > 0) return of(this.members);
+   constructor(private http: HttpClient) {
+      this.userParams = new UserParams();
+   }
 
-      return this.http.get<Member[]>(this.baseUrl + 'users').pipe(
-         map((members) => {
-            this.members = members;
+   ///////////////////////////////////////////
+   //////////  PARAMS
+   ///////////////////////////////////////////
+   getUserParams() {
+      return this.userParams;
+   }
 
-            return members;
+   setUserParams(params: UserParams) {
+      this.userParams = params;
+   }
+
+   resetUserParams() {
+      // if (this.user) {
+      this.userParams = new UserParams(/* this.user */);
+
+      return this.userParams;
+      // }
+
+      // return;
+   }
+   ///////////////////////////////////////////
+   //////////  MEMBERS
+   ///////////////////////////////////////////
+   getMembers(userParams: UserParams) {
+      const response = this.memberCache.get(
+         Object.values(userParams).join('-')
+      );
+      if (response) return of(response);
+
+      // solo los q conciernen a paginacion
+      let params = getPaginationHeaders(
+         userParams.pageNumber,
+         userParams.pageSize
+      );
+      // params = params.append('minAge', userParams.minAge)
+      params = params.append('orderBy', userParams.orderBy);
+
+      // "observe: 'response'" me da acceso a toda la response
+      return getPaginatedResult<Member[]>(
+         this.baseUrl + 'users',
+         params,
+         this.http
+      ).pipe(
+         map((response) => {
+            this.memberCache.set(Object.values(userParams).join('-'), response);
+
+            return response;
          })
       );
    }
 
    getMember(username: string) {
-      const member = this.members.find((m) => m.userName === username);
+      // const member = this.members.find((m) => m.userName === username);
+      // if (member) return of(member);
+      const member = [...this.memberCache.values()]
+         .reduce((arr, elem) => arr.concat(elem.result), [])
+         .find((member: Member) => member.userName === username);
+      // el reduce me devuelve un array de members
+
       if (member) return of(member);
 
       return this.http.get<Member>(this.baseUrl + 'users/' + username);
@@ -41,6 +93,9 @@ export class MembersService {
       );
    }
 
+   ///////////////////////////////////////////
+   //////////  FOTOS
+   ///////////////////////////////////////////
    setMainPhoto(photoId: number) {
       return this.http.put(
          this.baseUrl + 'users/set-main-photo/' + photoId,

@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
-//using App.Helpers;
+﻿using App.Helpers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace App.Controllers;
 
-//[ServiceFilter(typeof(LogUserActivity))]
+[ServiceFilter(typeof(LogUserActivity))]
 [Route("api/[controller]")]
 [ApiController]
 public class BaseApiController : ControllerBase

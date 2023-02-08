@@ -60,7 +60,7 @@
          <div class="flex flex-column justify-content-start mb-5">
             <!-- <span class="font-bold text-900">{{member.lastActive + "z" | timeago}}</span> -->
             <span class="font-bold text-900">{{
-               member.lastActive + "z"
+               member.lastActive + "z" | date : "dd MMM yyy"
             }}</span>
          </div>
 

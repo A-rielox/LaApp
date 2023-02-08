@@ -6,6 +6,7 @@ using AutoMapper;
 using App.DTOs;
 using System.Security.Claims;
 using App.Extensions;
+using App.Helpers;
 
 namespace App.Controllers;
 
@@ -32,11 +33,17 @@ public class UsersController : BaseApiController
     // GET: api/Users
     //[Authorize(Roles = "Admin")]
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
+    public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
     {
-        var members = await _userRepository.GetMembersAsync();
+        var currentUser = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+        userParams.CurrentUsername = currentUser.UserName;
 
-        return Ok(members);
+        var pagedMembers = await _userRepository.GetMembersAsync(userParams);
+
+        Response.AddPaginationHeader(new PaginationHeader(pagedMembers.CurrentPage,
+                          pagedMembers.PageSize, pagedMembers.TotalCount, pagedMembers.TotalPages));
+
+        return Ok(pagedMembers);
     }
 
     ////////////////////////////////////////////////

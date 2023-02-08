@@ -1,5 +1,6 @@
 ﻿using App.DTOs;
 using App.Entities;
+using App.Helpers;
 using App.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -80,13 +81,32 @@ public class UserRepository : IUserRepository
     ////////////////////////////////////////////////
     ///////////////////////////////////////////////////
     //
-    public async Task<IEnumerable<MemberDto>> GetMembersAsync()
+    public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
     {
-        var members = await _context.Users
-                                    .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-                                    .ToListAsync();
+        var query = _context.Users.AsQueryable();
 
-        return members;
+        // p'q NO me mande "a mi" en los members
+        query = query.Where(u => u.UserName != userParams.CurrentUsername);
+
+        // por defecto ordena por LastActive
+        query = userParams.OrderBy switch
+        {
+            "a-z" => query.OrderBy(u => u.UserName),
+            _ => query.OrderByDescending(u => u.LastActive)
+        };
+
+        var pagedList = await PagedList<MemberDto>.CreateAsync(
+                                query.AsNoTracking().ProjectTo<MemberDto>(_mapper.ConfigurationProvider),
+                                userParams.PageNumber, userParams.PageSize);
+
+        return pagedList;
+
+        // Previo pagedList
+        //var members = await _context.Users
+        //    .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
+        //    .ToListAsync();
+
+        //return members;
     }
 
     ////////////////////////////////////////////////

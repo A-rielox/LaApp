@@ -6,9 +6,10 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { TextInputComponent } from './text-input/text-input.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PrimeModule } from '../_prime/prime.module';
+import { PaginatorComponent } from './paginator/paginator.component';
 
 @NgModule({
-   declarations: [TextInputComponent],
+   declarations: [TextInputComponent, PaginatorComponent],
    imports: [
       CommonModule,
       NgxSpinnerModule.forRoot({ type: 'pacman' }),
@@ -16,6 +17,11 @@ import { PrimeModule } from '../_prime/prime.module';
       ReactiveFormsModule,
       PrimeModule,
    ],
-   exports: [NgxSpinnerModule, FileUploadModule, TextInputComponent],
+   exports: [
+      NgxSpinnerModule,
+      FileUploadModule,
+      TextInputComponent,
+      PaginatorComponent,
+   ],
 })
 export class SharedModule {}
