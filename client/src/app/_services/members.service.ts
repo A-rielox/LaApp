@@ -122,4 +122,32 @@ export class MembersService {
       };
    }
     */
+
+   ///////////////////////////////////////////
+   //////////  LIKES
+   ///////////////////////////////////////////
+
+   // para dar like, el username es de a quien se le da el like
+   addLike(username: string) {
+      return this.http.post(this.baseUrl + 'likes/' + username, {});
+   }
+
+   // p' agarrar los likes de un user
+   //
+   // api/likes?predicate=liked   --> los q me han gustado
+   // api/likes?predicate=likedBy --> a los q les e gustado
+   getLikes(predicate: string, pageNumber: number, pageSize: number) {
+      let params = getPaginationHeaders(pageNumber, pageSize);
+      params = params.append('predicate', predicate);
+
+      return getPaginatedResult<Member[]>(
+         this.baseUrl + 'likes',
+         params,
+         this.http
+      );
+
+      // return this.http.get<Member[]>(
+      //    this.baseUrl + 'likes?predicate=' + predicate
+      // );
+   }
 }

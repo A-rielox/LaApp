@@ -38,4 +38,14 @@ public class AppUser
 
     ////////////////////////////
     // LIKES
+    public List<UserLike> LikedByUsers { get; set; } // los q te dan like
+    public List<UserLike> LikedUsers { get; set; } // a quienes les doy like
+
+    // un SourceUser puede tener varios LikedUsers
+    // un LikedUser puede tener varios LikedByUsers
+    // la configuracion p' 2waybinding se hace en LA TABLA EN DataContext.cs
+
+
+    ////////////////////////////
+    // Messages
 }
