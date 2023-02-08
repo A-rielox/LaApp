@@ -35,24 +35,24 @@ export class LikesComponent implements OnInit {
    }
 
    loadLikes() {
-      // this.memberService
-      //    .getLikes(this.predicate, this.pageNumber, this.pageSize)
-      //    .subscribe({
-      //       next: (res) => {
-      //          this.members = res.result;
-      //          if (res.pagination!.totalPages > 1) {
-      //             this.pagination = res.pagination;
-      //          } else {
-      //             this.pagination = undefined;
-      //          }
-      //       },
-      //    });
+      this.memberService
+         .getLikes(this.predicate, this.pageNumber, this.pageSize)
+         .subscribe({
+            next: (res) => {
+               this.members = res.result;
+               if (res.pagination!.totalPages > 1) {
+                  this.pagination = res.pagination;
+               } else {
+                  this.pagination = undefined;
+               }
+            },
+         });
 
-      this.memberService.getLikes(this.predicate).subscribe({
-         next: (res) => {
-            this.members = res;
-         },
-      });
+      // this.memberService.getLikes(this.predicate).subscribe({
+      //    next: (res) => {
+      //       this.members = res;
+      //    },
+      // });
    }
 
    // este es el de member-list ( xsi lo quiero paginar aca )

@@ -69,27 +69,17 @@ public class LikesController : BaseApiController
     // GET: api/likes?predicate=liked o likedBy
     // p' agarrar los likes de un user
     [HttpGet]
-    //public async Task<ActionResult<PagedList<LikeDto>>> GetUserLikes([FromQuery] LikesParams likesParams)
-    //{
-    //    // id del q da el like
-    //    likesParams.UserId = User.GetUserId();
-
-    //    var pagedUsers = await _likesRepository.GetUserLikes(likesParams);
-
-    //    Response.AddPaginationHeader(new PaginationHeader(pagedUsers.CurrentPage,
-    //            pagedUsers.PageSize, pagedUsers.TotalCount, pagedUsers.TotalPages));
-
-    //    return Ok(pagedUsers);
-    //}
-
-    public async Task<ActionResult<IEnumerable<LikeDto>>> GetUserLikes(string predicate)
+    public async Task<ActionResult<PagedList<LikeDto>>> GetUserLikes([FromQuery] LikesParams likesParams)
     {
         // id del q da el like
-        var sourceUserId = User.GetUserId();
+        likesParams.UserId = User.GetUserId();
 
-        var users = await _likesRepository.GetUserLikes(predicate, sourceUserId);
+        var pagedUsers = await _likesRepository.GetUserLikes(likesParams);
 
-        return Ok(users);
+        Response.AddPaginationHeader(new PaginationHeader(pagedUsers.CurrentPage,
+                pagedUsers.PageSize, pagedUsers.TotalCount, pagedUsers.TotalPages));
+
+        return Ok(pagedUsers);
     }
 
     // api/likes?predicate=liked   --> los q me han gustado

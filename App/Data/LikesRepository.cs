@@ -35,62 +35,26 @@ public class LikesRepository : ILikesRepository
     // el id puede ser del sourceUser y serian los q ese user ha dado like
     // puede ser el targetId y serian los likes q ese user ha dado
     // SERIA los users que ese user a dado like o quienes le han dado like
-    //public async Task<PagedList<LikeDto>> GetUserLikes(LikesParams likesParams)
-    //{
-    //    var users = _context.Users.OrderBy(u => u.UserName).AsQueryable();
-    //    var likes = _context.Likes.AsQueryable();
-
-    //    // para los q este user ha dado like
-    //    if (likesParams.Predicate == "liked")
-    //    {
-    //        likes = likes.Where(l => l.SourceUserId == likesParams.UserId);
-    //        users = likes.Select(l => l.TargetUser);
-    //    }
-
-    //    // los q le han dado like al user actual
-    //    if (likesParams.Predicate == "likedBy")
-    //    {
-    //        likes = likes.Where(l => l.TargetUserId == likesParams.UserId);
-    //        users = likes.Select(l => l.SourceUser);
-    //    }
-
-    //    var likedUsers = users.Select(u => new LikeDto
-    //    {
-    //        UserName = u.UserName,
-    //        KnownAs = u.KnownAs,
-    //        PhotoUrl = u.Photos.FirstOrDefault(p => p.IsMain).Url,
-    //        City = u.City,
-    //        Country= u.Country,
-    //        Id = u.Id,
-    //    });
-
-    //    var pagedList = await PagedList<LikeDto>.CreateAsync(likedUsers,
-    //            likesParams.PageNumber, likesParams.PageSize);
-
-    //    return pagedList;
-    //}
-
-    public async Task<IEnumerable<LikeDto>> GetUserLikes(string predicate, int userId)
+    public async Task<PagedList<LikeDto>> GetUserLikes(LikesParams likesParams)
     {
         var users = _context.Users.OrderBy(u => u.UserName).AsQueryable();
         var likes = _context.Likes.AsQueryable();
 
         // para los q este user ha dado like
-        if (predicate == "liked")
+        if (likesParams.Predicate == "liked")
         {
-            likes = likes.Where(l => l.SourceUserId == userId);
-            // se supone que selecciona los users que estan dentro de la lista anterior de likes
-            users = likes.Select(l => l.TargetUser); 
+            likes = likes.Where(l => l.SourceUserId == likesParams.UserId);
+            users = likes.Select(l => l.TargetUser);
         }
 
         // los q le han dado like al user actual
-        if (predicate == "likedBy")
+        if (likesParams.Predicate == "likedBy")
         {
-            likes = likes.Where(l => l.TargetUserId == userId);
+            likes = likes.Where(l => l.TargetUserId == likesParams.UserId);
             users = likes.Select(l => l.SourceUser);
         }
 
-        var likedUsers = await users.Select(u => new LikeDto
+        var likedUsers = users.Select(u => new LikeDto
         {
             UserName = u.UserName,
             KnownAs = u.KnownAs,
@@ -98,13 +62,14 @@ public class LikesRepository : ILikesRepository
             City = u.City,
             Country = u.Country,
             Id = u.Id,
-        }).ToListAsync();
+        });
 
-        //var pagedList = await PagedList<LikeDto>.CreateAsync(likedUsers,
-        //        likesParams.PageNumber, likesParams.PageSize);
+        var pagedList = await PagedList<LikeDto>.CreateAsync(likedUsers,
+                likesParams.PageNumber, likesParams.PageSize);
 
-        return likedUsers;
+        return pagedList;
     }
+
 
     ////////////////////////////////////////////////
     ///////////////////////////////////////////////////

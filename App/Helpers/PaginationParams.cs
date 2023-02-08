@@ -1,4 +1,4 @@
-﻿namespace Socioil_API.Helpers;
+﻿namespace App.Helpers;
 
 public class PaginationParams
 {

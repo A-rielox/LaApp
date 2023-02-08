@@ -136,18 +136,19 @@ export class MembersService {
    //
    // api/likes?predicate=liked   --> los q me han gustado
    // api/likes?predicate=likedBy --> a los q les e gustado
-   getLikes(predicate: string /* , pageNumber: number, pageSize: number */) {
-      // let params = getPaginationHeaders(pageNumber, pageSize);
-      // params = params.append('predicate', predicate);
+   getLikes(predicate: string, pageNumber: number, pageSize: number) {
+      let params = getPaginationHeaders(pageNumber, pageSize);
 
-      // return getPaginatedResult<Member[]>(
-      //    this.baseUrl + 'likes',
-      //    params,
-      //    this.http
-      // );
+      params = params.append('predicate', predicate);
 
-      return this.http.get<Member[]>(
-         this.baseUrl + 'likes?predicate=' + predicate
+      return getPaginatedResult<Member[]>(
+         this.baseUrl + 'likes',
+         params,
+         this.http
       );
+
+      // return this.http.get<Member[]>(
+      //    this.baseUrl + 'likes?predicate=' + predicate
+      // );
    }
 }
