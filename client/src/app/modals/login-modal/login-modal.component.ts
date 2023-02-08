@@ -34,6 +34,7 @@ export class LoginModalComponent implements OnInit {
       this.visibleLogin = !this.visibleLogin;
    }
 
+   // aca resetear los params, xsi se mete con otro user y asi resetear los filtros
    login() {
       this.accountService.login(this.loginForm).subscribe({
          next: () => {

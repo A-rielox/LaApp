@@ -22,14 +22,14 @@ export class MemberCardComponent implements OnInit {
    ngOnInit(): void {}
 
    addLike(username: string) {
-      // this.memberService.addLike(username).subscribe({
-      //    next: () => {
-      //       this.notification.addNoti({
-      //          severity: 'success',
-      //          summary: 'Excelente',
-      //          detail: 'Le has dado like a ' + username,
-      //       });
-      //    },
-      // });
+      this.memberService.addLike(username).subscribe({
+         next: () => {
+            this.notification.addNoti({
+               severity: 'success',
+               summary: 'Excelente',
+               detail: 'Le has dado like a ' + username,
+            });
+         },
+      });
    }
 }

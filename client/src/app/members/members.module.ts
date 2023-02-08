@@ -18,6 +18,6 @@ import { SharedModule } from '../_shared/shared.module';
       PhotoEditorComponent,
    ],
    imports: [CommonModule, PrimeModule, SharedModule, FormsModule],
-   exports: [MemberListComponent, MemberDetailComponent],
+   exports: [MemberListComponent, MemberDetailComponent, MemberCardComponent],
 })
 export class MembersModule {}
