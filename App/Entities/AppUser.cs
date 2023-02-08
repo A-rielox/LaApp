@@ -46,6 +46,18 @@ public class AppUser
     // la configuracion p' 2waybinding se hace en LA TABLA EN DataContext.cs
 
 
+
     ////////////////////////////
     // Messages
+
+    public List<Message> MessagesSent { get; set; }
+    public List<Message> MessagesReceived { get; set; }
+
+
+    ////////////////////////////
+    // User Roles
+    // es la misma navigation-property hacia la join-table en AppUser.cs y AppRole.cs
+    //public ICollection<AppUserRole> UserRoles { get; set; }
+
+
 }

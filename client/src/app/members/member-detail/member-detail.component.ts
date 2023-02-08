@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Member } from 'src/app/_models/member';
 import { Message } from 'src/app/_models/message';
 import { MembersService } from 'src/app/_services/members.service';
+import { MessageService } from 'src/app/_services/message.service';
 
 @Component({
    selector: 'app-member-detail',
@@ -11,7 +12,6 @@ import { MembersService } from 'src/app/_services/members.service';
 })
 export class MemberDetailComponent implements OnInit {
    // @ViewChild('memberTabs') memberTabs?: TabView;
-
    member: Member | undefined;
    messages: Message[] = [];
 
@@ -35,7 +35,7 @@ export class MemberDetailComponent implements OnInit {
 
    constructor(
       private memberService: MembersService,
-      // private messageService: MessageService,
+      private messageService: MessageService,
       private route: ActivatedRoute // private intl: TimeagoIntl
    ) {
       // p' timeAgo en español
@@ -94,11 +94,11 @@ export class MemberDetailComponent implements OnInit {
    }
 
    loadMessages() {
-      // if (this.member) {
-      //    this.messageService.getMessageThread(this.member.userName).subscribe({
-      //       next: (messages) => (this.messages = messages),
-      //    });
-      // }
+      if (this.member) {
+         this.messageService.getMessageThread(this.member.userName).subscribe({
+            next: (messages) => (this.messages = messages),
+         });
+      }
    }
 
    // onTabChanged(e: any) {

@@ -11,6 +11,7 @@ public class DataContext : DbContext
 
     public DbSet<AppUser> Users { get; set; }
     public DbSet<UserLike> Likes { get; set; }
+    public DbSet<Message> Messages { get; set; }
 
 
 
@@ -38,5 +39,26 @@ public class DataContext : DbContext
             .HasForeignKey(l => l.TargetUserId)
             .OnDelete(DeleteBehavior.NoAction);
         // si uso sqlServer => uno de los dos OnDelete debe ser distinto como OnDelete.NoAction
+
+
+
+
+        //--------
+        //-------- p' Message
+        builder.Entity<Message>()
+            .HasOne(m => m.Sender)
+            .WithMany(u => u.MessagesSent)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        // en ambas queda especificada la foreign key por convencion ( RecipientId y SenderId )
+
+        builder.Entity<Message>()
+            .HasOne(m => m.Recipient)
+            .WithMany(u => u.MessagesReceived) 
+            .OnDelete(DeleteBehavior.Restrict);
+
+
+
+
     }
 }

@@ -8,6 +8,7 @@ import { MemberEditComponent } from './member-edit/member-edit.component';
 import { FormsModule } from '@angular/forms';
 import { PhotoEditorComponent } from './photo-editor/photo-editor.component';
 import { SharedModule } from '../_shared/shared.module';
+import { MemberMessagesComponent } from './member-messages/member-messages.component';
 
 @NgModule({
    declarations: [
@@ -16,6 +17,7 @@ import { SharedModule } from '../_shared/shared.module';
       MemberCardComponent,
       MemberEditComponent,
       PhotoEditorComponent,
+      MemberMessagesComponent,
    ],
    imports: [CommonModule, PrimeModule, SharedModule, FormsModule],
    exports: [MemberListComponent, MemberDetailComponent, MemberCardComponent],
