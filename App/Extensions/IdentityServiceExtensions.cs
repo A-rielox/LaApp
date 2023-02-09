@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using App.Data;
+using App.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -11,13 +14,13 @@ public static class IdentityServiceExtensions
                     IConfiguration config
                 )
     {
-        //services.AddIdentityCore<AppUser>(opt =>
-        //{
-        //    opt.Password.RequireNonAlphanumeric = false; // no es necesario pero na mas pa cagar el palo
-        //    //opt.User.RequireUniqueEmail = true; 
-        //}).AddRoles<AppRole>()
-        //  .AddRoleManager<RoleManager<AppRole>>()
-        //  .AddEntityFrameworkStores<DataContext>(); // este es el q crea las tablas relacionadas a Identity
+        services.AddIdentityCore<AppUser>(opt =>
+        {
+            opt.Password.RequireNonAlphanumeric = false; // no es necesario pero na mas pa cagar el palo
+            //opt.User.RequireUniqueEmail = true; 
+        }).AddRoles<AppRole>()
+          .AddRoleManager<RoleManager<AppRole>>()
+          .AddEntityFrameworkStores<DataContext>(); // este es el q crea las tablas relacionadas a Identity
 
 
 
