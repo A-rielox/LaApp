@@ -56,21 +56,21 @@ public class RecipeRepository : IRecipeRepository
     //
     public async Task<PagedList<RecipeDto>> GetRecipesAsync(RecipeParams recipeParams)
     {
-        var query = _context.Recipes.OrderByDescending(r => r.Created).AsQueryable();
+        var query = _context.Recipes.Include(r => r.CreatedBy).OrderByDescending(r => r.Created).AsQueryable();
 
         if (!String.IsNullOrEmpty(recipeParams.Ownername)) // p' buscar las propias recetas 
         {
-            query = query.Where(r => r.CreatedBy.UserName == recipeParams.Ownername);
+            query = query.Where(r => r.CreatedBy.UserName.ToLower() == recipeParams.Ownername.ToLower());
         }
 
         if (!String.IsNullOrEmpty(recipeParams.Membername)) // p' buscar las de un mienbro xsu knownAs
         {
-            query = query.Where(r => r.CreatedBy.KnownAs.Contains(recipeParams.Membername));
+            query = query.Where(r => r.CreatedBy.KnownAs.ToLower().Contains(recipeParams.Membername.ToLower()));
         }
 
         if (!String.IsNullOrEmpty(recipeParams.Title))
         {
-            query = query.Where(r => r.Title.Contains(recipeParams.Title));
+            query = query.Where(r => r.Title.ToLower().Contains(recipeParams.Title.ToLower()));
         }
 
         var pagedList = await PagedList<RecipeDto>.CreateAsync(

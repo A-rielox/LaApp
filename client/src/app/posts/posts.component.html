@@ -1,0 +1,212 @@
+<div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+   <div class="font-bold text-5xl text-900 mb-3 relative">
+      Posts
+
+      <button
+         pButton
+         type="button"
+         icon="pi pi-plus"
+         class="p-button-rounded absolute top-0 right-0 small-btn"
+         routerLink="/add-edit"
+      ></button>
+
+      <button
+         pButton
+         type="button"
+         label="Añadir"
+         icon="pi pi-plus"
+         class="p-button w-2 absolute top-0 right-0 big-btn"
+         routerLink="/add-edit/post"
+      ></button>
+   </div>
+
+   <!--        el "Recuerda"        -->
+   <div class="text-700 line-height-3 text-base mb-6 flex align-items-center">
+      Recuerda:
+      <div class="flex ml-2 align-items-center">
+         Salud
+         <div
+            style="background: linear-gradient(15deg, #f91616, #f97316)"
+            class="w-2rem h-2rem flex-shrink-0 border-circle ml-2"
+         ></div>
+         &nbsp;, &nbsp;
+      </div>
+
+      <div class="flex ml-2 align-items-center">
+         Belleza
+         <div
+            style="background: linear-gradient(15deg, #cc63f1, #6366f1)"
+            class="w-2rem h-2rem flex-shrink-0 border-circle ml-2"
+         ></div>
+         &nbsp;, &nbsp;
+      </div>
+
+      <div class="flex ml-2 align-items-center">
+         Bebés
+         <div
+            style="background: linear-gradient(15deg, #06d465, #06b6d4)"
+            class="w-2rem h-2rem flex-shrink-0 border-circle ml-2"
+         ></div>
+      </div>
+   </div>
+
+   <!--              FORM               -->
+   <div>
+      <div
+         *ngIf="postParams"
+         class="field flex flex-column lg:flex-row lg:align-items-center lg:justify-content-between"
+      >
+         <!-- (ngSubmit)="loadPosts()" -->
+         <form
+            #form="ngForm"
+            (ngSubmit)="filterPosts()"
+            autocomplete="off"
+            class="flex flex-column md:flex-row md:align-items-center mb-3 md:mb-0"
+         >
+            <div class="grid">
+               <div class="col-12 md:col-6">
+                  <label for="autor" class="block text-900 font-medium mb-2"
+                     >Por Autor</label
+                  >
+                  <input
+                     id="autor"
+                     type="text"
+                     placeholder="Buscar por autor"
+                     pInputText
+                     class="w-full mb-3 p-3"
+                     [(ngModel)]="postParams.membername"
+                     name="membername"
+                  />
+               </div>
+
+               <div class="col-12 md:col-6">
+                  <label for="title" class="block text-900 font-medium mb-2"
+                     >Por Titulo</label
+                  >
+                  <input
+                     id="title"
+                     type="text"
+                     placeholder="Buscar en el título"
+                     pInputText
+                     class="w-full mb-3 p-3"
+                     [(ngModel)]="postParams.title"
+                     name="title"
+                  />
+               </div>
+            </div>
+
+            <button
+               pButton
+               type="submit"
+               label="Filtrar"
+               icon="pi pi-filter"
+               class="ml-2"
+            ></button>
+         </form>
+
+         <div class="flex align-items-center">
+            <label for="sort" class="font-normal text-900 mb-0 mr-2 text-sm"
+               >Ver:</label
+            >
+            <p-selectButton
+               [options]="postsToDisplay"
+               name="sort"
+               optionLabel="label"
+               optionValue="name"
+               [(ngModel)]="postParams.ownername"
+               (onOptionClick)="fetchMyPosts()"
+            ></p-selectButton>
+         </div>
+      </div>
+   </div>
+
+   <!--              POSTS               -->
+   <div class="grid">
+      <ng-container *ngFor="let post of posts">
+         <div class="col-12 lg:col-6">
+            <div
+               class="p-4 cursor-pointer shadow-2 h-full flex flex-column justify-content-between"
+               (click)="displayPost(post)"
+            >
+               <div>
+                  <div
+                     class="border-top-3"
+                     [style]="border2Color(post.category)"
+                  ></div>
+
+                  <div class="text-blue-600 font-medium my-2">
+                     {{ post.category }}
+                  </div>
+
+                  <div class="text-900 font-medium text-xl line-height-3 mb-4">
+                     {{ post.title }}
+                  </div>
+
+                  <div class="text-700 line-height-3">
+                     <div [innerHTML]="post.content | shorten : 250"></div>
+                  </div>
+               </div>
+
+               <div class="flex justify-content-end">
+                  <p-avatar
+                     image="{{ post.createdByPhotoUrl }}"
+                     shape="circle"
+                  ></p-avatar>
+
+                  <div class="ml-2">
+                     <div class="text-sm font-bold text-900 mb-1">
+                        {{ post.createdByUsername | titlecase }}
+                     </div>
+                     <div class="text-sm flex align-items-center text-700">
+                        <i class="pi pi-calendar mr-1 text-sm"></i>
+                        <span>{{ post.created | date }}</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </ng-container>
+   </div>
+
+   <div class="flex justify-content-center" *ngIf="pagination && postParams">
+      <app-paginator
+         [numberOfPages]="pagination.totalPages"
+         [currentPage]="pagination.currentPage"
+         (changePage)="pageChanged($event)"
+      ></app-paginator>
+   </div>
+
+   <!--        COMO LO QUIERO PONER         -->
+   <div class="col-12 lg:col-4 p-3">
+      <div class="shadow-2 border-round h-full surface-card">
+         <img
+            src="assets/images/blog-1.jpg"
+            alt="Image"
+            class="block w-full border-round-top"
+         />
+         <div class="p-4">
+            <span class="block font-medium text-blue-600 mb-3">Crime</span>
+            <div class="text-xl text-900 font-medium mb-3 line-height-3">
+               Fugitive flamingo spotted in Florida
+            </div>
+            <div class="line-height-3 mb-3 text-700">
+               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+               eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </div>
+            <div class="flex">
+               <p-avatar
+                  image="assets/images/avatar-f-1.png"
+                  shape="circle"
+               ></p-avatar>
+               <div class="ml-2">
+                  <div class="text-sm font-bold text-900 mb-1">Anna Lane</div>
+                  <div class="text-sm flex align-items-center text-700">
+                     <i class="pi pi-calendar mr-1 text-sm"></i>
+                     <span>Apr 5, 2021</span>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

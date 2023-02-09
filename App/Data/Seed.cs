@@ -49,6 +49,43 @@ public class Seed
         await userManager.CreateAsync(admin, "P@ssword1");
         await userManager.AddToRolesAsync(admin, new[] { "Admin", "Moderator" });
     }
+
+    public static async Task SeedRecipe(DataContext context)
+    {
+        if (await context.Recipes.AnyAsync()) return;
+
+        var recipeData = await File.ReadAllTextAsync("Data/RecipeSeedData.json");
+
+        //var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+
+        var recipes = JsonConvert.DeserializeObject<List<Recipe>>(recipeData);// The solution was to change from System.Text.Json to Newtonsoft Json with this line
+
+       
+        foreach (var recipe in recipes)
+        {
+            context.Recipes.Add(recipe);
+        }
+
+        await context.SaveChangesAsync();
+    }
+    public static async Task SeedPost(DataContext context)
+    {
+        if (await context.Posts.AnyAsync()) return;
+
+        var postData = await File.ReadAllTextAsync("Data/PostSeedData.json");
+
+        //var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+
+        var posts = JsonConvert.DeserializeObject<List<Post>>(postData);// The solution was to change from System.Text.Json to Newtonsoft Json with this line
+
+
+        foreach (var post in posts)
+        {
+            context.Posts.Add(post);
+        }
+
+        await context.SaveChangesAsync();
+    }
 }
 
 

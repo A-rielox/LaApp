@@ -19,6 +19,9 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { CheckboxModule } from 'primeng/checkbox';
+import { EditorModule } from 'primeng/editor';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 @NgModule({
    declarations: [],
@@ -41,6 +44,9 @@ import { CheckboxModule } from 'primeng/checkbox';
       TableModule,
       ProgressBarModule,
       CheckboxModule,
+      EditorModule,
+      MultiSelectModule,
+      ConfirmPopupModule,
    ],
    exports: [
       ButtonModule,
@@ -60,6 +66,9 @@ import { CheckboxModule } from 'primeng/checkbox';
       TableModule,
       ProgressBarModule,
       CheckboxModule,
+      EditorModule,
+      MultiSelectModule,
+      ConfirmPopupModule,
    ],
 })
 export class PrimeModule {}

@@ -38,40 +38,38 @@
             </li>
 
             <ng-container *ngIf="accountService.currentUser$ | async">
-               <ng-container *ngIf="false">
-                  <li>
-                     <a
-                        [class]="aClass()"
-                        routerLink="/recetas"
-                        routerLinkActive="active"
-                     >
-                        <i class="pi pi-book mr-2"></i>
-                        <span>Recetas</span>
-                     </a>
-                  </li>
+               <li>
+                  <a
+                     [class]="aClass()"
+                     routerLink="/recetas"
+                     routerLinkActive="active"
+                  >
+                     <i class="pi pi-book mr-2"></i>
+                     <span>Recetas</span>
+                  </a>
+               </li>
 
-                  <li>
-                     <a
-                        [class]="aClass()"
-                        routerLink="/posts"
-                        routerLinkActive="active"
-                     >
-                        <i class="pi pi-globe mr-2"></i>
-                        <span>Posts</span>
-                     </a>
-                  </li>
+               <li>
+                  <a
+                     [class]="aClass()"
+                     routerLink="/posts"
+                     routerLinkActive="active"
+                  >
+                     <i class="pi pi-globe mr-2"></i>
+                     <span>Posts</span>
+                  </a>
+               </li>
 
-                  <li>
-                     <a
-                        [class]="aClass()"
-                        routerLink="/noticias"
-                        routerLinkActive="active"
-                     >
-                        <i class="pi pi-megaphone mr-2"></i>
-                        <span>Noticias</span>
-                     </a>
-                  </li>
-               </ng-container>
+               <li>
+                  <a
+                     [class]="aClass()"
+                     routerLink="/noticias"
+                     routerLinkActive="active"
+                  >
+                     <i class="pi pi-megaphone mr-2"></i>
+                     <span>Noticias</span>
+                  </a>
+               </li>
 
                <li>
                   <a

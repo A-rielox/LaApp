@@ -12,6 +12,11 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { AdminGuard } from './_guards/admin.guard';
+import { RecipesComponent } from './recipes/recipes.component';
+import { PostsComponent } from './posts/posts.component';
+import { AddEditComponent } from './add-edit/add-edit.component';
+import { AddRecipeComponent } from './add-edit/add-recipe/add-recipe.component';
+import { AddPostComponent } from './add-edit/add-post/add-post.component';
 
 const routes: Routes = [
    { path: '', component: HomeComponent },
@@ -23,8 +28,18 @@ const routes: Routes = [
          { path: 'members', component: MemberListComponent },
          { path: 'members/edit', component: MemberEditComponent },
          { path: 'members/:username', component: MemberDetailComponent },
+         { path: 'recetas', component: RecipesComponent },
+         { path: 'posts', component: PostsComponent },
          { path: 'likes', component: LikesComponent },
          { path: 'messages', component: MessagesComponent },
+         {
+            path: 'add-edit',
+            component: AddEditComponent,
+            children: [
+               { path: 'recipe', component: AddRecipeComponent },
+               { path: 'post', component: AddPostComponent },
+            ],
+         },
          {
             path: 'admin',
             component: AdminPanelComponent,

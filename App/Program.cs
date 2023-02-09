@@ -85,8 +85,13 @@ try
 
     await context.Database.MigrateAsync();
 
+
     await Seed.SeedUsers(userManager, roleManager);
     //await Seed.SeedUsers(context);
+
+    await Seed.SeedRecipe(context);
+
+    await Seed.SeedPost(context);
 }
 catch (Exception ex)
 {

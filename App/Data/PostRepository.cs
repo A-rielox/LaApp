@@ -53,21 +53,21 @@ public class PostRepository : IPostRepository
     //
     public async Task<PagedList<PostDto>> GetPostsAsync(PostParams postParams)
     {
-        var query = _context.Posts.OrderByDescending(p => p.CreatedBy).AsQueryable();
+        var query = _context.Posts.Include(p => p.CreatedBy).OrderByDescending(p => p.Created).AsQueryable();
 
         if (!String.IsNullOrEmpty(postParams.Ownername)) // p' buscar las propias recetas 
         {
-            query = query.Where(r => r.CreatedBy.UserName == postParams.Ownername);
+            query = query.Where(r => r.CreatedBy.UserName.ToLower() == postParams.Ownername.ToLower());
         }
 
         if (!String.IsNullOrEmpty(postParams.Membername)) // p' buscar las de un mienbro xsu knownAs
         {
-            query = query.Where(r => r.CreatedBy.KnownAs.Contains(postParams.Membername));
+            query = query.Where(r => r.CreatedBy.KnownAs.ToLower().Contains(postParams.Membername.ToLower()));
         }
 
         if (!String.IsNullOrEmpty(postParams.Title))
         {
-            query = query.Where(r => r.Title.Contains(postParams.Title));
+            query = query.Where(r => r.Title.ToLower().Contains(postParams.Title.ToLower()));
         }
 
         var pagedPosts = await PagedList<PostDto>.CreateAsync(

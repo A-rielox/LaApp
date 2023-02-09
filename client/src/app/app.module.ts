@@ -27,6 +27,14 @@ import { HasRoleDirective } from './_directives/has-role.directive';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
+import { PostsComponent } from './posts/posts.component';
+import { PostDisplayComponent } from './posts/post-display/post-display.component';
+import { RecipesComponent } from './recipes/recipes.component';
+import { RecipeDisplayComponent } from './recipes/recipe-display/recipe-display.component';
+import { AddEditModule } from './add-edit/add-edit.module';
+import { ShortenPipe } from './_pipes/shorten.pipe';
+import { SeparatePipe } from './_pipes/separate.pipe';
+import { IsOwnerOrAdminDirective } from './_directives/is-owner-or-admin.directive';
 
 @NgModule({
    declarations: [
@@ -43,6 +51,13 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
       UserManagementComponent,
       PhotoManagementComponent,
       RolesModalComponent,
+      PostsComponent,
+      PostDisplayComponent,
+      RecipesComponent,
+      RecipeDisplayComponent,
+      ShortenPipe,
+      SeparatePipe,
+      IsOwnerOrAdminDirective,
    ],
    imports: [
       BrowserModule,
@@ -58,6 +73,8 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
       //
       MembersModule,
       HomeModule,
+
+      AddEditModule,
    ],
    providers: [
       { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
