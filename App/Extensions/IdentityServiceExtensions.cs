@@ -45,11 +45,11 @@ public static class IdentityServiceExtensions
 
         //
         // CONFIGURACION  de las policies p' el acceso
-        //services.AddAuthorization(opt =>
-        //{
-        //    opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
-        //    opt.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin", "Moderator"));
-        //});
+        services.AddAuthorization(opt =>
+        {
+            opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+            opt.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin", "Moderator"));
+        });
 
 
 

@@ -43,16 +43,15 @@ public class AccountController : BaseApiController
 
         if (!result.Succeeded) return BadRequest(result.Errors);
 
-        //var roleResult = await _userManager.AddToRoleAsync(user, "Member");
+        var roleResult = await _userManager.AddToRoleAsync(user, "Member");
 
-        //if (!roleResult.Succeeded) return BadRequest(roleResult.Errors);
+        if (!roleResult.Succeeded) return BadRequest(roleResult.Errors);
 
         return new UserDto
         {
             UserName = user.UserName,
-            Token = _tokenService.CreateToken(user),
-            KnownAs = user.KnownAs
-            // Gender = user.Gender
+            KnownAs = user.KnownAs,
+            Token = await _tokenService.CreateToken(user)
         };
     }
 
@@ -77,7 +76,7 @@ public class AccountController : BaseApiController
             UserName = user.UserName,
             KnownAs = user.KnownAs,
             PhotoUrl = user.Photos.FirstOrDefault(p => p.IsMain)?.Url,
-            Token = _tokenService.CreateToken(user)
+            Token = await _tokenService.CreateToken(user)
         };
     }
 

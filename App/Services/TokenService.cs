@@ -11,19 +11,19 @@ namespace App.Services;
 public class TokenService : ITokenService
 {
     private readonly SymmetricSecurityKey _key;
-    //private readonly UserManager<AppUser> _userManager;
+    private readonly UserManager<AppUser> _userManager;
 
-    public TokenService(IConfiguration config/*, UserManager<AppUser> userManager*/)
+    public TokenService(IConfiguration config, UserManager<AppUser> userManager)
     {
         _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
-        //_userManager = userManager;
+        _userManager = userManager;
     }
 
     ////////////////////////////////////////////////
     ///////////////////////////////////////////////////
     //
-    //public async Task<string> CreateToken(AppUser user)
-    public string CreateToken(AppUser user)
+    // public string CreateToken(AppUser user)
+    public async Task<string> CreateToken(AppUser user)
     {
         var claims = new List<Claim>
             {
@@ -33,14 +33,10 @@ public class TokenService : ITokenService
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
             };
 
-
-
-        //    // Añado el claims con los roles.
-        //    // la lista de roles del usuario q se pasa
-        //    var roles = await _userManager.GetRolesAsync(user);
-        //    claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
-
-
+        // Añado el claims con los roles.
+        // la lista de roles del usuario q se pasa
+        var roles = await _userManager.GetRolesAsync(user);
+        claims.AddRange(roles.Select(role => new Claim(ClaimTypes.Role, role)));
 
         var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
