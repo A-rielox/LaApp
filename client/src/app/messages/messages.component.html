@@ -97,7 +97,7 @@
 
             <td>
                <p class="mt-0 mb-2 font-normal text-base text-color-secondary">
-                  {{ message.messageSent + "z" | date : "dd MMM yyy" }}
+                  {{ message.messageSent | date : "dd MMM yyy" }}
                </p>
                <!-- <p class="mt-0 mb-2 font-normal text-base text-color-secondary">
                   {{ message.messageSent + "z" | timeago }}
@@ -174,7 +174,7 @@
                   ) | titlecase
                }}</span>
                <span class="text-600 text-sm mb-3 white-space-nowrap">{{
-                  message.messageSent + "z" | date : "dd MMM yyy"
+                  message.messageSent | date : "dd MMM yyy"
                }}</span>
                <!-- <span class="text-600 text-sm mb-3 white-space-nowrap">{{
                   message.messageSent + "z" | timeago | titlecase
