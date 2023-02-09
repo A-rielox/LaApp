@@ -9,6 +9,7 @@ import { MenuModule } from 'primeng/menu';
 import { DropdownModule } from 'primeng/dropdown';
 import { AvatarModule } from 'primeng/avatar';
 import { DialogModule } from 'primeng/dialog';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { DividerModule } from 'primeng/divider';
 import { TabViewModule } from 'primeng/tabview';
@@ -17,6 +18,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TableModule } from 'primeng/table';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
    declarations: [],
@@ -29,6 +31,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
       AvatarModule,
       StyleClassModule,
       DialogModule,
+      DynamicDialogModule,
       InputTextModule,
       DividerModule,
       TabViewModule,
@@ -37,6 +40,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
       SelectButtonModule,
       TableModule,
       ProgressBarModule,
+      CheckboxModule,
    ],
    exports: [
       ButtonModule,
@@ -46,6 +50,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
       AvatarModule,
       StyleClassModule,
       DialogModule,
+      DynamicDialogModule,
       InputTextModule,
       DividerModule,
       TabViewModule,
@@ -54,6 +59,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
       SelectButtonModule,
       TableModule,
       ProgressBarModule,
+      CheckboxModule,
    ],
 })
 export class PrimeModule {}
