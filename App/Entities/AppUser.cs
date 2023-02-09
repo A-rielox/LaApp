@@ -36,4 +36,17 @@ public class AppUser : IdentityUser<int>
     public ICollection<AppUserRole> UserRoles { get; set; }
     // AppUserRole es la join-table
 
+
+    ////////////////////////////
+
+    public List<Recipe> Recipes { get; set; } = new();
+
+
+
+    ////////////////////////////
+
+    public List<Post> Posts { get; set; } = new();
+
+
+
 }

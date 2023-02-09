@@ -44,8 +44,8 @@ public static class ApplicationServiceExtensions
         //services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 
-        //services.AddScoped<IRecipeRepository, RecipeRepository>();
-        //services.AddScoped<IPostRepository, PostRepository>();
+        services.AddScoped<IRecipeRepository, RecipeRepository>();
+        services.AddScoped<IPostRepository, PostRepository>();
 
 
         return services;

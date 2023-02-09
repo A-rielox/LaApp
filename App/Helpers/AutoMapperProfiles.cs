@@ -26,25 +26,25 @@ public class AutoMapperProfiles : Profile
                 src.Recipient.Photos.FirstOrDefault(p => p.IsMain).Url));
 
 
-        //CreateMap<Recipe, RecipeDto>()
-        //    .ForMember(dest => dest.CreatedById, opt => opt.MapFrom(src =>
-        //        src.CreatedBy.Id))
-        //    .ForMember(dest => dest.CreatedByUsername, opt => opt.MapFrom(src =>
-        //        src.CreatedBy.UserName))
-        //    .ForMember(dest => dest.CreatedByPhotoUrl, opt => opt.MapFrom(src =>
-        //        src.CreatedBy.Photos.FirstOrDefault(p => p.IsMain).Url));
-        //CreateMap<RecipeUpdateDto, Recipe>();
+        CreateMap<Recipe, RecipeDto>()
+            .ForMember(dest => dest.CreatedById, opt => opt.MapFrom(src =>
+                src.CreatedBy.Id))
+            .ForMember(dest => dest.CreatedByUsername, opt => opt.MapFrom(src =>
+                src.CreatedBy.UserName))
+            .ForMember(dest => dest.CreatedByPhotoUrl, opt => opt.MapFrom(src =>
+                src.CreatedBy.Photos.FirstOrDefault(p => p.IsMain).Url));
+        CreateMap<RecipeUpdateDto, Recipe>();
 
 
 
-        //CreateMap<Post, PostDto>()
-        //    .ForMember(dest => dest.CreatedById, opt => opt.MapFrom(src =>
-        //        src.CreatedBy.Id))
-        //    .ForMember(dest => dest.CreatedByUsername, opt => opt.MapFrom(src =>
-        //        src.CreatedBy.UserName))
-        //    .ForMember(dest => dest.CreatedByPhotoUrl, opt => opt.MapFrom(src =>
-        //        src.CreatedBy.Photos.FirstOrDefault(p => p.IsMain).Url));
-        //CreateMap<PostUpdateDto, Post>();
+        CreateMap<Post, PostDto>()
+            .ForMember(dest => dest.CreatedById, opt => opt.MapFrom(src =>
+                src.CreatedBy.Id))
+            .ForMember(dest => dest.CreatedByUsername, opt => opt.MapFrom(src =>
+                src.CreatedBy.UserName))
+            .ForMember(dest => dest.CreatedByPhotoUrl, opt => opt.MapFrom(src =>
+                src.CreatedBy.Photos.FirstOrDefault(p => p.IsMain).Url));
+        CreateMap<PostUpdateDto, Post>();
     }
 }
 
