@@ -86,8 +86,8 @@
                </li>
 
                <li>
-                  <!-- *appHasRole="['Admin', 'Moderator']" -->
                   <a
+                     *appHasRole="['Admin', 'Moderator']"
                      [class]="aClass()"
                      routerLink="/admin"
                      routerLinkActive="active"
@@ -99,7 +99,7 @@
                </li>
             </ng-container>
 
-            <li *ngIf="true">
+            <li *ngIf="false">
                <a
                   [class]="aClass()"
                   routerLink="/errors"

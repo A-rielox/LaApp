@@ -22,6 +22,10 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { SharedModule } from './_shared/shared.module';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './_directives/has-role.directive';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 
 @NgModule({
    declarations: [
@@ -33,6 +37,10 @@ import { LoadingInterceptor } from './_interceptors/loading.interceptor';
       TestErrorComponent,
       NotFoundComponent,
       ServerErrorComponent,
+      AdminPanelComponent,
+      HasRoleDirective,
+      UserManagementComponent,
+      PhotoManagementComponent,
    ],
    imports: [
       BrowserModule,

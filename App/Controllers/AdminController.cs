@@ -67,7 +67,7 @@ public class AdminController : BaseApiController
         // si ya tenia algun role y no lo pasé como role en el query se va a remover
         result = await _userManager.RemoveFromRolesAsync(user, userRoles.Except(selectedRoles));
 
-        if (!result.Succeeded) return BadRequest("Probelams quitando rol/roles.");
+        if (!result.Succeeded) return BadRequest("Probleams quitando rol/roles.");
 
         // retorno la lista actualizado de los roles q se tiene
         return Ok(await _userManager.GetRolesAsync(user));
