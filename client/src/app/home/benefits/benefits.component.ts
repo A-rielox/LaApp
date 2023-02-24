@@ -6,9 +6,12 @@ import { Component, OnInit } from '@angular/core';
    styleUrls: ['./benefits.component.css'],
 })
 export class BenefitsComponent implements OnInit {
-   visible1 = false;
-   visible2 = false;
-   visible3 = false;
+   // visible1 = false;
+   // visible2 = false;
+   // visible3 = false;
+
+   hovered1 = false;
+   visibleDialog1 = false;
 
    constructor() {}
 

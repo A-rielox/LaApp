@@ -1,3 +1,237 @@
+<div class="surface-ground px-4 py-8 md:px-6 lg:px-8">
+   <div class="text-900 font-bold text-5xl mb-4 text-center">
+      ¿Cómo usar los aceites esenciales?
+   </div>
+
+   <p class="text-700 text-xl mt-0 mb-6 text-center line-height-3">
+      Con tantos aceites esenciales a su alcance que tienen tantos usos
+      posibles, seguramente se preguntará cómo usarlos todos. No se preocupe,
+      con un poco de ayuda, ¡será un profesional en poco tiempo!
+   </p>
+
+   <div class="flex flex-column lg:flex-row gap-4">
+      <!-- <div class="flex flex-column gap-4 flex-1">
+         <div
+            *ngFor="let plan of plans"
+            class="shadow-2 surface-card p-4 cursor-pointer border-round-lg border-2 border-transparent text-900 hover:surface-hover transition-colors transition-duration-150"
+            (click)="selectedPlan = plan"
+            [ngClass]="{ 'border-primary': selectedPlan == plan }"
+         >
+            <div class="flex flex-column lg:flex-row align-items-start">
+               <div class="mr-3">
+                  <span
+                     class="inline-flex justify-content-center border-circle align-items-center bg-indigo-100 w-3rem h-3rem bg-primary"
+                  >
+                     <i [ngClass]="plan.icon" class="text-2xl"></i>
+                  </span>
+               </div>
+
+               <div>
+                  <div class="text-xl mb-2 font-bold">{{ plan.name }}</div>
+
+                  <p class="m-0 text-600 line-height-3">
+                     {{ plan.description[0].substring(0, 100) + " ..." }}
+                  </p>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="flex-1">
+         <div
+            class="flex flex-column shadow-2 h-full border-round-lg overflow-hidden"
+         >
+            <div class="bg-primary p-5">
+               <div class="text-4xl font-bold">
+                  {{ selectedPlan.name }}
+               </div>
+
+            </div>
+
+            <div
+               class="flex-1 border-round-lg border-noround-top surface-card p-5 flex flex-column"
+            >
+               <div
+                  *ngFor="let description of selectedPlan.description"
+                  class="flex-1 mb-3 text-600 line-height-3 text-center mx-auto mb-5 text-base md:text-lg"
+               >
+                  {{ description }}
+               </div>
+            </div>
+         </div>
+      </div> -->
+   </div>
+
+   <div class="grid">
+      <div class="col-12 lg:col-4 p-3">
+         <div
+            class="shadow-2 border-round surface-card p-4"
+            (mouseenter)="hovered1 = true"
+            (mouseleave)="hovered1 = false"
+         >
+            <div class="relative">
+               <img src="../../assets/images/aromatico.jpg" class="w-full" />
+               <button
+                  *ngIf="hovered1"
+                  class="fadein absolute p-component border-none bg-black-alpha-40 hover:bg-black-alpha-50 px-3 py-2 text-white font-medium text-base border-round cursor-pointer transition-colors transition-duration-300 trasladar"
+                  style="bottom: 1rem; right: 50%"
+                  (click)="visibleDialog1 = true"
+               >
+                  View Details
+               </button>
+               <!-- 
+                  <button
+                  *ngIf="hovered1"
+                  class="fadein absolute p-component border-none bg-black-alpha-40 hover:bg-black-alpha-50 px-3 py-2 text-white font-medium text-base border-round cursor-pointer transition-colors transition-duration-300 w-13rem"
+                  style="bottom: 1rem; left: 1rem"
+                  (click)="visibleDialog1 = true"
+               >
+                  View Details
+               </button>
+               -->
+            </div>
+
+            <div class="flex align-items-center mt-3 mb-2">
+               <span
+                  class="inline-flex border-circle align-items-center justify-content-center bg-yellow-100 mr-3"
+                  style="width: 38px; height: 38px"
+               >
+                  <i class="pi pi-cloud text-xl text-yellow-600"></i>
+               </span>
+               <span class="text-900 font-medium text-2xl">Aromático</span>
+            </div>
+
+            <p class="mt-0 mb-3 text-700 line-height-3">
+               ¡La manera más sencilla de disfrutar los beneficios aromáticos de
+               los aceites esenciales es respirándolos!
+            </p>
+         </div>
+      </div>
+
+      <div class="col-12 lg:col-4 p-3">
+         <div
+            class="shadow-2 border-round surface-card mb-3 h-full flex-column justify-content-between flex"
+         >
+            <div class="p-4">
+               <div class="flex align-items-center">
+                  <span
+                     class="inline-flex border-circle align-items-center justify-content-center bg-yellow-100 mr-3"
+                     style="width: 38px; height: 38px"
+                  >
+                     <i class="pi pi-briefcase text-xl text-yellow-600"></i>
+                  </span>
+                  <span class="text-900 font-medium text-2xl">Card Title</span>
+               </div>
+               <div class="text-900 my-3 text-xl font-medium">
+                  Proin libero nunci
+               </div>
+               <p class="mt-0 mb-3 text-700 line-height-3">
+                  Molestie ac feugiat sed lectus vestibulum mattis ullamcorper.
+                  Vulputate odio ut enim blandit volutpat maecenas. Convallis
+                  tellus id interdum velit.
+               </p>
+            </div>
+            <div class="px-4 py-3 surface-100 text-right">
+               <button
+                  pButton
+                  pRipple
+                  icon="pi pi-download"
+                  iconPos="right"
+                  label="Load"
+                  class="p-button-rounded p-button-warning"
+               ></button>
+            </div>
+         </div>
+      </div>
+
+      <div class="col-12 lg:col-4 p-3">
+         <div
+            class="shadow-2 border-round surface-card mb-3 h-full flex-column justify-content-between flex"
+         >
+            <div class="p-4">
+               <div class="flex align-items-center">
+                  <span
+                     class="inline-flex border-circle align-items-center justify-content-center bg-purple-100 mr-3"
+                     style="width: 38px; height: 38px"
+                  >
+                     <i class="pi pi-image text-xl text-purple-600"></i>
+                  </span>
+                  <span class="text-900 font-medium text-2xl">Card Title</span>
+               </div>
+               <div class="text-900 my-3 text-xl font-medium">
+                  At obcaecati quos ipsam laboriosam.
+               </div>
+               <p class="mt-0 mb-3 text-700 line-height-3">
+                  Rhoncus urna neque viverra justo nec ultrices dui sapien eget.
+                  Id neque aliquam vestibulum morbi blandit cursus risus at
+                  ipsum.
+               </p>
+            </div>
+            <div class="px-4 py-3 surface-100 text-right">
+               <button
+                  pButton
+                  pRipple
+                  icon="pi pi-bookmark"
+                  iconPos="right"
+                  label="Save"
+                  class="p-button-rounded p-button-help"
+               ></button>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<p-dialog
+   [(visible)]="visibleDialog1"
+   appendTo="body"
+   [modal]="true"
+   [breakpoints]="{ '960px': '75vw', '640px': '90vw' }"
+   [style]="{ width: '700px' }"
+   [showHeader]="false"
+   [contentStyle]="{ padding: '2rem 2rem 1rem 2rem' }"
+>
+   <div class="grid relative">
+      <div class="col-12 lg:col-6 text-center">
+         <img
+            src="../../assets/images/aromatico.jpg"
+            class="w-8rem sm:w-15rem lg:w-20rem"
+         />
+      </div>
+      <div class="col-12 lg:col-6 py-0 lg:pl-5">
+         <div class="flex justify-content-end">
+            <button
+               pButton
+               class="absolute lg:static p-button-text p-button-plain p-button-rounded"
+               icon="pi pi-times pi-2xl"
+               (click)="visibleDialog1 = false"
+               style="right: 0rem; top: 0rem"
+            ></button>
+         </div>
+         <div class="flex align-items-center justify-content-between mb-3">
+            <span class="text-xl font-medium text-900">Respirarlo.</span>
+         </div>
+
+         <p class="p-0 mt-0 mb-3 line-height-3 text-700">
+            ¡La manera más sencilla de disfrutar los beneficios aromáticos de
+            los aceites esenciales es respirándolos! ¿Alguna vez has caminado
+            dentro de un spa y te has deleitado con el aroma de los aceites
+            esenciales de Árbol de Té y Eucalipto? ¿O quizás has sentido la
+            calma del aroma del aceite de Lavanda? Todo lo que se requiere es
+            colocar algunas gotas de aceite esencial en las palmas de tus manos.
+            Enseguida coloca tus manos en forma ahuecada ligeramente sobre tu
+            boca y nariz e inhala, respira profundamente durante el tiempo que
+            sea necesario. También podrías usar un difusor para aceites
+            esenciales para llenar tu hogar u oficina con tus aromas favoritos o
+            agregar algunas gotas de tus aceites esenciales favoritos en una
+            bolita de algodón y colocarlas en donde desees que se disperse el
+            aroma.
+         </p>
+      </div>
+   </div>
+</p-dialog>
+
+<!-- 
 <div
    class="surface-ground px-4 py-8 md:px-6 lg:px-8 min-h-screen flex flex-column justify-content-center"
 >
@@ -73,9 +307,6 @@
    </div>
 </div>
 
-<!--  -->
-<!-- 1 -->
-<!--  -->
 <p-dialog
    [(visible)]="visible1"
    appendTo="body"
@@ -127,9 +358,6 @@
    </ng-template>
 </p-dialog>
 
-<!--  -->
-<!-- 2 -->
-<!--  -->
 <p-dialog
    [(visible)]="visible2"
    appendTo="body"
@@ -182,9 +410,6 @@
    </ng-template>
 </p-dialog>
 
-<!--  -->
-<!-- 3 -->
-<!--  -->
 <p-dialog
    [(visible)]="visible3"
    appendTo="body"
@@ -230,3 +455,5 @@
       </div>
    </ng-template>
 </p-dialog>
+
+-->
