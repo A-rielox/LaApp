@@ -9,58 +9,98 @@
       con un poco de ayuda, ¡será un profesional en poco tiempo!
    </p>
 
-   <div class="flex flex-column lg:flex-row gap-4">
-      <!-- <div class="flex flex-column gap-4 flex-1">
+   <div class="grid">
+      <div class="col-12 lg:col-4 p-3" *ngFor="let item of data; let i = index">
          <div
-            *ngFor="let plan of plans"
-            class="shadow-2 surface-card p-4 cursor-pointer border-round-lg border-2 border-transparent text-900 hover:surface-hover transition-colors transition-duration-150"
-            (click)="selectedPlan = plan"
-            [ngClass]="{ 'border-primary': selectedPlan == plan }"
+            class="shadow-2 border-round surface-card p-4"
+            (mouseenter)="item.card = true"
+            (mouseleave)="item.card = false"
          >
-            <div class="flex flex-column lg:flex-row align-items-start">
-               <div class="mr-3">
-                  <span
-                     class="inline-flex justify-content-center border-circle align-items-center bg-indigo-100 w-3rem h-3rem bg-primary"
-                  >
-                     <i [ngClass]="plan.icon" class="text-2xl"></i>
-                  </span>
-               </div>
-
-               <div>
-                  <div class="text-xl mb-2 font-bold">{{ plan.name }}</div>
-
-                  <p class="m-0 text-600 line-height-3">
-                     {{ plan.description[0].substring(0, 100) + " ..." }}
-                  </p>
-               </div>
+            <div class="relative">
+               <img [src]="item.image" class="w-full" />
+               <button
+                  *ngIf="item.card"
+                  class="fadein absolute p-component border-none bg-black-alpha-40 hover:bg-black-alpha-50 px-3 py-2 text-white font-medium text-base border-round cursor-pointer transition-colors transition-duration-300 trasladar"
+                  style="bottom: 1rem; right: 50%"
+                  (click)="dialogToOpen(i)"
+               >
+                  Conocer más
+               </button>
             </div>
+
+            <div class="flex align-items-center mt-3 mb-2">
+               <span
+                  class="inline-flex border-circle align-items-center justify-content-center mr-3"
+                  [ngClass]="item.iconBgColor"
+                  style="width: 38px; height: 38px"
+               >
+                  <i class="text-xl" [ngClass]="item.icon"></i>
+               </span>
+
+               <span class="text-900 font-medium text-2xl">{{
+                  item.title
+               }}</span>
+            </div>
+
+            <p class="mt-0 mb-3 text-700 line-height-3">
+               {{ item.shortDesc }}
+            </p>
          </div>
       </div>
-
-      <div class="flex-1">
-         <div
-            class="flex flex-column shadow-2 h-full border-round-lg overflow-hidden"
-         >
-            <div class="bg-primary p-5">
-               <div class="text-4xl font-bold">
-                  {{ selectedPlan.name }}
-               </div>
-
-            </div>
-
-            <div
-               class="flex-1 border-round-lg border-noround-top surface-card p-5 flex flex-column"
-            >
-               <div
-                  *ngFor="let description of selectedPlan.description"
-                  class="flex-1 mb-3 text-600 line-height-3 text-center mx-auto mb-5 text-base md:text-lg"
-               >
-                  {{ description }}
-               </div>
-            </div>
-         </div>
-      </div> -->
    </div>
+</div>
+
+<p-dialog
+   [(visible)]="openDialog"
+   appendTo="body"
+   [modal]="true"
+   [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+   [style]="{ width: '60vw' }"
+   [header]="dialog.header"
+   [draggable]="false"
+   [resizable]="false"
+   [dismissableMask]="true"
+>
+   <div class="flex flex-wrap border-top-1 surface-border pt-4">
+      <div
+         class="bg-blue-50 flex align-items-center justify-content-center py-3 px-0 w-full md:w-4 border-round"
+      >
+         <img [src]="dialog.img" alt="Image" class="w-9" />
+      </div>
+
+      <div class="text-700 line-height-3 m-0 p-5 w-full md:w-8">
+         <div class="text-3xl font-medium text-900 mb-2">
+            {{ dialog.title }}
+         </div>
+
+         <p>
+            {{ dialog.desc }}
+         </p>
+      </div>
+   </div>
+   <ng-template pTemplate="footer">
+      <div class="border-top-1 surface-border pt-3">
+         <button
+            pButton
+            pRipple
+            icon="pi pi-check"
+            (click)="openDialog = false"
+            label="Listo"
+         ></button>
+      </div>
+   </ng-template>
+</p-dialog>
+
+<!-- <div class="surface-ground px-4 py-8 md:px-6 lg:px-8">
+   <div class="text-900 font-bold text-5xl mb-4 text-center">
+      ¿Cómo usar los aceites esenciales?
+   </div>
+
+   <p class="text-700 text-xl mt-0 mb-6 text-center line-height-3">
+      Con tantos aceites esenciales a su alcance que tienen tantos usos
+      posibles, seguramente se preguntará cómo usarlos todos. No se preocupe,
+      con un poco de ayuda, ¡será un profesional en poco tiempo!
+   </p>
 
    <div class="grid">
       <div class="col-12 lg:col-4 p-3">
@@ -77,27 +117,18 @@
                   style="bottom: 1rem; right: 50%"
                   (click)="visibleDialog1 = true"
                >
-                  View Details
+                  Conocer más
                </button>
-               <!-- 
-                  <button
-                  *ngIf="hovered1"
-                  class="fadein absolute p-component border-none bg-black-alpha-40 hover:bg-black-alpha-50 px-3 py-2 text-white font-medium text-base border-round cursor-pointer transition-colors transition-duration-300 w-13rem"
-                  style="bottom: 1rem; left: 1rem"
-                  (click)="visibleDialog1 = true"
-               >
-                  View Details
-               </button>
-               -->
             </div>
 
             <div class="flex align-items-center mt-3 mb-2">
                <span
-                  class="inline-flex border-circle align-items-center justify-content-center bg-yellow-100 mr-3"
+                  class="inline-flex border-circle align-items-center justify-content-center bg-green-100 mr-3"
                   style="width: 38px; height: 38px"
                >
-                  <i class="pi pi-cloud text-xl text-yellow-600"></i>
+                  <i class="pi pi-cloud text-xl text-green-600"></i>
                </span>
+
                <span class="text-900 font-medium text-2xl">Aromático</span>
             </div>
 
@@ -110,73 +141,71 @@
 
       <div class="col-12 lg:col-4 p-3">
          <div
-            class="shadow-2 border-round surface-card mb-3 h-full flex-column justify-content-between flex"
+            class="shadow-2 border-round surface-card p-4"
+            (mouseenter)="hovered2 = true"
+            (mouseleave)="hovered2 = false"
          >
-            <div class="p-4">
-               <div class="flex align-items-center">
-                  <span
-                     class="inline-flex border-circle align-items-center justify-content-center bg-yellow-100 mr-3"
-                     style="width: 38px; height: 38px"
-                  >
-                     <i class="pi pi-briefcase text-xl text-yellow-600"></i>
-                  </span>
-                  <span class="text-900 font-medium text-2xl">Card Title</span>
-               </div>
-               <div class="text-900 my-3 text-xl font-medium">
-                  Proin libero nunci
-               </div>
-               <p class="mt-0 mb-3 text-700 line-height-3">
-                  Molestie ac feugiat sed lectus vestibulum mattis ullamcorper.
-                  Vulputate odio ut enim blandit volutpat maecenas. Convallis
-                  tellus id interdum velit.
-               </p>
-            </div>
-            <div class="px-4 py-3 surface-100 text-right">
+            <div class="relative">
+               <img src="../../assets/images/topico.jpg" class="w-full" />
                <button
-                  pButton
-                  pRipple
-                  icon="pi pi-download"
-                  iconPos="right"
-                  label="Load"
-                  class="p-button-rounded p-button-warning"
-               ></button>
+                  *ngIf="hovered2"
+                  class="fadein absolute p-component border-none bg-black-alpha-40 hover:bg-black-alpha-50 px-3 py-2 text-white font-medium text-base border-round cursor-pointer transition-colors transition-duration-300 trasladar"
+                  style="bottom: 1rem; right: 50%"
+                  (click)="visibleDialog2 = true"
+               >
+                  Conocer más
+               </button>
             </div>
+
+            <div class="flex align-items-center mt-3 mb-2">
+               <span
+                  class="inline-flex border-circle align-items-center justify-content-center bg-yellow-100 mr-3"
+                  style="width: 38px; height: 38px"
+               >
+                  <i class="pi pi-thumbs-up text-xl text-yellow-600"></i>
+               </span>
+               <span class="text-900 font-medium text-2xl">Tópico</span>
+            </div>
+
+            <p class="mt-0 mb-3 text-700 line-height-3">
+               Unas gotas en la piel. El uso tópico de los aceites esenciales es
+               uno de los más populares.
+            </p>
          </div>
       </div>
 
       <div class="col-12 lg:col-4 p-3">
          <div
-            class="shadow-2 border-round surface-card mb-3 h-full flex-column justify-content-between flex"
+            class="shadow-2 border-round surface-card p-4"
+            (mouseenter)="hovered2 = true"
+            (mouseleave)="hovered2 = false"
          >
-            <div class="p-4">
-               <div class="flex align-items-center">
-                  <span
-                     class="inline-flex border-circle align-items-center justify-content-center bg-purple-100 mr-3"
-                     style="width: 38px; height: 38px"
-                  >
-                     <i class="pi pi-image text-xl text-purple-600"></i>
-                  </span>
-                  <span class="text-900 font-medium text-2xl">Card Title</span>
-               </div>
-               <div class="text-900 my-3 text-xl font-medium">
-                  At obcaecati quos ipsam laboriosam.
-               </div>
-               <p class="mt-0 mb-3 text-700 line-height-3">
-                  Rhoncus urna neque viverra justo nec ultrices dui sapien eget.
-                  Id neque aliquam vestibulum morbi blandit cursus risus at
-                  ipsum.
-               </p>
-            </div>
-            <div class="px-4 py-3 surface-100 text-right">
+            <div class="relative">
+               <img src="../../assets/images/interno.jpg" class="w-full" />
                <button
-                  pButton
-                  pRipple
-                  icon="pi pi-bookmark"
-                  iconPos="right"
-                  label="Save"
-                  class="p-button-rounded p-button-help"
-               ></button>
+                  *ngIf="hovered2"
+                  class="fadein absolute p-component border-none bg-black-alpha-40 hover:bg-black-alpha-50 px-3 py-2 text-white font-medium text-base border-round cursor-pointer transition-colors transition-duration-300 trasladar"
+                  style="bottom: 1rem; right: 50%"
+                  (click)="visibleDialog2 = true"
+               >
+                  Conocer más
+               </button>
             </div>
+
+            <div class="flex align-items-center mt-3 mb-2">
+               <span
+                  class="inline-flex border-circle align-items-center justify-content-center bg-purple-100 mr-3"
+                  style="width: 38px; height: 38px"
+               >
+                  <i class="pi pi-apple text-xl text-purple-600"></i>
+               </span>
+               <span class="text-900 font-medium text-2xl">Interno</span>
+            </div>
+
+            <p class="mt-0 mb-3 text-700 line-height-3">
+               Uno con tu cuerpo. ¿Sabías que puedes obtener los beneficios de
+               los aceites esenciales ingiriéndolos?
+            </p>
          </div>
       </div>
    </div>
@@ -229,7 +258,11 @@
          </p>
       </div>
    </div>
-</p-dialog>
+</p-dialog> -->
+
+<!--  -->
+<!--  -->
+<!--  -->
 
 <!-- 
 <div
@@ -454,6 +487,4 @@
          ></button>
       </div>
    </ng-template>
-</p-dialog>
-
--->
+</p-dialog> -->
