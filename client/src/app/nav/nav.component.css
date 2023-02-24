@@ -10,3 +10,8 @@ a {
    border-bottom-width: 2px !important;
    border-bottom-style: solid !important;
 }
+
+.width-container {
+   max-width: 1300px;
+   margin: 0 auto;
+}
