@@ -1,0 +1,13 @@
+@keyframes beat {
+   from {
+      transform: scale(1);
+   }
+   to {
+      transform: scale(1.5);
+   }
+}
+
+.beat {
+   display: inline-block;
+   animation: beat 0.8s linear infinite alternate;
+}

@@ -9,9 +9,10 @@ import { HeroComponent } from './hero/hero.component';
 import { WhatAreComponent } from './what-are/what-are.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { BenefitsComponent } from './benefits/benefits.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-   declarations: [RegisterModalComponent, HomeComponent, HeroComponent, WhatAreComponent, TabsComponent, BenefitsComponent],
+   declarations: [RegisterModalComponent, HomeComponent, HeroComponent, WhatAreComponent, TabsComponent, BenefitsComponent, FooterComponent],
    imports: [CommonModule, PrimeModule, ReactiveFormsModule, SharedModule],
    exports: [],
 })

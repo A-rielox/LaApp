@@ -55,15 +55,16 @@
    appendTo="body"
    [modal]="true"
    [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
-   [style]="{ width: '60vw' }"
+   [style]="{ width: '60vw', maxWidth: '1000px' }"
    [header]="dialog.header"
    [draggable]="false"
    [resizable]="false"
    [dismissableMask]="true"
 >
    <div class="flex flex-wrap border-top-1 surface-border pt-4">
+      <!-- bg-blue-50 -->
       <div
-         class="bg-blue-50 flex align-items-center justify-content-center py-3 px-0 w-full md:w-4 border-round"
+         class="flex align-items-center justify-content-center py-3 px-0 w-full md:w-4 border-round"
       >
          <img [src]="dialog.img" alt="Image" class="w-9" />
       </div>
