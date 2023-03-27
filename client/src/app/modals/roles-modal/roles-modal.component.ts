@@ -39,8 +39,6 @@ export class RolesModalComponent implements OnInit {
    }
 
    closeD() {
-      console.log(this.selectedRoles);
-
       this.ref.close(this.selectedRoles);
    }
 }

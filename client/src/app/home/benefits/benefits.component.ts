@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { benefitsData, BenefitsData } from './benefitsData';
+import { benefitsData, BenefitsData, DialogType } from './benefitsData';
 
 @Component({
    selector: 'app-benefits',
@@ -11,7 +11,7 @@ export class BenefitsComponent implements OnInit {
 
    data?: BenefitsData[];
 
-   dialog = { header: '', title: '', desc: '', img: '' };
+   dialog: DialogType = {} as DialogType;
 
    constructor() {}
 

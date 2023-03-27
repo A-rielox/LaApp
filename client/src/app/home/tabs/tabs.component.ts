@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class TabsComponent implements OnInit {
    // activeTab1 = 0;
 
-   plans = [
+   items = [
       {
          icon: 'pi pi-bolt',
          name: 'Mejorar Tu Bienestar Físico',
@@ -38,7 +38,7 @@ export class TabsComponent implements OnInit {
       },
    ];
 
-   selectedPlan = this.plans[0];
+   selectedItem = this.items[0];
 
    constructor() {}
 

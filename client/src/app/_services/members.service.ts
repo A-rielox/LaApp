@@ -14,7 +14,7 @@ export class MembersService {
    members: Member[] = [];
    memberCache = new Map();
 
-   userParams: UserParams | undefined; // aqui están los filtros
+   userParams: UserParams | undefined; // aqui tengo los filtros
 
    constructor(private http: HttpClient) {
       this.userParams = new UserParams();
@@ -54,7 +54,7 @@ export class MembersService {
          userParams.pageNumber,
          userParams.pageSize
       );
-      // params = params.append('minAge', userParams.minAge)
+
       params = params.append('orderBy', userParams.orderBy);
 
       // "observe: 'response'" me da acceso a toda la response
@@ -70,6 +70,17 @@ export class MembersService {
          })
       );
    }
+
+   //             memberCache
+   // key: '1-5-lastActive';
+   // value: PaginatedResult:
+   //                      pagination: {
+   //                         currentPage: 1;
+   //                         itemsPerPage: 5;
+   //                         totalItems: 11;
+   //                         totalPages: 3;
+   //                      };
+   //                      result: (5) [{…}, {…}, {…}, {…}, {…}]
 
    getMember(username: string) {
       // const member = this.members.find((m) => m.userName === username);
@@ -88,6 +99,7 @@ export class MembersService {
       return this.http.put(this.baseUrl + 'users', member).pipe(
          map(() => {
             const index = this.members.indexOf(member);
+
             this.members[index] = { ...this.members[index], ...member };
          })
       );

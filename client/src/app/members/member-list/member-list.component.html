@@ -5,7 +5,6 @@
       natural.
    </div>
 
-   <!-- <div class="field col-12 md:col-6"> -->
    <div
       class="field flex align-items-center justify-content-end"
       *ngIf="userParams"
@@ -43,7 +42,6 @@
 
 <!--  -->
 <!--  -->
-<!--  -->
 
 <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
    <div class="text-center font-bold text-900 text-5xl mb-3">El Equipo</div>
@@ -53,10 +51,6 @@
    </div>
 
    <div class="grid justify-content-center">
-      <!-- <div
-         class="shadow-2 p-4 mb-5 lg:mb-0 mr-0 lg:mr-5 surface-card col-12 md:col-6 lg:col-3 p-3"
-         *ngFor="let member of members"
-      > -->
       <div
          class="shadow-2 p-4 mb-5 mr-0 lg:mr-5 surface-card col-12 md:col-6 lg:col-3 flex flex-column"
          *ngFor="let member of members"
@@ -76,25 +70,21 @@
                </div>
             </div>
 
-            <!--  mt-4  -->
             <div class="flex flex-nowrap justify-content-around mt-4">
                <button
                   pButton
-                  pRipple
                   type="button"
                   icon="pi pi-user"
                   class="p-button-rounded p-button-help p-button-outlined"
                ></button>
                <button
                   pButton
-                  pRipple
                   type="button"
                   icon="pi pi-heart"
                   class="p-button-rounded p-button-danger p-button-outlined XXXXXXD"
                ></button>
                <button
                   pButton
-                  pRipple
                   type="button"
                   icon="pi pi-envelope"
                   class="p-button-rounded p-button-success p-button-outlined"

@@ -74,8 +74,8 @@
             {{ dialog.title }}
          </div>
 
-         <p>
-            {{ dialog.desc }}
+         <p *ngFor="let desc of dialog.desc">
+            {{ desc }}
          </p>
       </div>
    </div>

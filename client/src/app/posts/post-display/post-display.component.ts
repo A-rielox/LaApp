@@ -30,7 +30,6 @@ export class PostDisplayComponent implements OnInit {
    }
 
    onEdit() {
-      console.log('edit edit edit');
       // p' cerra este modal this.ref.close();
       this.ref.close();
       const navigationExtras: NavigationExtras = {
@@ -42,7 +41,6 @@ export class PostDisplayComponent implements OnInit {
 
    // pop-up de confirmar borrado
    confirm(event: Event) {
-      console.log('confirm confirm confirm');
       if (!event.target) return;
 
       this.confirmationService.confirm({
