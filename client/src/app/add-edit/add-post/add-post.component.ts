@@ -59,7 +59,7 @@ export class AddPostComponent implements OnInit {
             [
                Validators.required,
                Validators.minLength(5),
-               Validators.maxLength(30),
+               Validators.maxLength(50),
             ],
          ],
          content: [
@@ -67,7 +67,7 @@ export class AddPostComponent implements OnInit {
             [
                Validators.required,
                Validators.minLength(30),
-               Validators.maxLength(1000),
+               Validators.maxLength(2000),
             ],
          ],
          category: [[], Validators.required],

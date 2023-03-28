@@ -70,15 +70,15 @@ export class AddRecipeComponent implements OnInit {
             [
                Validators.required,
                Validators.minLength(5),
-               Validators.maxLength(30),
+               Validators.maxLength(50),
             ],
          ],
          content: [
             '',
             [
                Validators.required,
-               Validators.minLength(30),
-               Validators.maxLength(1000),
+               Validators.minLength(50),
+               Validators.maxLength(1300),
             ],
          ],
          oilsList: [[], Validators.required],

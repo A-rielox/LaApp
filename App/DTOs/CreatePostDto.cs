@@ -5,7 +5,7 @@ namespace App.DTOs;
 public class CreatePostDto
 {
     [Required]
-    [StringLength(30, ErrorMessage = "Your title is limited from {2} to {1} characters", MinimumLength = 5)]
+    [StringLength(50, ErrorMessage = "Your title is limited from {2} to {1} characters", MinimumLength = 5)]
     public string Title { get; set; }
 
     [Required]
