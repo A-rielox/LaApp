@@ -9,11 +9,8 @@ public class Post
     public DateTime Created { get; set; } = DateTime.UtcNow;
 
 
-
     public bool Public { get; set; }
     public bool Banned { get; set; }
-
-
 
 
     public AppUser CreatedBy { get; set; }

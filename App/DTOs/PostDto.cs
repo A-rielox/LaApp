@@ -9,6 +9,12 @@ public class PostDto
     public DateTime Created { get; set; }
 
     /////////////////////
+
+    public bool Public { get; set; }
+    public bool Banned { get; set; }
+
+    /////////////////////
+
     public int CreatedById { get; set; }
     public string CreatedByUsername { get; set; }
     public string CreatedByPhotoUrl { get; set; }
