@@ -8,16 +8,17 @@ import { PostsService } from '../_services/posts.service';
 import { AccountService } from '../_services/account.service';
 import { take } from 'rxjs/operators';
 import { PostDisplayComponent } from './post-display/post-display.component';
+import { CloseModal, PostsToDisplay } from './interfaces';
 
-interface PostsToDisplay {
-   name: string;
-   label: string;
-}
+// interface PostsToDisplay {
+//    name: string;
+//    label: string;
+// }
 
-interface CloseModal {
-   por: string;
-   id: number; // receta o post
-}
+// interface CloseModal {
+//    por: string;
+//    id: number; // receta o post
+// }
 
 @Component({
    selector: 'app-posts',

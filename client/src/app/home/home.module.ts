@@ -10,9 +10,23 @@ import { WhatAreComponent } from './what-are/what-are.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { BenefitsComponent } from './benefits/benefits.component';
 import { FooterComponent } from './footer/footer.component';
+import { MembersHomeComponent } from './members-home/members-home.component';
+import { PostsHomeComponent } from './posts-home/posts-home.component';
+import { RecipesHomeComponent } from './recipes-home/recipes-home.component';
 
 @NgModule({
-   declarations: [RegisterModalComponent, HomeComponent, HeroComponent, WhatAreComponent, TabsComponent, BenefitsComponent, FooterComponent],
+   declarations: [
+      RegisterModalComponent,
+      HomeComponent,
+      HeroComponent,
+      WhatAreComponent,
+      TabsComponent,
+      BenefitsComponent,
+      FooterComponent,
+      MembersHomeComponent,
+      PostsHomeComponent,
+      RecipesHomeComponent,
+   ],
    imports: [CommonModule, PrimeModule, ReactiveFormsModule, SharedModule],
    exports: [],
 })

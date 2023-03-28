@@ -8,16 +8,17 @@ import { RecipesService } from '../_services/recipes.service';
 import { AccountService } from '../_services/account.service';
 import { take } from 'rxjs/operators';
 import { RecipeDisplayComponent } from './recipe-display/recipe-display.component';
+import { CloseModal, RecipesToDisplay } from './interfaces';
 
-interface RecipesToDisplay {
-   name: string;
-   label: string;
-}
+// interface RecipesToDisplay {
+//    name: string;
+//    label: string;
+// }
 
-interface CloseModal {
-   por: string;
-   id: number; // receta o post
-}
+// interface CloseModal {
+//    por: string;
+//    id: number; // receta o post
+// }
 
 @Component({
    selector: 'app-recipes',

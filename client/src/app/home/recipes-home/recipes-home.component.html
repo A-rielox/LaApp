@@ -1,0 +1,155 @@
+<div class="surface-ground px-4 py-8 md:px-6 lg:px-8">
+   <div class="text-900 font-bold text-5xl mb-4 text-center">
+      Únete para publicar y acceder a todas nuestras recetas.
+   </div>
+
+   <div class="text-700 line-height-3 text-xl mb-6 flex align-items-center">
+      Categorias:
+      <div class="flex ml-2 align-items-center">
+         Salud
+         <div
+            style="background: linear-gradient(15deg, #f91616, #f97316)"
+            class="w-2rem h-2rem flex-shrink-0 border-circle ml-2"
+         ></div>
+         &nbsp;, &nbsp;
+      </div>
+
+      <div class="flex ml-2 align-items-center">
+         Malestares
+         <div
+            style="background: linear-gradient(15deg, #cc63f1, #6366f1)"
+            class="w-2rem h-2rem flex-shrink-0 border-circle ml-2"
+         ></div>
+         &nbsp;, &nbsp;
+      </div>
+
+      <div class="flex ml-2 align-items-center">
+         Ánimo
+         <div
+            style="background: linear-gradient(15deg, #06d465, #06b6d4)"
+            class="w-2rem h-2rem flex-shrink-0 border-circle ml-2"
+         ></div>
+      </div>
+   </div>
+
+   <!-- <p class="text-700 text-xl mt-0 mb-6 text-center line-height-3">
+      Con tantos aceites esenciales a su alcance que tienen tantos usos
+      posibles, seguramente se preguntará cómo usarlos todos. No se preocupe,
+      con un poco de ayuda, ¡será un profesional en poco tiempo!
+   </p> -->
+
+   <div class="grid">
+      <!-- class="col-12 md:col-6 lg:col-3" -->
+      <ng-container *ngFor="let recipe of recipes; let i = index">
+         <div class="col-12 md:col-6 lg:col-4">
+            <div
+               class="shadow-2 border-round-xl cursor-pointer h-full"
+               [style]="borderColor(recipe.category)"
+               (click)="dialogToOpen(i)"
+            >
+               <div
+                  class="p-4 border-round surface-card h-full flex flex-column justify-content-between"
+               >
+                  <div>
+                     <div class="flex mb-3">
+                        <p-avatar
+                           image="{{ recipe.createdByPhotoUrl }}"
+                           shape="circle"
+                        ></p-avatar>
+
+                        <div class="ml-2">
+                           <div class="font-medium text-900 mb-1">
+                              {{ recipe.createdByUsername | titlecase }}
+                           </div>
+
+                           <div
+                              class="text-xs flex align-items-center text-400"
+                           >
+                              <span>{{ recipe.created | date }}</span>
+                           </div>
+                        </div>
+                     </div>
+
+                     <div
+                        class="text-xl text-900 font-medium mb-3 line-height-3"
+                     >
+                        {{ recipe.title }}
+                     </div>
+
+                     <div class="line-height-3 text-700">
+                        {{ recipe.content.substring(0, 150) + "..." }}
+                     </div>
+                  </div>
+
+                  <div class="text-xs text-right text-400 mt-2">
+                     {{ recipe.oilsList.split(",").join(" - ") }}
+                  </div>
+               </div>
+            </div>
+         </div>
+      </ng-container>
+   </div>
+</div>
+
+<ng-container *ngIf="dialog.recipe">
+   <p-dialog
+      [(visible)]="openDialog"
+      appendTo="body"
+      [modal]="true"
+      [breakpoints]="{ '960px': '75vw', '640px': '100vw' }"
+      [style]="{ width: '60vw', maxWidth: '1000px' }"
+      [header]="dialog.recipe.category"
+      [draggable]="false"
+      [resizable]="false"
+      [dismissableMask]="true"
+   >
+      <div class="p-4 pt-0 pb-0">
+         <div class="text-xl text-900 font-medium mb-3 line-height-3">
+            {{ dialog.recipe.title }}
+         </div>
+
+         <div class="line-height-3 mb-3 text-700">
+            {{ dialog.recipe.content }}
+         </div>
+
+         <!--         lista         -->
+         <div class="text-base text-900 font-medium mb-1 line-height-3">
+            Lista de aceites:
+         </div>
+
+         <div class="line-height-3 text-700 ml-6">
+            {{ dialog.recipe.oilsList.split(",").join(" - ") }}
+         </div>
+
+         <!--        usuario         -->
+         <div class="flex justify-content-end">
+            <p-avatar
+               image="{{ dialog.recipe.createdByPhotoUrl }}"
+               shape="circle"
+            ></p-avatar>
+
+            <div class="ml-2">
+               <div class="font-medium text-900 mb-1">
+                  {{ dialog.recipe.createdByUsername | titlecase }}
+               </div>
+
+               <div class="text-xs flex align-items-center text-400">
+                  <span>{{ dialog.recipe.created | date }}</span>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <ng-template pTemplate="footer">
+         <div class="border-top-1 surface-border pt-3">
+            <button
+               pButton
+               pRipple
+               icon="pi pi-check"
+               (click)="openDialog = false"
+               label="Listo"
+            ></button>
+         </div>
+      </ng-template>
+   </p-dialog>
+</ng-container>
