@@ -10,17 +10,18 @@
    </p>
 
    <div class="grid">
-      <div class="col-12 lg:col-4 p-3" *ngFor="let item of data; let i = index">
+      <div class="col-12 md:col-4 p-3" *ngFor="let item of data; let i = index">
          <div
-            class="shadow-2 border-round surface-card p-4"
+            class="shadow-2 border-round surface-card p-4 h-full"
             (mouseenter)="item.card = true"
             (mouseleave)="item.card = false"
          >
             <div class="relative">
-               <img [src]="item.image" class="w-full" />
+               <img [src]="item.image" class="w-full hidden md:block" />
+
                <button
                   *ngIf="item.card"
-                  class="fadein absolute p-component border-none bg-black-alpha-40 hover:bg-black-alpha-50 px-3 py-2 text-white font-medium text-base border-round cursor-pointer transition-colors transition-duration-300 trasladar"
+                  class="fadein absolute p-component border-none bg-black-alpha-40 hover:bg-black-alpha-50 px-3 py-2 text-white font-medium text-base border-round cursor-pointer transition-colors transition-duration-300 trasladar hidden md:block"
                   style="bottom: 1rem; right: 50%"
                   (click)="dialogToOpen(i)"
                >

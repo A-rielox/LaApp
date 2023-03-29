@@ -5,33 +5,34 @@
       Atrevete a usarlos y deja que te ayuden a:
    </p>
 
-   <!-- <div class="flex flex-column lg:flex-row gap-4 xl:px-8 xl:mx-8"> -->
    <div class="flex flex-column lg:flex-row gap-4">
       <div class="flex flex-column gap-4 flex-1">
          <div
             *ngFor="let item of items"
-            class="shadow-2 surface-card p-4 cursor-pointer border-round-lg border-2 border-transparent text-900 hover:surface-hover transition-colors transition-duration-150"
+            class="shadow-2 surface-card p-4 lg:cursor-pointer border-round-lg border-2 border-transparent text-900 hover:surface-hover transition-colors transition-duration-150"
             (click)="selectedItem = item"
             [ngClass]="{ 'border-primary': selectedItem == item }"
          >
             <div class="flex flex-column lg:flex-row align-items-start">
-               <div class="mr-3">
+               <div class="mr-3 icono-container">
                   <span
-                     class="inline-flex justify-content-center border-circle align-items-center bg-indigo-100 w-3rem h-3rem bg-primary"
+                     class="inline-flex justify-content-center border-circle align-items-center bg-indigo-100 w-2rem md:w-3rem h-2rem md:h-3rem bg-primary mb-1 lg:mb-2 icono"
                   >
-                     <i [ngClass]="item.icon" class="text-2xl"></i>
+                     <i [ngClass]="item.icon" class="text-base md:text-2xl"></i>
                   </span>
                </div>
 
                <div>
                   <div class="text-xl mb-2 font-bold">{{ item.name }}</div>
 
-                  <!-- <p class="m-0 font-light line-height-3">
-                     Nunc consequat interdum varius sit.
-                     <span class="font-medium">$ {{ plan.price }} | </span>Save
-                     $67 on Annual Plan
+                  <!-- <p class="m-0 text-600 line-height-3">
+                     {{ item.description[0].substring(0, 100) + " ..." }}
                   </p> -->
-                  <p class="m-0 text-600 line-height-3">
+                  <p class="m-0 text-600 line-height-3 lg:hidden">
+                     {{ item.description[0] }}
+                  </p>
+
+                  <p class="m-0 text-600 line-height-3 hidden lg:block">
                      {{ item.description[0].substring(0, 100) + " ..." }}
                   </p>
                </div>
@@ -39,7 +40,7 @@
          </div>
       </div>
 
-      <div class="flex-1">
+      <div class="flex-1 hidden lg:block">
          <div
             class="flex flex-column shadow-2 h-full border-round-lg overflow-hidden"
          >

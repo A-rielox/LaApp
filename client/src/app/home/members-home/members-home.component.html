@@ -1,52 +1,22 @@
 <div class="surface-ground text-center px-4 py-8 md:px-6 lg:px-8">
    <div class="text-900 font-bold text-5xl mb-8 text-center">
-      Conoce al equipo.
+      Conoce parte del equipo.
    </div>
 
-   <div class="flex flex-column md:flex-row">
-      <div class="flex flex-grow-1 mb-4 md:mb-0 md:px-4 py-4 md:py-0">
+   <div class="flex flex-column lg:flex-row">
+      <div
+         *ngFor="let mem of mems"
+         class="flex flex-grow-1 mb-4 lg:mb-0 lg:px-4 py-4 lg:py-0"
+      >
          <div class="shadow-2 surface-card border-round relative">
-            <img
-               src="../../../assets/user.png"
-               width="100"
-               height="100"
-               class="absolute left-50"
-               style="margin-left: -50px; top: -50px"
-            />
-
-            <div class="px-4 pb-4 pt-8 relative">
-               <p
-                  class="text-900 font-italic line-height-3 text-lg m-0 pb-4 border-bottom-1 surface-border"
-               >
-                  “Lorem ipsum dolor sit amet, sed tempor incididunt ut labore
-                  et dolore magna alique.”
-               </p>
-
-               <div class="text-900 font-semibold line-height-3 mt-4">
-                  Dave Williams
-               </div>
-               <div class="text-600 line-height-3 text-sm">Company Title</div>
-            </div>
-         </div>
-      </div>
-
-      <div class="flex flex-grow-1 mb-4 md:mb-0 md:px-4 py-4 md:py-0">
-         <div class="shadow-2 surface-card border-round relative">
-            <!-- <img
-               src="../../../assets/images/avatar-f-1.png"
-               width="100"
-               height="100"
-               class="absolute left-50"
-               style="margin-left: -50px; top: -50px"
-            /> -->
-
             <div
                class="absolute left-50"
                style="margin-left: -50px; top: -50px"
             >
                <p-avatar
-                  image="{{ mems[1].pic }}"
+                  image="{{ mem.pic }}"
                   shape="circle"
+                  styleClass="shadow-1"
                   [style]="{ width: '100px', height: '100px' }"
                ></p-avatar>
             </div>
@@ -55,63 +25,43 @@
                <p
                   class="text-900 font-italic line-height-3 text-lg m-0 pb-4 border-bottom-1 surface-border"
                >
-                  “Lorem ipsum dolor sit amet, sed tempor incididunt ut labore
-                  et dolore magna alique.”
+                  {{ mem.desc }}
                </p>
 
                <div class="text-900 font-semibold line-height-3 mt-4">
-                  Jane Watson
+                  {{ mem.name }}
                </div>
-               <div class="text-600 line-height-3 text-sm">Company Title</div>
-            </div>
-         </div>
-      </div>
 
-      <div class="flex flex-grow-1 md:px-4 py-4 md:py-0">
-         <div class="shadow-2 surface-card border-round relative">
-            <img
-               src="../../../assets/images/avatar-f-1.png"
-               width="100"
-               height="100"
-               class="absolute left-50"
-               style="margin-left: -50px; top: -50px"
-            />
-
-            <div class="px-4 pb-4 pt-8 relative">
-               <p
-                  class="text-900 font-italic line-height-3 text-lg m-0 pb-4 border-bottom-1 surface-border"
-               >
-                  “Lorem ipsum dolor sit amet, sed tempor incididunt ut labore
-                  et dolore magna alique.”
-               </p>
-
-               <div class="text-900 font-semibold line-height-3 mt-4">
-                  Annie Lanphear
-               </div>
-               <div class="text-600 line-height-3 text-sm">Company Title</div>
+               <div class="text-600 line-height-3 text-sm">{{ mem.city }}</div>
             </div>
          </div>
       </div>
    </div>
 </div>
 
-<!-- 
-   <div class="surface-ground text-center px-0 sm:px-4 py-8 md:px-6 lg:px-8">
-      <p-carousel [value]="company">
-         <ng-template let-person pTemplate="item">
-            <div class="flex justify-content-center">
-               <div class="surface-card shadow-2 px-2 md:px-6 py-5 border-round mb-4 text-900 text-2xl line-highlight-3"
-               style="max-width: 600px">
-                  {{person.text}}
-               </div>
+<!-- <div class="surface-ground text-center px-0 sm:px-4 py-8 md:px-6 lg:px-8">
+   <p-carousel [value]="mems" autoPlayInterval="2000" [circular]="true">
+      <ng-template let-mem pTemplate="item">
+         <div class="flex justify-content-center">
+            <div
+               class="surface-card shadow-2 px-2 md:px-6 py-5 border-round mb-4 text-900 text-2xl line-highlight-3"
+               style="max-width: 600px"
+            >
+               {{ mem.desc }}
             </div>
+         </div>
 
-            <img src="assets/images/blocks/testimonial/testimonials-{{person.image}}.png" width="56" height="56" [alt]="person.name" class="mb-3" />
+         <img
+            src="{{ mem.pic }}"
+            width="56"
+            height="56"
+            [alt]="mem.name"
+            class="mb-3"
+         />
 
-            <div class="text-900 font-bold line-height-3">{{person.name}}</div>
+         <div class="text-900 font-bold line-height-3">{{ mem.name }}</div>
 
-            <div class="text-600 line-height-3 mb-4">Company Title</div>
-         </ng-template>
-      </p-carousel>
-   </div>
--->
+         <div class="text-600 line-height-3 mb-4">{{ mem.city }}</div>
+      </ng-template>
+   </p-carousel>
+</div> -->

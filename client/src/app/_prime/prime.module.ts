@@ -22,6 +22,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { EditorModule } from 'primeng/editor';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { CarouselModule } from 'primeng/carousel';
 
 @NgModule({
    declarations: [],
@@ -47,6 +48,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
       EditorModule,
       MultiSelectModule,
       ConfirmPopupModule,
+      CarouselModule,
    ],
    exports: [
       ButtonModule,
@@ -69,6 +71,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
       EditorModule,
       MultiSelectModule,
       ConfirmPopupModule,
+      CarouselModule,
    ],
 })
 export class PrimeModule {}

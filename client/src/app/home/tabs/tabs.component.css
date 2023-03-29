@@ -1,0 +1,11 @@
+@media only screen and (max-width: 992px) {
+   .icono-container {
+      display: grid;
+      width: 100%;
+      justify-self: end;
+   }
+
+   .icono {
+      justify-self: end;
+   }
+}

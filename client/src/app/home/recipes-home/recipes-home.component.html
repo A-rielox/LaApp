@@ -3,7 +3,9 @@
       Únete para publicar y acceder a todas nuestras recetas.
    </div>
 
-   <div class="text-700 line-height-3 text-xl mb-6 flex align-items-center">
+   <div
+      class="text-700 line-height-3 text-xl mb-6 flex flex-wrap align-items-center"
+   >
       Categorias:
       <div class="flex ml-2 align-items-center">
          Salud
@@ -39,7 +41,6 @@
    </p> -->
 
    <div class="grid">
-      <!-- class="col-12 md:col-6 lg:col-3" -->
       <ng-container *ngFor="let recipe of recipes; let i = index">
          <div class="col-12 md:col-6 lg:col-4">
             <div
