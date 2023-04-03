@@ -21,8 +21,8 @@ public class BuggyController : BaseApiController
     [Authorize]
     public ActionResult<string> GetSecret()
     {
-        // para ver la respuesta de NO autorizado
-        return "secret text";
+        // para ver la respuesta de NO autorizado 
+        return "Secret text";
     }
 
     ////////////////////////////////////////////////
