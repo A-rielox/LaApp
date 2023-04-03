@@ -1,6 +1,6 @@
 <div
    *ngIf="member"
-   class="relative overflow-hidden"
+   class="relative overflow-hidden max-w-13rem m-auto"
    (mouseenter)="visibleMember = index!"
    (mouseleave)="visibleMember = null"
 >
@@ -31,12 +31,12 @@
             ></a>
 
             <!--              link like -->
-            <a
+            <!-- <a
                tabindex="0"
                class="cursor-pointer text-white"
                (click)="addLike(member.userName)"
                ><i class="pi pi-heart text-600 text-xl text-pink-500"></i
-            ></a>
+            ></a> -->
 
             <!--              link mensaje -->
             <!-- http://.../members/karen?tab=Mensajes -->

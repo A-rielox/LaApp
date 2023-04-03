@@ -23,7 +23,7 @@
          <p-divider align="center">
             <div class="inline-flex align-items-center">
                <i class="pi pi-map-marker mr-2 text-cyan-500"></i>
-               <b class="text-500">Ubicación</b>
+               <!-- <b class="text-500">Ubicación</b> -->
             </div>
          </p-divider>
 
@@ -35,25 +35,25 @@
          </div>
 
          <!--                 Nivel -->
-         <p-divider align="center">
+         <!-- <p-divider align="center">
             <div class="inline-flex align-items-center">
                <i class="pi pi-chart-line mr-2 text-cyan-500"></i>
                <b class="text-500">Nivel</b>
             </div>
          </p-divider>
-         <!-- <span class="font-bold text-900">Nivel</span> -->
+         
          <div class="flex align-items-center justify-content-start mb-5">
             <div class="font-bold text-900 mr-3">Plata</div>
             <div
                class="w-2rem h-2rem flex-shrink-0 border-circle bg-green-500"
             ></div>
-         </div>
+         </div> -->
 
          <!--                 Activo por última vez -->
          <p-divider align="center">
             <div class="inline-flex align-items-center">
-               <i class="pi pi-map-marker mr-2 text-cyan-500"></i>
-               <b class="text-500">Activo por última vez</b>
+               <i class="pi pi-stopwatch mr-2 text-cyan-500"></i>
+               <!-- <b class="text-500">Activo por última vez</b> -->
             </div>
          </p-divider>
 
@@ -67,11 +67,12 @@
          <!--                 like y messages -->
          <p-divider align="center">
             <div class="inline-flex align-items-center">
-               <i class="pi pi-heart mr-2 text-cyan-500"></i>
+               <!-- <i class="pi pi-heart mr-2 text-cyan-500"></i> -->
                <i class="pi pi-pencil mr-2 text-cyan-500"></i>
             </div>
          </p-divider>
-         <div class="p-buttonset">
+
+         <!-- <div class="p-buttonset">
             <button
                pButton
                label="Like"
@@ -86,7 +87,15 @@
                class="w-6"
                (click)="selectTab()"
             ></button>
-         </div>
+         </div> -->
+
+         <button
+            pButton
+            label="Mensajes"
+            icon="pi pi-pencil"
+            class="w-12"
+            (click)="selectTab()"
+         ></button>
       </div>
 
       <!--                 TABS -->

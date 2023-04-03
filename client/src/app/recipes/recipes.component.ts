@@ -84,8 +84,6 @@ export class RecipesComponent implements OnInit {
                   this.recipes = res.result;
                   this.pagination = res.pagination;
                }
-
-               console.log(this.recipes);
             },
          });
       }

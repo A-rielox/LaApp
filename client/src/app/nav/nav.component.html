@@ -113,7 +113,7 @@
          <ul
             class="list-none p-0 m-0 flex select-none flex-column lg:flex-row border-top-1 surface-border lg:border-top-none"
          >
-            <li *ngIf="accountService.currentUser$ | async">
+            <!-- <li *ngIf="accountService.currentUser$ | async">
                <a
                   [class]="aClass()"
                   routerLink="/likes"
@@ -121,9 +121,8 @@
                   [routerLinkActiveOptions]="{ exact: true }"
                >
                   <i class="pi pi-heart mr-2 text-red-500"></i>
-                  <!-- <span>Likes</span> -->
                </a>
-            </li>
+            </li> -->
 
             <li *ngIf="accountService.currentUser$ | async">
                <a
