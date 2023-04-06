@@ -10,7 +10,7 @@ using App.Interfaces;
 namespace App.Controllers;
 
 [Authorize]
-public class RecipesController : BaseApiController
+public class RecipesController : BaseController
 {
     private readonly IUserRepository _userRepository;
     private readonly IRecipeRepository _recipeRepository;

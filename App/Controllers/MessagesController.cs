@@ -8,14 +8,14 @@ using App.Interfaces;
 
 namespace App.Controllers;
 
-public class MessagesController : BaseApiController
+public class MessagesController : BaseController
 {
     private readonly IUserRepository _userRepository;
-    private readonly IMessageRepository _messageRepository;
+    private readonly IMsgRepository _messageRepository;
     private readonly IMapper _mapper;
 
     public MessagesController(IUserRepository userRepository,
-                        IMessageRepository messageRepository, IMapper mapper)
+                        IMsgRepository messageRepository, IMapper mapper)
     {
         _userRepository = userRepository;
         _messageRepository = messageRepository;
@@ -27,7 +27,7 @@ public class MessagesController : BaseApiController
     ///////////////////////////////////////////////////
     // POST:  api/messages
     [HttpPost]
-    public async Task<ActionResult<MessageDto>> CreateMessage(CreateMessageDto createMessageDto)
+    public async Task<ActionResult<MsgDto>> CreateMessage(CreateMsgDto createMessageDto)
     {
         var username = User.GetUsername();
 
@@ -41,7 +41,7 @@ public class MessagesController : BaseApiController
 
         if (recipient == null) return NotFound();
 
-        var message = new Message
+        var message = new Msg
         {
             Sender = sender,
             Recipient = recipient,
@@ -55,7 +55,7 @@ public class MessagesController : BaseApiController
 
         if (await _messageRepository.SaveAllAsync())
         {
-            var msgDto = _mapper.Map<MessageDto>(message);
+            var msgDto = _mapper.Map<MsgDto>(message);
 
             return Ok(msgDto);
         }
@@ -68,8 +68,8 @@ public class MessagesController : BaseApiController
     ///////////////////////////////////////////////////
     // GET:  api/messages
     [HttpGet]
-    public async Task<ActionResult<PagedList<MessageDto>>> GetMessagesForUser(
-                            [FromQuery] MessageParams messageParams)
+    public async Task<ActionResult<PagedList<MsgDto>>> GetMessagesForUser(
+                            [FromQuery] MsgParams messageParams)
     {
         messageParams.Username = User.GetUsername();
 
@@ -86,7 +86,7 @@ public class MessagesController : BaseApiController
     ///////////////////////////////////////////////////
     // GET:  api/messages/thread/{username}
     [HttpGet("thread/{username}")]
-    public async Task<ActionResult<IEnumerable<MessageDto>>> GetMessageThread(string username)
+    public async Task<ActionResult<IEnumerable<MsgDto>>> GetMessageThread(string username)
     {
         var currentUsername = User.GetUsername();
 

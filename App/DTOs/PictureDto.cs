@@ -1,6 +1,6 @@
 ﻿namespace App.DTOs;
 
-public class PhotoDto
+public class PictureDto
 {
     public int Id { get; set; }
     public string Url { get; set; }

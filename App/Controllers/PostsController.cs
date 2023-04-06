@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using App.Data;
 using App.DTOs;
 using App.Entities;
 using App.Extensions;
@@ -11,7 +10,7 @@ using App.Interfaces;
 namespace App.Controllers;
 
 [Authorize]
-public class PostsController : BaseApiController
+public class PostsController : BaseController
 {
     private readonly IUserRepository _userRepository;
     private readonly IPostRepository _postRepository;

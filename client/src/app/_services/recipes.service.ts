@@ -11,27 +11,14 @@ import { EditedRecipe, NewRecipe, Recipe } from '../_models/recipe';
 export class RecipesService {
    baseUrl = environment.apiUrl;
 
-   // user: User | undefined; // 📌 solo p' sacar el username
    recipeParams: RecipeParams | undefined; // aqui estan los filtros
 
    constructor(
       private http: HttpClient // private accountService: AccountService
    ) {
       this.recipeParams = new RecipeParams();
-
-      // // 📌 solo p' sacar el username
-      // this.accountService.currentUser$.pipe(take(1)).subscribe({
-      //    next: (user) => {
-      //       if (user) {
-      //          this.user = user;
-      //       }
-      //    },
-      // });
    }
 
-   // getRecipes() {
-   //    return this.http.get<Recipe[]>(this.baseUrl + 'recipes');
-   // }
    getRecipes(recipeParams: RecipeParams) {
       // solo los q conciernen a paginacion
       let params = getPaginationHeaders(

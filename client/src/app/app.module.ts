@@ -15,10 +15,8 @@ import { MessagesComponent } from './messages/messages.component';
 import { MembersModule } from './members/members.module';
 import { HomeModule } from './home/home.module';
 import { NotificationsModule } from './notifications/notifications.module';
-import { TestErrorComponent } from './errors/test-error/test-error.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
-import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { SharedModule } from './_shared/shared.module';
 import { LoadingInterceptor } from './_interceptors/loading.interceptor';
@@ -43,9 +41,9 @@ import { IsOwnerOrAdminDirective } from './_directives/is-owner-or-admin.directi
       LoginModalComponent,
       LikesComponent,
       MessagesComponent,
-      TestErrorComponent,
+      // TestErrorComponent,
       NotFoundComponent,
-      ServerErrorComponent,
+      // ServerErrorComponent,
       AdminPanelComponent,
       HasRoleDirective,
       UserManagementComponent,

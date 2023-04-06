@@ -6,7 +6,7 @@ using App.Entities;
 
 namespace App.Controllers;
 
-public class AdminController : BaseApiController
+public class AdminController : BaseController
 {
     private readonly UserManager<AppUser> _userManager;
 

@@ -4,7 +4,7 @@ namespace App.Entities;
 
 // p' especificar el nombre q va a tener en la db, xq no voy a hacer el DbSet
 [Table("Photos")]
-public class Photo
+public class Picture
 {
     public int Id { get; set; }
     public string Url { get; set; }

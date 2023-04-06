@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/_services/account.service';
+import { MembersService } from 'src/app/_services/members.service';
+import { PostsService } from 'src/app/_services/posts.service';
+import { RecipesService } from 'src/app/_services/recipes.service';
 import { NotificationsService } from 'src/app/notifications/notifications.service';
 
 interface LoginForm {
@@ -19,8 +22,11 @@ export class LoginModalComponent implements OnInit {
 
    constructor(
       private accountService: AccountService,
-      private router: Router, // private notification: NotificationsService
-      private notification: NotificationsService
+      private router: Router,
+      private notification: NotificationsService,
+      private memberService: MembersService,
+      private recipesService: RecipesService,
+      private postsService: PostsService
    ) {}
 
    ngOnInit(): void {
@@ -36,6 +42,10 @@ export class LoginModalComponent implements OnInit {
 
    // aca resetear los params, xsi se mete con otro user y asi resetear los filtros
    login() {
+      this.memberService.resetUserParams();
+      this.recipesService.resetRecipeParams();
+      this.postsService.resetPostParams();
+
       this.accountService.login(this.loginForm).subscribe({
          next: () => {
             this.router.navigateByUrl('/members');

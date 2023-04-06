@@ -1,7 +1,7 @@
 ﻿namespace App.Entities;
 // esta es la join-table entre los users
 // es many-to-many xq 1user puede mandar muchos mensajes o recibir muchos mensajes
-public class Message
+public class Msg
 {
     public int Id { get; set; }
     /////////////////////

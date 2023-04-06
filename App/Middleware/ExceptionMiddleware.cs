@@ -32,7 +32,7 @@ public class ExceptionMiddleware
         {
             await _next(context);
         }
-        catch (Exception ex)
+        catch (System.Exception ex)
         {
             _logger.LogError(ex, ex.Message); // p' ver el error en la terminal
             context.Response.ContentType = "application/json";
@@ -40,8 +40,8 @@ public class ExceptionMiddleware
 
             // ApiException es la clase q yo cree
             var response = _env.IsDevelopment()
-                ? new ApiException(context.Response.StatusCode, ex.Message, ex.StackTrace?.ToString())
-                : new ApiException(context.Response.StatusCode, "Internal Server Error");
+                ? new Errors.Exception(context.Response.StatusCode, ex.Message, ex.StackTrace?.ToString())
+                : new Errors.Exception(context.Response.StatusCode, "Internal Server Error");
 
             var options = new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
 

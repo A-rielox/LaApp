@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace App.Extensions;
 
-public static class HttpExtensions
+public static class HttpResponseExtensions
 {
     public static void AddPaginationHeader(this HttpResponse response, 
                                             PaginationHeader header)

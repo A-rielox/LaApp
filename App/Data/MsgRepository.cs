@@ -5,16 +5,15 @@ using App.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace App.Data;
 
-public class MessageRepository : IMessageRepository
+public class MsgRepository : IMsgRepository
 {
     private readonly DataContext _context;
     private readonly IMapper _mapper;
 
-    public MessageRepository(DataContext context, IMapper mapper)
+    public MsgRepository(DataContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
@@ -25,7 +24,7 @@ public class MessageRepository : IMessageRepository
     ////////////////////////////////////////////////
     ///////////////////////////////////////////////////
     //
-    public void AddMessage(Message message)
+    public void AddMessage(Msg message)
     {
         _context.Messages.Add(message);
 
@@ -34,7 +33,7 @@ public class MessageRepository : IMessageRepository
     ////////////////////////////////////////////////
     ///////////////////////////////////////////////////
     //
-    public void DeleteMessage(Message message)
+    public void DeleteMessage(Msg message)
     {
         _context.Messages.Remove(message);
     }
@@ -42,7 +41,7 @@ public class MessageRepository : IMessageRepository
     ////////////////////////////////////////////////
     ///////////////////////////////////////////////////
     //
-    public async Task<Message> GetMessage(int id)
+    public async Task<Msg> GetMessage(int id)
     {
         var message = await _context.Messages.FindAsync(id);
 
@@ -52,7 +51,7 @@ public class MessageRepository : IMessageRepository
     ////////////////////////////////////////////////
     ///////////////////////////////////////////////////
     //
-    public async Task<PagedList<MessageDto>> GetMessagesForUser(MessageParams messageParams)
+    public async Task<PagedList<MsgDto>> GetMessagesForUser(MsgParams messageParams)
     {
         var query = _context.Messages
             .OrderByDescending(m => m.MessageSent).AsQueryable();
@@ -67,9 +66,9 @@ public class MessageRepository : IMessageRepository
                                     m.RecipientDeleted == false && m.DateRead == null),
         };
 
-        var messages = query.ProjectTo<MessageDto>(_mapper.ConfigurationProvider);
+        var messages = query.ProjectTo<MsgDto>(_mapper.ConfigurationProvider);
 
-        var pagedMsgs = await PagedList<MessageDto>.CreateAsync(messages,
+        var pagedMsgs = await PagedList<MsgDto>.CreateAsync(messages,
                             messageParams.PageNumber, messageParams.PageSize);
 
         return pagedMsgs;
@@ -78,7 +77,7 @@ public class MessageRepository : IMessageRepository
     ////////////////////////////////////////////////
     ///////////////////////////////////////////////////
     //
-    public async Task<IEnumerable<MessageDto>> GetMessageThread(string currentUserName, string recipientUserName)
+    public async Task<IEnumerable<MsgDto>> GetMessageThread(string currentUserName, string recipientUserName)
     {
         var messages = await _context.Messages
                         .Include(m => m.Sender).ThenInclude(u => u.Photos)
@@ -104,7 +103,7 @@ public class MessageRepository : IMessageRepository
             await _context.SaveChangesAsync();
         }
 
-        return _mapper.Map<IEnumerable<MessageDto>>(messages);
+        return _mapper.Map<IEnumerable<MsgDto>>(messages);
     }
 
     ////////////////////////////////////////////////

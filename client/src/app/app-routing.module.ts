@@ -6,9 +6,7 @@ import { LikesComponent } from './likes/likes.component';
 import { MessagesComponent } from './messages/messages.component';
 import { HomeComponent } from './home/home/home.component';
 import { AuthGuard } from './_guards/auth.guard';
-import { TestErrorComponent } from './errors/test-error/test-error.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
-import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { AdminGuard } from './_guards/admin.guard';
@@ -47,9 +45,7 @@ const routes: Routes = [
          },
       ],
    },
-   { path: 'errors', component: TestErrorComponent },
    { path: 'not-found', component: NotFoundComponent },
-   { path: 'server-error', component: ServerErrorComponent },
    { path: '**', component: NotFoundComponent, pathMatch: 'full' },
 ];
 

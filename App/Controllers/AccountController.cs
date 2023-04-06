@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography;
-using System.Text;
-using App.Data;
 using App.DTOs;
 using App.Interfaces;
 using App.Entities;
@@ -11,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace App.Controllers;
 
-public class AccountController : BaseApiController
+public class AccountController : BaseController
 {
     private readonly UserManager<AppUser> _userManager;
     private readonly ITokenService _tokenService;

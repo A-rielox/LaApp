@@ -4,9 +4,9 @@ using AutoMapper;
 
 namespace App.Helpers;
 
-public class AutoMapperProfiles : Profile
+public class Mapper : Profile
 {
-    public AutoMapperProfiles()
+    public Mapper()
     {
         CreateMap<DateTime, DateTime>().ConvertUsing(d => DateTime.SpecifyKind(d, DateTimeKind.Utc));
         CreateMap<DateTime?, DateTime?>().ConvertUsing(d => d.HasValue ? DateTime.SpecifyKind(d.Value, DateTimeKind.Utc) : null);
@@ -16,13 +16,13 @@ public class AutoMapperProfiles : Profile
             .ForMember(dest => dest.PhotoUrl, opt => opt.MapFrom(src => 
                                src.Photos.FirstOrDefault(p => p.IsMain).Url));
 
-        CreateMap<Photo, PhotoDto>();
+        CreateMap<Picture, PictureDto>();
         CreateMap<MemberUpdateDto, AppUser>();
         CreateMap<RegisterDto, AppUser>();
 
 
 
-        CreateMap<Message, MessageDto>()
+        CreateMap<Msg, MsgDto>()
             .ForMember(dest => dest.SenderPhotoUrl, opt => opt.MapFrom(src =>
                 src.Sender.Photos.FirstOrDefault(p => p.IsMain).Url))
             .ForMember(dest => dest.RecipientPhotoUrl, opt => opt.MapFrom(src =>

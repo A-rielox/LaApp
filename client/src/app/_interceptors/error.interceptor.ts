@@ -69,14 +69,16 @@ export class ErrorInterceptor implements HttpInterceptor {
 
                   case 500:
                      // p' mandar la info al componente al q redirecciono
-                     const navigationExtras: NavigationExtras = {
-                        state: { error: error.error },
-                     };
+                     // const navigationExtras: NavigationExtras = {
+                     //    state: { error: error.error },
+                     // };
 
-                     this.router.navigateByUrl(
-                        '/server-error',
-                        navigationExtras
-                     );
+                     // this.router.navigateByUrl(
+                     //    '/server-error',
+                     //    navigationExtras
+                     // );
+
+                     this.router.navigateByUrl('/');
 
                      break;
 

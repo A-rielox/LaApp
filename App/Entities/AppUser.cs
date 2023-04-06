@@ -10,7 +10,7 @@ public class AppUser : IdentityUser<int>
     public string Interests { get; set; }
     public string City { get; set; }
     public string Country { get; set; }
-    public List<Photo> Photos { get; set; } = new();
+    public List<Picture> Photos { get; set; } = new();
 
 
     ////////////////////////////
@@ -26,8 +26,8 @@ public class AppUser : IdentityUser<int>
 
     ////////////////////////////
     // Messages
-    public List<Message> MessagesSent { get; set; }
-    public List<Message> MessagesReceived { get; set; }
+    public List<Msg> MessagesSent { get; set; }
+    public List<Msg> MessagesReceived { get; set; }
     // Message es la join-table
 
     ////////////////////////////

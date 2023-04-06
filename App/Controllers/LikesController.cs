@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace App.Controllers;
 
-public class LikesController : BaseApiController
+public class LikesController : BaseController
 {
     private readonly IUserRepository _userRepository;
     private readonly ILikesRepository _likesRepository;

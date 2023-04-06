@@ -2,9 +2,9 @@
 
 // esta es la respuesta q manda mi ExceptionMiddleware cuando 
 // hay una excepcion
-public class ApiException
+public class Exception
 {
-    public ApiException(int statusCode, string message = null,
+    public Exception(int statusCode, string message = null,
                         string details = null)
     {
         StatusCode = statusCode;

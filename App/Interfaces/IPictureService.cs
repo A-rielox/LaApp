@@ -2,7 +2,7 @@
 
 namespace App.Interfaces;
 
-public interface IPhotoService
+public interface IPictureService
 {
     Task<ImageUploadResult> AddPhotoAsync(IFormFile file);
     Task<DeletionResult> DeletePhotoAsync(string publicId);

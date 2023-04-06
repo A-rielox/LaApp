@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace App.Extensions;
 
-public static class ApplicationServiceExtensions
+public static class AppServiceExtensions
 {
     public static IServiceCollection AddAplicationServices(
                         this IServiceCollection services,
@@ -34,12 +34,12 @@ public static class ApplicationServiceExtensions
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
         services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
-        services.AddScoped<IPhotoService, PhotoService>();
+        services.AddScoped<IPictureService, PictureService>();
 
         services.AddScoped<LogUserActivity>();
 
         services.AddScoped<ILikesRepository, LikesRepository>();
-        services.AddScoped<IMessageRepository, MessageRepository>();
+        services.AddScoped<IMsgRepository, MsgRepository>();
 
         //services.AddScoped<IUnitOfWork, UnitOfWork>();
 

@@ -1,6 +1,6 @@
 ﻿namespace App.Helpers;
 
-public class MessageParams : PaginationParams
+public class MsgParams : PaginationParams
 {
     public string Username { get; set; }
     public string Container { get; set; } = "Unread";

@@ -15,7 +15,7 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, int,
 
     //public DbSet<AppUser> Users { get; set; }
     public DbSet<UserLike> Likes { get; set; }
-    public DbSet<Message> Messages { get; set; }
+    public DbSet<Msg> Messages { get; set; }
     public DbSet<Recipe> Recipes { get; set; }
     public DbSet<Post> Posts { get; set; }
 
@@ -66,14 +66,14 @@ public class DataContext : IdentityDbContext<AppUser, AppRole, int,
 
         //--------
         //-------- p' Message
-        builder.Entity<Message>()
+        builder.Entity<Msg>()
             .HasOne(m => m.Sender)
             .WithMany(u => u.MessagesSent)
             .OnDelete(DeleteBehavior.Restrict);
 
         // en ambas queda especificada la foreign key por convencion ( RecipientId y SenderId )
 
-        builder.Entity<Message>()
+        builder.Entity<Msg>()
             .HasOne(m => m.Recipient)
             .WithMany(u => u.MessagesReceived) 
             .OnDelete(DeleteBehavior.Restrict);

@@ -4,22 +4,21 @@ using Microsoft.AspNetCore.Authorization;
 using App.Interfaces;
 using AutoMapper;
 using App.DTOs;
-using System.Security.Claims;
 using App.Extensions;
 using App.Helpers;
 
 namespace App.Controllers;
 
 [Authorize]
-public class UsersController : BaseApiController
+public class UsersController : BaseController
 {
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
-    private readonly IPhotoService _photoService;
+    private readonly IPictureService _photoService;
 
     public UsersController(IUserRepository userRepository,
                            IMapper mapper,
-                           IPhotoService photoService)
+                           IPictureService photoService)
     {
         _userRepository = userRepository;
         _mapper = mapper;
@@ -82,7 +81,7 @@ public class UsersController : BaseApiController
     ///////////////////////////////////////////////////
     // POST: api/Users/add-photo
     [HttpPost("add-photo")]
-    public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
+    public async Task<ActionResult<PictureDto>> AddPhoto(IFormFile file)
     {
         var username = User.GetUsername();
         // p'q funcione el resto debo hacer eagerLoading de las fotos con el GetUserByUsernameAsync
@@ -94,7 +93,7 @@ public class UsersController : BaseApiController
 
         if (result.Error != null) return BadRequest(result.Error.Message);
 
-        var photo = new Photo
+        var photo = new Picture
         {
             Url = result.SecureUrl.AbsoluteUri,
             PublicId = result.PublicId
@@ -114,7 +113,7 @@ public class UsersController : BaseApiController
             // el " new {} " es xq la ruta GetUser ocupa ese parametro para ir al user
             // el tercer parametro es el object que se creó
             return CreatedAtAction(nameof(GetUser),
-                    new { username = user.UserName }, _mapper.Map<PhotoDto>(photo));
+                    new { username = user.UserName }, _mapper.Map<PictureDto>(photo));
         }
 
         return BadRequest("Problemas al añadir la foto.");

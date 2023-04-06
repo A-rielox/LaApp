@@ -6,11 +6,11 @@ using Microsoft.Extensions.Options;
 
 namespace App.Services;
 
-public class PhotoService : IPhotoService
+public class PictureService : IPictureService
 {
     private readonly Cloudinary _cloudinary;
     // para pasar la configuracion cuando esta a traves de una class
-    public PhotoService(IOptions<CloudinarySettings> config)
+    public PictureService(IOptions<CloudinarySettings> config)
     {
         var acc = new Account
             (

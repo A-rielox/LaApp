@@ -3,11 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
 import { BehaviorSubject, map } from 'rxjs';
-
-interface RegisterModel {
-   username: string;
-   password: string;
-}
+import { LoginModel, RegisterModel } from '../_models/accountServ';
 
 @Injectable({
    providedIn: 'root',
@@ -20,7 +16,7 @@ export class AccountService {
 
    constructor(private http: HttpClient) {}
 
-   login(model: any) {
+   login(model: LoginModel) {
       return this.http.post<User>(this.baseUrl + 'account/login', model).pipe(
          map((res) => {
             const user = res;
