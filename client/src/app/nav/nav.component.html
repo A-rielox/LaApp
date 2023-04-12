@@ -33,7 +33,6 @@
                   [routerLinkActiveOptions]="{ exact: true }"
                >
                   <i class="pi pi-home mr-2"></i>
-                  <!-- <span>Home</span> -->
                </a>
             </li>
 
@@ -45,7 +44,7 @@
                      routerLinkActive="active"
                   >
                      <i class="pi pi-book mr-2"></i>
-                     <span>Recetas</span>
+                     <span>{{ text.navLink1 }}</span>
                   </a>
                </li>
 
@@ -56,7 +55,7 @@
                      routerLinkActive="active"
                   >
                      <i class="pi pi-globe mr-2"></i>
-                     <span>Posts</span>
+                     <span>{{ text.navLink2 }}</span>
                   </a>
                </li>
 
@@ -79,7 +78,7 @@
                      [routerLinkActiveOptions]="{ exact: true }"
                   >
                      <i class="pi pi-users mr-2"></i>
-                     <span>Miembros</span>
+                     <span>{{ text.navLink3 }}</span>
                   </a>
                </li>
 
@@ -97,6 +96,49 @@
                </li>
             </ng-container>
          </ul>
+
+         <!-- LANGUAGE -->
+         <div class="flex align-items-center justify-content-center">
+            <ul
+               class="surface-card p-1 m-0 list-none flex column-gap-1 overflow-x-auto select-none shadow-2 border-1 surface-border"
+               style="border-radius: 35px"
+            >
+               <li>
+                  <!-- (click)="selectedLang = 'Eng'" -->
+                  <button
+                     pRipple
+                     class="p-link cursor-pointer px-2 py-1 flex align-items-center transition-color transition-duration-150 text-sm"
+                     [ngClass]="{
+                        'bg-primary': selectedLang == 'Eng',
+                        'text-600': selectedLang != 'Eng',
+                        'hover:surface-hover': selectedLang != 'Eng'
+                     }"
+                     (click)="changeLang('Eng')"
+                     style="border-radius: 30px"
+                  >
+                     <span class="font-medium">Eng</span>
+                     <!-- United Kingdom	copy	U+1F1EC U+1F1E7 -->
+                  </button>
+               </li>
+
+               <li>
+                  <button
+                     pRipple
+                     class="p-link cursor-pointer px-2 py-1 flex align-items-center transition-colors transition-duration-150 text-sm"
+                     [ngClass]="{
+                        'bg-primary': selectedLang == 'Esp',
+                        'text-600': selectedLang != 'Esp',
+                        'hover:surface-hover': selectedLang != 'Esp'
+                     }"
+                     (click)="changeLang('Esp')"
+                     style="border-radius: 30px"
+                  >
+                     <span class="font-medium">Esp</span>
+                     <!-- Spain	copy	U+1F1EA U+1F1F8 -->
+                  </button>
+               </li>
+            </ul>
+         </div>
 
          <!--                       RIGHT -->
          <!--                       Inbox, Notificaciones y presentacion (texto) en pantalla chica -->
@@ -130,7 +172,7 @@
             <li *ngIf="!(accountService.currentUser$ | async)">
                <app-login-modal
                   buttonText="Login"
-                  title="Bienvenida de vuelta!"
+                  title="{{ text.logBtnPop }}"
                ></app-login-modal>
             </li>
 
@@ -162,7 +204,7 @@
                      routerLinkActive="active"
                   >
                      <i class="pi pi-cog mr-2"></i>
-                     <span class="font-medium">Editar Perfil</span>
+                     <span class="font-medium">{{ text.editProfile }}</span>
                   </a>
                </li>
 
@@ -171,7 +213,7 @@
                   routerLinkActive="active" -->
                   <a [class]="aClass()">
                      <i class="pi pi-sign-out mr-2"></i>
-                     <span class="font-medium">Salir</span>
+                     <span class="font-medium">{{ text.logOut }}</span>
                   </a>
                </li>
             </ng-container>

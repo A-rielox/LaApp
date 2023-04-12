@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { User } from '../_models/user';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, Subject, map } from 'rxjs';
 import { LoginModel, RegisterModel } from '../_models/accountServ';
 
 @Injectable({
@@ -13,6 +13,10 @@ export class AccountService {
 
    private currentUserSource = new BehaviorSubject<User | null>(null);
    currentUser$ = this.currentUserSource.asObservable();
+
+   ////////
+   selectedLang = new BehaviorSubject<string>('Eng');
+   selectedLang$ = this.selectedLang.asObservable();
 
    constructor(private http: HttpClient) {}
 
