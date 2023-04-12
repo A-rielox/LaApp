@@ -1,27 +1,8 @@
 import { Recipe } from 'src/app/_models/recipe';
 
-// export interface RecipesHomeData {
-//    banned: boolean;
-//    category: string;
-//    content: string;
-//    created: string;
-//    createdById: number;
-//    createdByPhotoUrl: string;
-//    createdByUsername: string;
-//    id: number;
-//    oilsList: string;
-//    public: boolean;
-//    title: string;
-// }
-
 export interface DialogType {
    recipe: Recipe;
 }
-// export interface DialogType {
-//    header: string;
-//    title: string;
-//    desc: string;
-// }
 
 export const recipesData: Recipe[] = [
    {

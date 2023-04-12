@@ -12,24 +12,17 @@
       <div
          class="text-xl md:text-3xl lg:text-5xl mb-3 text-white flex justify-content-center flex-wrap"
       >
-         ¿Qué son los aceites esenciales?
+         {{ text.title }}
       </div>
 
       <div [class]="paragraph()" style="max-width: 500px">
-         Los aceites esenciales son extractos vegetales concentrados cosechados
-         de plantas, hierbas y árboles que luego se destilan a vapor o se
-         prensan en frío de manera cuidadosa.
+         {{ text.paragraph1 }}
       </div>
       <div [class]="paragraph()" style="max-width: 500px">
-         Estos aceites esenciales puros son más poderosos y potentes que los
-         componentes botánicos de los que fueron extraídos, por lo tanto
-         altamente concentrados para brindar beneficios para la salud y el
-         bienestar.
+         {{ text.paragraph2 }}
       </div>
       <div [class]="paragraph()" style="max-width: 500px">
-         ¡Ya sea que uses los aceites como aromaterapia, cuidado personal o como
-         soluciones caseras, encontrarás que cada aspecto de tu vida conseguirá
-         un impulso con unas cuantas gotas de aceite esencial!
+         {{ text.paragraph3 }}
       </div>
    </div>
 </div>

@@ -1,7 +1,8 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { AccountService } from '../_services/account.service';
+import { text, textEng, textEsp } from './navLang';
 
 @Component({
    selector: 'app-nav',
@@ -12,17 +13,8 @@ export class NavComponent implements OnInit {
    items: MenuItem[] = [];
    navItems: MenuItem[] = [];
 
-   text = {
-      navLink1: 'Recipes',
-      navLink2: 'Posts',
-      navLink3: 'Members',
-      logBtnPop: 'Welcome back!',
-      editProfile: 'Edit profile',
-      logOut: 'Log Out',
-   };
-
-   //////
    selectedLang: string = 'Eng';
+   text: text = textEng;
 
    constructor(
       public accountService: AccountService,
@@ -32,42 +24,13 @@ export class NavComponent implements OnInit {
          next: (lang) => {
             this.selectedLang = lang;
 
-            this.text = lang === 'Esp' ? this.textEsp : this.textEng;
+            this.text = lang === 'Esp' ? textEsp : textEng;
          },
       });
    }
 
    ngOnInit(): void {
-      this.items = [
-         {
-            label: this.text.editProfile,
-            icon: 'pi pi-cog',
-            routerLink: ['/members/edit'],
-            // command: () => {
-            //   this.update();  routerLink="/members/edit"
-            // },
-         },
-         {
-            label: this.text.logOut,
-            icon: 'pi pi-sign-out',
-            command: () => {
-               //   this.delete();
-               this.logout();
-            },
-         },
-      ];
-
-      this.navItems = [
-         {
-            label: 'Home',
-            icon: 'pi pi-home',
-            routerLink: ['/'],
-         },
-         {
-            label: 'Salir',
-            icon: 'pi pi-sign-out',
-         },
-      ];
+      this.setItems();
    }
 
    logout() {
@@ -81,6 +44,10 @@ export class NavComponent implements OnInit {
 
       this.accountService.selectedLang.next(lang === 'Eng' ? 'Eng' : 'Esp');
 
+      this.setItems();
+   }
+
+   setItems() {
       this.items = [
          {
             label: this.text.editProfile,
@@ -112,22 +79,4 @@ export class NavComponent implements OnInit {
    aClass() {
       return 'flex h-full px-6 p-3 lg:px-3 lg:py-2 align-items-center text-600 hover:text-900 border-left-2 lg:border-bottom-2 lg:border-left-none border-transparent hover:border-primary font-medium cursor-pointer transition-colors transition-duration-150';
    }
-
-   textEsp = {
-      navLink1: 'Recetas',
-      navLink2: 'Posts',
-      navLink3: 'Miembros',
-      logBtnPop: 'Bienvenida de vuelta!',
-      editProfile: 'Editar Perfil',
-      logOut: 'Salir',
-   };
-
-   textEng = {
-      navLink1: 'Recipes',
-      navLink2: 'Posts',
-      navLink3: 'Members',
-      logBtnPop: 'Welcome back!',
-      editProfile: 'Edit Profile',
-      logOut: 'Log Out',
-   };
 }

@@ -1,14 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { AccountService } from 'src/app/_services/account.service';
+import { text, textEng, textEsp } from './whatAreLang';
 
 @Component({
    selector: 'app-what-are',
    templateUrl: './what-are.component.html',
    styleUrls: ['./what-are.component.css'],
 })
-export class WhatAreComponent implements OnInit {
+export class WhatAreComponent implements OnInit, OnChanges {
+   @Input() lang: string = 'Eng';
+   text: text = textEng;
+
    constructor() {}
 
    ngOnInit(): void {}
+
+   ngOnChanges(): void {
+      this.text = this.lang === 'Esp' ? textEsp : textEng;
+   }
 
    paragraph() {
       return (

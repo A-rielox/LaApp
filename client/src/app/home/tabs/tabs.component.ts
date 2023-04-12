@@ -1,44 +1,75 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { text, textEng, textEsp } from './tabsLang';
 
 @Component({
    selector: 'app-tabs',
    templateUrl: './tabs.component.html',
    styleUrls: ['./tabs.component.css'],
 })
-export class TabsComponent implements OnInit {
-   // activeTab1 = 0;
+export class TabsComponent implements OnInit, OnChanges {
+   @Input() lang: string = 'Eng';
+   text: text = textEsp;
 
-   items = [
+   /////////////////////////////
+   // activeTab1 = 0;
+   /////////////////////////////
+
+   /* items = [
       {
          icon: 'pi pi-bolt',
-         name: 'Mejorar Tu Bienestar Físico',
-         price: 23,
-         description: [
-            'Los estilos de vida modernos no siempre favorecen las condiciones óptimas para el bienestar físico. Una dieta deficiente, la falta de ejercicio y una saturación de tóxicos ambientales pueden dejar el cuerpo desequilibrado y disminuir los niveles de energía.',
-            'Desde el control del peso hasta el soporte de suplementos, nuestros aceites esenciales y productos enriquecidos con aceites esenciales pueden proporcionar las soluciones específicas que necesitas para restablecer el equilibrio y sentirte mejor.',
-         ],
+         name: this.text.name1,
+         description: this.text.description1,
       },
       {
          icon: 'pi pi-home',
-         name: 'Purificar tu hogar',
-         price: 23,
-         description: [
-            'Los productos que usamos en nuestros hogares impactan nuestra salud y bienestar. El compromiso de Young Living con los productos a base de plantas de origen natural facilita la elección de limpiadores, productos para el cuidado personal y otros artículos para el hogar formulados sin el uso de químicos dañinos que se encuentran en muchos productos tradicionales.',
-            'Nos apasiona usar solo los mejores ingredientes que son buenos para la salud y responsables con el medio ambiente, y a la misma vez efectivos.',
-         ],
+         name: this.text.name2,
+         description: this.text.description2,
       },
       {
          icon: 'pi pi-heart',
-         name: 'Realzar tu rutina de belleza',
-         price: 23,
-         description: [
-            'Elimina los ingredientes agresivos de tus productos de cuidado personal y deja que tu belleza brille. ¡Te enamorarás de la amplia gama de aceites esenciales que ayudan a mantener la piel con un aspecto claro, aumentan la hidratación y te dan ese brillo juvenil! ¡Los aceites esenciales incluso pueden ayudar a que tu cabello se vea fabuloso!',
-            'Utilizando ingredientes de origen natural, nuestras soluciones avanzadas para el cuidado de la piel y el cabello facilitan el disfrute de los hermosos beneficios de los aceites esenciales todos los días.',
-         ],
+         name: this.text.name3,
+         description: this.text.description3,
       },
-   ];
+   ]; */
 
+   items = this.setItems();
    selectedItem = this.items[0];
+
+   ngOnChanges(): void {
+      this.text = this.lang === 'Esp' ? textEsp : textEng;
+
+      this.items = this.setItems();
+      this.selectedItem = this.items[0];
+   }
+
+   setItems() {
+      return [
+         {
+            icon: 'pi pi-bolt',
+            name: this.lang === 'Esp' ? textEsp.name1 : textEng.name1,
+            description:
+               this.lang === 'Esp'
+                  ? textEsp.description1
+                  : textEng.description1,
+         },
+         {
+            icon: 'pi pi-home',
+            name: this.lang === 'Esp' ? textEsp.name2 : textEng.name2,
+            description:
+               this.lang === 'Esp'
+                  ? textEsp.description2
+                  : textEng.description2,
+         },
+         {
+            icon: 'pi pi-heart',
+            name: this.lang === 'Esp' ? textEsp.name3 : textEng.name3,
+            description:
+               this.lang === 'Esp'
+                  ? textEsp.description3
+                  : textEng.description3,
+         },
+      ];
+   }
 
    constructor() {}
 
