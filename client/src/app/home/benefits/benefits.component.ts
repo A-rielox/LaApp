@@ -19,6 +19,7 @@ export class BenefitsComponent implements OnInit, OnChanges {
    data?: BenefitsData[];
    dialog: DialogType = {} as DialogType;
 
+   // LANG
    @Input() lang: string = 'Eng';
    text: text = textEng;
 

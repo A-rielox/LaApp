@@ -1,18 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Recipe } from 'src/app/_models/recipe';
-import { DialogType, recipesData } from './recipesHomeData';
+import {
+   DialogType,
+   recipesDataEng,
+   recipesDataEsp,
+   text,
+   textEng,
+   textEsp,
+} from './recipesHomeData';
 
 @Component({
    selector: 'app-recipes-home',
    templateUrl: './recipes-home.component.html',
    styleUrls: ['./recipes-home.component.css'],
 })
-export class RecipesHomeComponent implements OnInit {
+export class RecipesHomeComponent implements OnInit, OnChanges {
    openDialog = false;
-   recipes: Recipe[] = recipesData;
+   recipes: Recipe[] = recipesDataEng;
    dialog: DialogType = {} as DialogType;
 
+   // LANG
+   @Input() lang: string = 'Eng';
+   text: text = textEng;
+
    constructor() {}
+
+   ngOnChanges(): void {
+      this.text = this.lang === 'Esp' ? textEsp : textEng;
+
+      this.recipes = this.lang === 'Esp' ? recipesDataEsp : recipesDataEng;
+   }
 
    ngOnInit(): void {}
 
@@ -26,13 +43,20 @@ export class RecipesHomeComponent implements OnInit {
 
    borderColor(category: string) {
       switch (category) {
+         // NO me reconoce con || --> "case 'Animo' || 'Mood'
+         case 'Mood':
+            return 'background: linear-gradient(15deg, #06d465, #06b6d4); border-left: 10px solid transparent;';
          case 'Ánimo':
             return 'background: linear-gradient(15deg, #06d465, #06b6d4); border-left: 10px solid transparent;';
 
          case 'Salud':
             return 'background: linear-gradient(15deg, #f91616, #f97316); border-left: 10px solid transparent;';
+         case 'Health':
+            return 'background: linear-gradient(15deg, #f91616, #f97316); border-left: 10px solid transparent;';
 
          case 'Malestares':
+            return 'background: linear-gradient(15deg, #cc63f1, #6366f1); border-left: 10px solid transparent;';
+         case 'Discomforts':
             return 'background: linear-gradient(15deg, #cc63f1, #6366f1); border-left: 10px solid transparent;';
 
          default:

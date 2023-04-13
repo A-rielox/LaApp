@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Post } from 'src/app/_models/post';
-import { DialogType, postsData } from './postsHomeData';
+import { DialogType, postsData, text, textEng, textEsp } from './postsHomeData';
 
 @Component({
    selector: 'app-posts-home',
@@ -12,7 +12,17 @@ export class PostsHomeComponent implements OnInit {
    posts: Post[] = postsData;
    dialog: DialogType = {} as DialogType;
 
+   // LANG
+   @Input() lang: string = 'Eng';
+   text: text = textEng;
+
    constructor() {}
+
+   ngOnChanges(): void {
+      this.text = this.lang === 'Esp' ? textEsp : textEng;
+
+      // this.recipes = this.lang === 'Esp' ? recipesDataEsp : recipesDataEng;
+   }
 
    ngOnInit(): void {}
 

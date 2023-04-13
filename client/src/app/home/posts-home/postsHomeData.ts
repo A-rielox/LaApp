@@ -4,6 +4,21 @@ export interface DialogType {
    post: Post;
 }
 
+//////////////////////
+
+export interface text {
+   title: string;
+   modalReadyBtn: string;
+}
+export const textEng = {
+   title: 'and posts',
+   modalReadyBtn: 'ready',
+};
+export const textEsp = {
+   title: 'y posts',
+   modalReadyBtn: 'Listo',
+};
+
 export const postsData: Post[] = [
    {
       category: 'Malestares',
