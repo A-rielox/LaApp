@@ -9,16 +9,7 @@ import { AccountService } from '../_services/account.service';
 import { take } from 'rxjs/operators';
 import { RecipeDisplayComponent } from './recipe-display/recipe-display.component';
 import { CloseModal, RecipesToDisplay } from './interfaces';
-
-// interface RecipesToDisplay {
-//    name: string;
-//    label: string;
-// }
-
-// interface CloseModal {
-//    por: string;
-//    id: number; // receta o post
-// }
+import { text, textEng, textEsp } from './recipesLang';
 
 @Component({
    selector: 'app-recipes',
@@ -37,6 +28,9 @@ export class RecipesComponent implements OnInit {
    user: User | undefined; // 📌 solo p' sacar el username
    recipesToDisplay: RecipesToDisplay[] = []; // p' le filtro de "mias" o "todas"
 
+   //    LANG
+   text: text = textEng;
+
    constructor(
       private recipesService: RecipesService,
       public dialogService: DialogService,
@@ -52,6 +46,23 @@ export class RecipesComponent implements OnInit {
             }
          },
       });
+
+      //       LANG
+      this.accountService.selectedLang$.subscribe({
+         next: (lang) => {
+            this.text = lang === 'Esp' ? textEsp : textEng;
+
+            if (this.user) {
+               this.recipesToDisplay = [
+                  { name: '', label: lang === 'Esp' ? 'Todas' : 'All' },
+                  {
+                     name: this.user.userName,
+                     label: lang === 'Esp' ? 'Mias' : 'Mine',
+                  },
+               ];
+            }
+         },
+      });
    }
 
    ngOnInit(): void {
@@ -59,8 +70,8 @@ export class RecipesComponent implements OnInit {
 
       if (this.user) {
          this.recipesToDisplay = [
-            { name: '', label: 'Todas' },
-            { name: this.user.userName, label: 'Mias' },
+            { name: '', label: 'All' },
+            { name: this.user.userName, label: 'Mine' },
          ];
       }
    }
@@ -110,18 +121,10 @@ export class RecipesComponent implements OnInit {
       });
    }
 
-   // private arrayEqual(arr1: any[], arr2: any[]) {
-   //    // transformo todo el array en un string
-   //    return JSON.stringify(arr1.sort()) === JSON.stringify(arr2.sort());
-   // }
-
    pageChanged(e: number) {
       if (!this.recipeParams) return;
 
       this.recipeParams.pageNumber = e;
-
-      // ya lo hago en loadRecipes()
-      // this.recipesService.setRecipeParams(this.recipeParams);
 
       this.loadRecipes();
    }

@@ -11,7 +11,18 @@ export interface Mem {
    pic: string;
 }
 
-export const memsData: Mem[] = [
+//////////////////////
+export interface text {
+   title: string;
+}
+export const textEng = {
+   title: 'Meet part of the team.',
+};
+export const textEsp = {
+   title: 'Conoce parte del equipo.',
+};
+
+export const memsDataEsp: Mem[] = [
    {
       name: 'Todd',
       city: 'Monterrey',
@@ -36,4 +47,24 @@ export const memsData: Mem[] = [
    //    desc: 'string',
    //    pic: 'https://randomuser.me/api/portraits/men/87.jpg',
    // },
+];
+export const memsDataEng: Mem[] = [
+   {
+      name: 'Todd',
+      city: 'Tokio',
+      desc: "Hello hello, I'm from Tokio, I love outdoor life and organizing roast meat. I am 27 years old and I am passionate about being able to improve the quality of life with natural methods that are available to everyone.",
+      pic: 'https://randomuser.me/api/portraits/men/90.jpg',
+   },
+   {
+      name: 'Lisa',
+      city: 'New York',
+      desc: "I'm Lisa, I work in nutrition and wellness, so I'm fascinated by the possibility that oils offer to improve people's overall quality of life with something as simple as using an oil.",
+      pic: 'https://res.cloudinary.com/dxrrk3nvu/image/upload/v1679868007/LaApp/ylgkq71ylvshmmcwpa1h.webp',
+   },
+   {
+      name: 'Lois',
+      city: 'London',
+      desc: 'I have been using and studying the benefits of oils for more than 10 years, and I am still learning, I love sharing with everyone what I have learned on this journey through this magnificent community',
+      pic: 'https://randomuser.me/api/portraits/women/11.jpg',
+   },
 ];

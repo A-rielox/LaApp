@@ -1,8 +1,9 @@
 <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
-   <div class="text-center font-bold text-900 text-5xl mb-3">El Equipo</div>
+   <div class="text-center font-bold text-900 text-5xl mb-3">
+      {{ text.title }}
+   </div>
    <div class="text-center text-xl line-height-3 text-600 mb-6">
-      Todos comprometidos con mejorar nuestro estilo de vida de una forma sana y
-      natural.
+      {{ text.subTitle }}
    </div>
 
    <div
@@ -10,7 +11,7 @@
       *ngIf="userParams"
    >
       <label for="sort" class="font-normal text-900 mb-0 mr-2 text-sm"
-         >Ordenar por:</label
+         >{{ text.titleFilters }}:</label
       >
       <p-selectButton
          [options]="sortingOpts"

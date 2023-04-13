@@ -9,16 +9,7 @@ import { AccountService } from '../_services/account.service';
 import { take } from 'rxjs/operators';
 import { PostDisplayComponent } from './post-display/post-display.component';
 import { CloseModal, PostsToDisplay } from './interfaces';
-
-// interface PostsToDisplay {
-//    name: string;
-//    label: string;
-// }
-
-// interface CloseModal {
-//    por: string;
-//    id: number; // receta o post
-// }
+import { text, textEng, textEsp } from './postsLang';
 
 @Component({
    selector: 'app-posts',
@@ -37,6 +28,9 @@ export class PostsComponent implements OnInit {
    user: User | undefined; // 📌 solo p' sacar el username
    postsToDisplay: PostsToDisplay[] = [];
 
+   //    LANG
+   text: text = textEng;
+
    constructor(
       private postsService: PostsService,
       public dialogService: DialogService,
@@ -52,6 +46,23 @@ export class PostsComponent implements OnInit {
             }
          },
       });
+
+      //       LANG
+      this.accountService.selectedLang$.subscribe({
+         next: (lang) => {
+            this.text = lang === 'Esp' ? textEsp : textEng;
+
+            if (this.user) {
+               this.postsToDisplay = [
+                  { name: '', label: lang === 'Esp' ? 'Todas' : 'All' },
+                  {
+                     name: this.user.userName,
+                     label: lang === 'Esp' ? 'Mias' : 'Mine',
+                  },
+               ];
+            }
+         },
+      });
    }
 
    ngOnInit(): void {
@@ -59,8 +70,8 @@ export class PostsComponent implements OnInit {
 
       if (this.user) {
          this.postsToDisplay = [
-            { name: '', label: 'Todas' },
-            { name: this.user.userName, label: 'Mias' },
+            { name: '', label: 'All' },
+            { name: this.user.userName, label: 'Mine' },
          ];
       }
    }

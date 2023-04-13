@@ -1,6 +1,6 @@
 <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
    <div class="font-bold text-5xl text-900 mb-3 relative">
-      Recetas
+      {{ text.title }}
 
       <button
          pButton
@@ -13,7 +13,7 @@
       <button
          pButton
          type="button"
-         label="Añadir"
+         label="{{ text.addBtn }}"
          icon="pi pi-plus"
          class="p-button w-2 absolute top-0 right-0 big-btn"
          routerLink="/add-edit/recipe"
@@ -23,9 +23,9 @@
    <div
       class="text-700 line-height-3 text-base mb-6 flex flex-wrap align-items-center"
    >
-      Recuerda:
+      {{ text.categoryTitle }}:
       <div class="flex ml-2 align-items-center">
-         Salud
+         {{ text.cat1 }}
          <div
             style="background: linear-gradient(15deg, #f91616, #f97316)"
             class="w-2rem h-2rem flex-shrink-0 border-circle ml-2"
@@ -34,7 +34,7 @@
       </div>
 
       <div class="flex ml-2 align-items-center">
-         Belleza
+         {{ text.cat2 }}
          <div
             style="background: linear-gradient(15deg, #cc63f1, #6366f1)"
             class="w-2rem h-2rem flex-shrink-0 border-circle ml-2"
@@ -43,7 +43,7 @@
       </div>
 
       <div class="flex ml-2 align-items-center">
-         Bebés
+         {{ text.cat3 }}
          <div
             style="background: linear-gradient(15deg, #06d465, #06b6d4)"
             class="w-2rem h-2rem flex-shrink-0 border-circle ml-2"
@@ -51,7 +51,7 @@
       </div>
 
       <div class="flex ml-2 align-items-center">
-         Otros
+         {{ text.cat4 }}
          <div
             style="background: linear-gradient(15deg, #eae91c, #6d1e70)"
             class="w-2rem h-2rem flex-shrink-0 border-circle ml-2"
@@ -75,13 +75,13 @@
          >
             <div class="grid">
                <div class="col-12 md:col-6">
-                  <label for="autor" class="block text-900 font-medium mb-2"
-                     >Por Autor</label
-                  >
+                  <label for="autor" class="block text-900 font-medium mb-2">{{
+                     text.filterAuthor
+                  }}</label>
                   <input
                      id="autor"
                      type="text"
-                     placeholder="Buscar por autor"
+                     placeholder="{{ text.filterAuthorPlaceholder }}"
                      pInputText
                      class="w-full mb-3 p-3"
                      [(ngModel)]="recipeParams.membername"
@@ -90,13 +90,13 @@
                </div>
 
                <div class="col-12 md:col-6">
-                  <label for="title" class="block text-900 font-medium mb-2"
-                     >Por Titulo</label
-                  >
+                  <label for="title" class="block text-900 font-medium mb-2">{{
+                     text.filterTitle
+                  }}</label>
                   <input
                      id="title"
                      type="text"
-                     placeholder="Buscar en el título"
+                     placeholder="{{ text.filterTitlePlaceholder }}"
                      pInputText
                      class="w-full mb-3 p-3"
                      [(ngModel)]="recipeParams.title"
@@ -108,7 +108,7 @@
             <button
                pButton
                type="submit"
-               label="Filtrar"
+               label="{{ text.filterBtn }}"
                icon="pi pi-filter"
                class="ml-2"
             ></button>
@@ -116,7 +116,7 @@
 
          <div class="flex align-items-center">
             <label for="sort" class="font-normal text-900 mb-0 mr-2 text-sm"
-               >Ver:</label
+               >{{ text.sortTitle }}:</label
             >
             <!-- (onOptionClick)="loadRecipes()" -->
             <p-selectButton

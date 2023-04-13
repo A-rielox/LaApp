@@ -5,7 +5,6 @@ export interface DialogType {
 }
 
 //////////////////////
-
 export interface text {
    title: string;
    modalReadyBtn: string;

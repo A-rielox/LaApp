@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Post } from 'src/app/_models/post';
 import {
    DialogType,
@@ -14,7 +14,7 @@ import {
    templateUrl: './posts-home.component.html',
    styleUrls: ['./posts-home.component.css'],
 })
-export class PostsHomeComponent implements OnInit {
+export class PostsHomeComponent implements OnInit, OnChanges {
    openDialog = false;
    posts: Post[] = postsDataEng;
    dialog: DialogType = {} as DialogType;

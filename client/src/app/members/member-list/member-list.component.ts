@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { Member } from 'src/app/_models/member';
 import { Pagination } from 'src/app/_models/pagination';
 import { UserParams } from 'src/app/_models/userParams';
+import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
-
-interface Sorting {
-   name: string;
-   label: string;
-}
+import {
+   Sorting,
+   sortingOptsEng,
+   sortingOptsEsp,
+   text,
+   textEng,
+   textEsp,
+} from './memberListLang';
 
 @Component({
    selector: 'app-member-list',
@@ -19,17 +23,24 @@ export class MemberListComponent implements OnInit {
    pagination: Pagination | undefined; // p'paginator en .html
    userParams: UserParams | undefined; // aqui estan los filtros
 
-   //sorting options
-   sortingOpts: Sorting[] = [
-      { name: 'lastActive', label: 'Más reciente' },
-      { name: 'a-z', label: 'Nombre a-z' },
-   ];
-   // sortingChoice = 'lastActive'; // yellow revisar si lo ocupo
+   sortingOpts: Sorting[] = sortingOptsEng;
 
-   // red red poner pagina uno al cambiar el filtro
+   //    LANG
+   text: text = textEng;
 
-   constructor(private memberService: MembersService) {
+   constructor(
+      private memberService: MembersService,
+      public accountService: AccountService
+   ) {
       this.userParams = this.memberService.getUserParams();
+
+      //    LANG
+      this.accountService.selectedLang$.subscribe({
+         next: (lang) => {
+            this.text = lang === 'Esp' ? textEsp : textEng;
+            this.sortingOpts = lang === 'Esp' ? sortingOptsEsp : sortingOptsEng;
+         },
+      });
    }
 
    ngOnInit(): void {
