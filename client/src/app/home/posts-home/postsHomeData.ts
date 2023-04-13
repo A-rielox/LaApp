@@ -19,7 +19,7 @@ export const textEsp = {
    modalReadyBtn: 'Listo',
 };
 
-export const postsData: Post[] = [
+export const postsDataEsp: Post[] = [
    {
       category: 'Malestares',
       content:
@@ -52,5 +52,41 @@ export const postsData: Post[] = [
       createdByUsername: 'lois',
       id: 6,
       title: 'Para tratar tus chipotes',
+   },
+];
+
+export const postsDataEng: Post[] = [
+   {
+      category: 'Discomforts',
+      content:
+         "<p><strong><u>Thyme essential oil</u></strong> is well known for its antibacterial properties, but it is also a powerful antiviral. In fact, its germ-killing qualities are so effective that you'll find thyme essential oil as an active ingredient in many green cleaning products. In a <strong>study published in the journal Medicinal Chemistry in 2011</strong>, researchers examined the response of thyme oil to 120 strains of bacteria that were isolated from patients with respiratory infections. The results found that thyme oil showed strong activity against all strains of bacteria, meaning thyme oil is perfect for sore throats, coughs, and nasal congestion due to colds.</p><p><br></p><p>Thyme oil, How to use thyme oil?</p><ul><li>Apply topically to the neck and chest</li><li>Take 1 or 2 drops internally</li><li>Add 5 to 7 drops to hot water and breathe in the steam.</li></ul><p><br></p><p>Safety with thyme essential oil:</p><ul><li>Do not use during the pregnancy</li><li>Avoid if you have high blood pressure or epilepsy</li></ul>",
+      created: new Date('2023-03-28T19:22:05.09964Z'),
+      createdById: 6,
+      createdByPhotoUrl: 'https://randomuser.me/api/portraits/men/90.jpg',
+      createdByUsername: 'todd',
+      id: 8,
+      title: 'Against cough and respiratory infections',
+   },
+   {
+      category: 'Discomforts',
+      content:
+         '<ul><li>Wintergreen Essential Oil</li><li>Immortelle Essential Oil</li><li>Blue Eucalyptus Essential Oil</li><li>Katrafay Essential Oil</li></ul><p>It is enough to mix 2 drops of each essential oil and then apply the synergy to the painful area 3 times a day! How easy, right? And very important very natural!</p><p><br></p><h1>What benefits do these oils bring us in the treatment of back pain or any other type of pain?</h1><p><br></p><p><strong>Wintergreen Essential Oil</strong> has analgesic and antispasmodic effects, highly recommended for athletes.</p><p><strong>Immortelle Essential Oil</strong> a perfect ally against any type of trauma, due to its anti-hematoma and anti-inflammatory properties.</p><p><strong>Blue Eucalyptus Essential Oil</strong> is added to this recipe for its soothing, anti-inflammatory, and analgesic benefits.</p><p><strong>Katrafay Essential Oil</strong>, another oil that enhances the effect of this synergy thanks to its decongestant, anti-inflammatory and analgesic effects.</p><p><br></p><p>I hope you liked it and that you learned something new! Have a good weekend, rest but without pain, of course!</p><p><br></p><p><em>Do not forget to inform yourself about the possible contraindications of the oils, which we mentioned! You can find more information on our website.</em></p>',
+      created: new Date('2022-05-01T19:09:40.7453596Z'),
+      createdById: 6,
+      createdByPhotoUrl: 'https://randomuser.me/api/portraits/men/90.jpg',
+      createdByUsername: 'todd',
+      id: 7,
+      title: 'For your back pain',
+   },
+   {
+      category: 'Health',
+      content:
+         "<ul><li>Arnica Vegetable Oil (30 ml)</li><li>Immortelle Essential Oil (20 drops)</li><li>Ylang-Ylang Essential Oil (5 drops)</li></ul><p>Gently massage the area of ​​the blow, bruise or chip with this formula several times a day until you notice the improvement.</p><p><br></p><h2>And why do I recommend using these oils to treat chipotes and bumps?</h2><p><br></p><p><strong>Arnica Vegetable Oil</strong> is an anti-inflammatory oil, perfect in case you have bruises, pain or stiffness after the gym.</p><p><strong>Immortelle Essential Oil</strong> I love it! Because it has so many properties, among which its anti-hematoma effect stands out the most, which is why it is widely used to treat chipotes, bruises, bruises, both recent and old blows, whether internal or external.</p><p><strong>Ylang-Ylang Essential Oil</strong> is an anti-inflammatory and skin tonic with a relaxing and calming effect on the nervous system.</p><p><br></p><p>That's all for today, I'm calmer now because now in your power you have a remedy to be able to face the beatings, bruises and chipotes of your children. And next week more and better.</p><p><br></p><p>Think green!</p><p><br></p><p><em>Do not forget to inform yourself about the possible contraindications of the oils, which we mentioned! You can find more information on our website.</em></p>",
+      created: new Date('2021-03-20T18:57:48.5573259Z'),
+      createdById: 4,
+      createdByPhotoUrl: 'https://randomuser.me/api/portraits/women/11.jpg',
+      createdByUsername: 'lois',
+      id: 6,
+      title: 'To treat your bumps',
    },
 ];

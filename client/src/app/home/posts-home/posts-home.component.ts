@@ -1,6 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Post } from 'src/app/_models/post';
-import { DialogType, postsData, text, textEng, textEsp } from './postsHomeData';
+import {
+   DialogType,
+   postsDataEng,
+   postsDataEsp,
+   text,
+   textEng,
+   textEsp,
+} from './postsHomeData';
 
 @Component({
    selector: 'app-posts-home',
@@ -9,7 +16,7 @@ import { DialogType, postsData, text, textEng, textEsp } from './postsHomeData';
 })
 export class PostsHomeComponent implements OnInit {
    openDialog = false;
-   posts: Post[] = postsData;
+   posts: Post[] = postsDataEng;
    dialog: DialogType = {} as DialogType;
 
    // LANG
@@ -21,7 +28,7 @@ export class PostsHomeComponent implements OnInit {
    ngOnChanges(): void {
       this.text = this.lang === 'Esp' ? textEsp : textEng;
 
-      // this.recipes = this.lang === 'Esp' ? recipesDataEsp : recipesDataEng;
+      this.posts = this.lang === 'Esp' ? postsDataEsp : postsDataEng;
    }
 
    ngOnInit(): void {}
@@ -36,21 +43,22 @@ export class PostsHomeComponent implements OnInit {
 
    border2Color(category: string) {
       switch (category) {
+         // NO funcionan con || case 'Discomforts' || 'Malestares':
          case 'Piel':
             return 'border-color: #06d465';
-         // return 'background: linear-gradient(15deg, #06d465, #06b6d4); border-top-width: 3px;';
 
          case 'Salud':
             return 'border-color: #f91616';
-         // return 'background: linear-gradient(15deg, #f91616, #f97316); border-top-width: 3px;';
+         case 'Health':
+            return 'border-color: #f91616';
 
          case 'Malestares':
             return 'border-color: #cc63f1';
-         // return 'background: linear-gradient(15deg, #cc63f1, #6366f1); border-top-width: 3px;';
+         case 'Discomforts':
+            return 'border-color: #cc63f1';
 
          default:
             return 'border-color: #eae91c';
-         // return 'background: linear-gradient(15deg, #eae91c, #6d1e70); border-top-width: 3px;';
       }
    }
 }
