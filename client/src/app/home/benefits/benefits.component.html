@@ -1,12 +1,10 @@
 <div class="surface-section px-4 py-8 md:px-6 lg:px-8">
    <div class="text-900 font-bold text-5xl mb-4 text-center">
-      ¿Cómo usar los aceites esenciales?
+      {{ text.title }}
    </div>
 
    <p class="text-700 text-xl mt-0 mb-6 text-center line-height-3">
-      Con tantos aceites esenciales a su alcance que tienen tantos usos
-      posibles, seguramente se preguntará cómo usarlos todos. No se preocupe,
-      con un poco de ayuda, ¡será un profesional en poco tiempo!
+      {{ text.subtitle }}
    </p>
 
    <div class="grid">
@@ -25,7 +23,7 @@
                   style="bottom: 1rem; right: 50%"
                   (click)="dialogToOpen(i)"
                >
-                  Conocer más
+                  {{ text.btn }}
                </button>
             </div>
 
@@ -86,7 +84,7 @@
             pButton
             icon="pi pi-check"
             (click)="openDialog = false"
-            label="Listo"
+            label="{{ lang === 'Esp' ? 'Listo' : 'Close' }}"
          ></button>
       </div>
    </ng-template>

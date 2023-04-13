@@ -1,22 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { benefitsData, BenefitsData, DialogType } from './benefitsData';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import {
+   benefitsData,
+   BenefitsData,
+   benefitsDataEng,
+   DialogType,
+   text,
+   textEng,
+   textEsp,
+} from './benefitsData';
 
 @Component({
    selector: 'app-benefits',
    templateUrl: './benefits.component.html',
    styleUrls: ['./benefits.component.css'],
 })
-export class BenefitsComponent implements OnInit {
+export class BenefitsComponent implements OnInit, OnChanges {
    openDialog = false;
-
    data?: BenefitsData[];
-
    dialog: DialogType = {} as DialogType;
+
+   @Input() lang: string = 'Eng';
+   text: text = textEng;
 
    constructor() {}
 
+   ngOnChanges(): void {
+      this.text = this.lang === 'Esp' ? textEsp : textEng;
+
+      this.setLang();
+   }
+
    ngOnInit(): void {
-      this.data = benefitsData;
+      this.setLang();
+   }
+
+   setLang() {
+      this.data = this.lang === 'Esp' ? benefitsData : benefitsDataEng;
    }
 
    dialogToOpen(index: number) {
