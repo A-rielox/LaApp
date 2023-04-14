@@ -6,11 +6,11 @@
       autocomplete="off"
    >
       <div class="field col-12 md:col-8">
-         <label for="firstname6">Lista de Aceites</label>
+         <label for="firstname6">{{ text.list }}</label>
          <p-multiSelect
             formControlName="oilsList"
             [options]="allOils"
-            defaultLabel="Selecciona los aceites"
+            defaultLabel="{{ text.listPlaceholder }}"
             optionLabel="name"
             display="chip"
             [selectionLimit]="5"
@@ -30,15 +30,15 @@
                id="oilsList-help"
                class="p-error block"
             >
-               Este campo es requerido</small
+               {{ text.requiredField }}</small
             >
          </ng-container>
 
-         <label for="category" class="mt-3">Categoría</label>
+         <label for="category" class="mt-3">{{ text.category }}</label>
          <p-multiSelect
             formControlName="category"
             [options]="allCats"
-            defaultLabel="Selecciona una Categoria"
+            defaultLabel="{{ text.categoryPlaceholder }}"
             optionLabel="name"
             display="chip"
             [selectionLimit]="1"
@@ -58,13 +58,13 @@
                id="category-help"
                class="p-error block"
             >
-               Este campo es requerido</small
+               {{ text.requiredField }}</small
             >
          </ng-container>
       </div>
 
       <div class="field col-12 md:col-4">
-         <label class="ml-2">Tu selección de aceites:</label>
+         <label class="ml-2">{{ text.selection }}:</label>
 
          <ul class="ml-2 mt-0">
             <li *ngFor="let oil of selectedOilsToDisplay">
@@ -74,7 +74,7 @@
       </div>
 
       <div class="field col-12">
-         <label for="title">Título</label>
+         <label for="title">{{ text.titleField }}</label>
          <input
             pInputText
             id="title"
@@ -94,14 +94,13 @@
                id="title-help"
                class="p-error block"
             >
-               Este campo es requerido, con un mínimo de 5 y máx de 30
-               caracteres.</small
+               {{ text.titleFieldErrorMsg }}</small
             >
          </ng-container>
       </div>
 
       <div class="field col-12">
-         <label for="content">Descripción</label>
+         <label for="content">{{ text.descField }}</label>
          <textarea
             formControlName="content"
             pInputTextarea
@@ -123,15 +122,14 @@
                id="content-help"
                class="p-error block"
             >
-               Este campo es requerido, con un mínimo de 30 y máx de 1000
-               caracteres.</small
+               {{ text.descFieldErrorMsg }}</small
             >
          </ng-container>
       </div>
    </form>
 
    <p-button
-      label="Guardar"
+      label="{{ text.btn }}"
       icon="pi pi-check"
       styleClass="p-button"
       (onClick)="register()"

@@ -1,5 +1,5 @@
 <!-- <div class="field col-12 md:col-6 XXXXXXXXXXXXXXXXXXX"> -->
-<div class="field col-12 XXXXXXXXXXXXXXXXXXX">
+<div class="field col-12">
    <p-selectButton
       [options]="containers"
       name="container"
@@ -14,7 +14,7 @@
 </div>
 
 <div class="col-12" *ngIf="!messages || messages.length === 0">
-   <h3>Sin mensajes</h3>
+   <h3>{{ text.noMessage }}</h3>
 </div>
 
 <!--              TABLA           -->
@@ -30,18 +30,18 @@
          <tr>
             <th>
                <span class="font-semibold text-sm text-color-secondary">{{
-                  container === "Outbox" ? "Para" : "Desde"
+                  container === "Outbox" ? text.for : text.from
                }}</span>
             </th>
             <th>
                <span class="font-semibold text-sm text-color-secondary">{{
-                  container === "Outbox" ? "Enviado" : "Recibido"
+                  container === "Outbox" ? text.sent : text.received
                }}</span>
             </th>
             <th>
-               <span class="font-semibold text-sm text-color-secondary"
-                  >Mensaje</span
-               >
+               <span class="font-semibold text-sm text-color-secondary">{{
+                  text.message
+               }}</span>
             </th>
             <th></th>
          </tr>
@@ -116,7 +116,7 @@
                   (click)="$event.stopPropagation()"
                   (click)="deleteMessage(message.id)"
                   pButton
-                  label="Borrar"
+                  label="{{ text.btn }}"
                   icon="pi pi-trash "
                ></button>
             </td>

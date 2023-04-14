@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Message } from '../_models/message';
 import { Pagination } from '../_models/pagination';
 import { MessageService } from '../_services/message.service';
-
-interface Containers {
-   name: string;
-   label: string;
-   icon: string;
-}
+import { AccountService } from '../_services/account.service';
+import {
+   Containers,
+   containersEng,
+   containersEsp,
+   text,
+   textEng,
+   textEsp,
+} from './messagesLang';
 
 @Component({
    selector: 'app-messages',
@@ -22,19 +25,27 @@ export class MessagesComponent implements OnInit {
    pageSize = 5;
    loading = false;
 
-   containers: Containers[] = [
-      { name: 'Unread', label: 'Nuevos', icon: 'pi pi-envelope mr-2' },
-      { name: 'Inbox', label: 'Recibidos', icon: 'pi pi-folder-open mr-2' },
-      { name: 'Outbox', label: 'Enviados', icon: 'pi pi-send mr-2' },
-   ];
+   lang: string = 'Eng';
+   text: text = textEng;
+   containers: Containers[] = containersEng;
 
    constructor(
-      private messageService: MessageService
-   ) // private intl: TimeagoIntl
-   {
+      private accountService: AccountService,
+      private messageService: MessageService // private intl: TimeagoIntl
+   ) {
       // p' timeAgo en español
       // this.intl.strings = englishStrings;
       // this.intl.changes.next();
+
+      this.accountService.selectedLang$.subscribe({
+         next: (lang) => {
+            this.lang = lang;
+
+            this.text = lang === 'Esp' ? textEsp : textEng;
+
+            this.containers = lang === 'Esp' ? containersEsp : containersEng;
+         },
+      });
    }
 
    ngOnInit(): void {

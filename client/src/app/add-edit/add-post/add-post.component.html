@@ -10,11 +10,11 @@
       autocomplete="off"
    >
       <div class="flex flex-column mt-3 field col-12 md:col-6">
-         <label for="category" class="mb-2">Categoría</label>
+         <label for="category" class="mb-2">{{ textL.category }}</label>
          <p-multiSelect
             formControlName="category"
             [options]="allCats"
-            defaultLabel="Selecciona una Categoria"
+            defaultLabel="{{ textL.categoryPlaceholder }}"
             optionLabel="name"
             display="chip"
             [selectionLimit]="1"
@@ -36,13 +36,13 @@
                id="category-help"
                class="p-error block"
             >
-               Este campo es requerido</small
+               {{ textL.requiredField }}</small
             >
          </ng-container>
       </div>
 
       <div class="field col-12">
-         <label for="title">Título</label>
+         <label for="title">{{ textL.titleField }}</label>
          <input
             pInputText
             id="title"
@@ -63,14 +63,13 @@
                id="title-help"
                class="p-error block"
             >
-               Este campo es requerido, con un mínimo de 5 y máx de 30
-               caracteres.</small
-            >
+               {{ textL.titleFieldErrorMsg }}
+            </small>
          </ng-container>
       </div>
 
       <div class="field col-12">
-         <label for="content">Descripción</label>
+         <label for="content">{{ textL.descField }}</label>
          <!-- <textarea
             formControlName="content"
             pInputTextarea
@@ -96,15 +95,14 @@
                id="content-help"
                class="p-error block"
             >
-               Este campo es requerido, con un mínimo de 30 y máx de 1000
-               caracteres.</small
+               {{ textL.descFieldErrorMsg }}</small
             >
          </ng-container>
       </div>
    </form>
 
    <p-button
-      label="Guardar"
+      label="{{ textL.btn }}"
       icon="pi pi-check"
       styleClass="p-button"
       (onClick)="sendPost()"

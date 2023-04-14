@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { categoryList, oilsList } from 'src/app/_models/optionLists';
-import {
-   EditedRecipe,
-   NewRecipe,
-   OilsAndCat,
-   Recipe,
-} from 'src/app/_models/recipe';
+// prettier-ignore
+import { EditedRecipe, NewRecipe, OilsAndCat, Recipe } from 'src/app/_models/recipe';
+import { AccountService } from 'src/app/_services/account.service';
 import { RecipesService } from 'src/app/_services/recipes.service';
 import { NotificationsService } from 'src/app/notifications/notifications.service';
+import { text, textEng, textEsp } from './addRecipeLang';
 
 @Component({
    selector: 'app-add-recipe',
@@ -25,14 +23,26 @@ export class AddRecipeComponent implements OnInit {
    allCats?: OilsAndCat[];
    selectedOilsToDisplay?: string[];
 
+   lang: string = 'Eng';
+   text: text = textEng;
+
    constructor(
       private fb: FormBuilder,
       private recipesService: RecipesService,
       private notification: NotificationsService,
-      private router: Router
+      private router: Router,
+      private accountService: AccountService
    ) {
       const navigation = this.router.getCurrentNavigation();
       this.recipeToEdit = navigation?.extras.state?.['recipe'];
+
+      this.accountService.selectedLang$.subscribe({
+         next: (lang) => {
+            this.lang = lang;
+
+            this.text = lang === 'Esp' ? textEsp : textEng;
+         },
+      });
    }
 
    ngOnInit(): void {

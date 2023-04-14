@@ -6,6 +6,8 @@ import { EditedPost, NewPost, Post } from 'src/app/_models/post';
 import { OilsAndCat } from 'src/app/_models/recipe';
 import { PostsService } from 'src/app/_services/posts.service';
 import { NotificationsService } from 'src/app/notifications/notifications.service';
+import { text, textEng, textEsp } from './addPostLang';
+import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
    selector: 'app-add-post',
@@ -22,14 +24,24 @@ export class AddPostComponent implements OnInit {
    // el textArea
    text: string = '';
 
+   //          LANG
+   textL: text = textEng;
+
    constructor(
       private fb: FormBuilder,
       private postsService: PostsService,
       private notification: NotificationsService,
-      private router: Router
+      private router: Router,
+      private accountService: AccountService
    ) {
       const navigation = this.router.getCurrentNavigation();
       this.postToEdit = navigation?.extras.state?.['post'];
+
+      this.accountService.selectedLang$.subscribe({
+         next: (lang) => {
+            this.textL = lang === 'Esp' ? textEsp : textEng;
+         },
+      });
    }
 
    ngOnInit(): void {
