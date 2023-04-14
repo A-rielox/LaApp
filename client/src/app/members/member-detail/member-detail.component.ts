@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Member } from 'src/app/_models/member';
 import { Message } from 'src/app/_models/message';
+import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
 import { MessageService } from 'src/app/_services/message.service';
+import { text, textEng, textEsp } from './memberDetailLang';
 
 @Component({
    selector: 'app-member-detail',
@@ -33,14 +35,25 @@ export class MemberDetailComponent implements OnInit {
 
    activeTabIndex: number = 0;
 
+   lang: string = 'Eng';
+   text: text = textEng;
+
    constructor(
       private memberService: MembersService,
       private messageService: MessageService,
-      private route: ActivatedRoute // private intl: TimeagoIntl
+      private route: ActivatedRoute,
+      public accountService: AccountService // private intl: TimeagoIntl
    ) {
       // p' timeAgo en español
       // this.intl.strings = englishStrings;
       // this.intl.changes.next();
+
+      this.accountService.selectedLang$.subscribe({
+         next: (lang) => {
+            this.lang = lang;
+            this.text = lang === 'Esp' ? textEsp : textEng;
+         },
+      });
    }
 
    ngOnInit(): void {

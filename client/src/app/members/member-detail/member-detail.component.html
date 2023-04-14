@@ -34,26 +34,15 @@
             }}</span>
          </div>
 
-         <!--                 Nivel -->
-         <!-- <p-divider align="center">
-            <div class="inline-flex align-items-center">
-               <i class="pi pi-chart-line mr-2 text-cyan-500"></i>
-               <b class="text-500">Nivel</b>
-            </div>
-         </p-divider>
-         
-         <div class="flex align-items-center justify-content-start mb-5">
-            <div class="font-bold text-900 mr-3">Plata</div>
-            <div
-               class="w-2rem h-2rem flex-shrink-0 border-circle bg-green-500"
-            ></div>
-         </div> -->
-
          <!--                 Activo por última vez -->
          <p-divider align="center">
             <div class="inline-flex align-items-center">
                <i class="pi pi-stopwatch mr-2 text-cyan-500"></i>
-               <!-- <b class="text-500">Activo por última vez</b> -->
+               <b class="text-500 text-xs"
+                  >(
+                  {{ lang === "Esp" ? "Activo por última vez" : "Last active" }}
+                  )</b
+               >
             </div>
          </p-divider>
 
@@ -72,26 +61,9 @@
             </div>
          </p-divider>
 
-         <!-- <div class="p-buttonset">
-            <button
-               pButton
-               label="Like"
-               icon="pi pi-heart"
-               class="p-button-danger w-6"
-            ></button>
-
-            <button
-               pButton
-               label="Mensajes"
-               icon="pi pi-pencil"
-               class="w-6"
-               (click)="selectTab()"
-            ></button>
-         </div> -->
-
          <button
             pButton
-            label="Mensajes"
+            label="{{ text.msgBtn }}"
             icon="pi pi-pencil"
             class="w-12"
             (click)="selectTab()"
@@ -104,11 +76,11 @@
       <div class="col-12 lg:col-8 lg:pl-6">
          <!-- (onChange)="onTabChanged($event)" -->
          <p-tabView [(activeIndex)]="activeTabIndex">
-            <p-tabPanel header="Acerca de {{ member.knownAs }}">
+            <p-tabPanel header="{{ text.aboutTab }} {{ member.knownAs }}">
                <ul class="list-none p-0 m-0">
                   <li class="pb-5 border-bottom-1 surface-border">
                      <div class="text-900 font-medium text-xl my-3">
-                        Introducción
+                        {{ text.intro }}
                      </div>
                      <p class="mx-0 mt-0 mb-3 text-700 line-height-3">
                         {{ member.introduction }}
@@ -117,7 +89,7 @@
 
                   <li class="py-5">
                      <div class="text-900 font-medium text-xl my-3">
-                        Intereses
+                        {{ text.interests }}
                      </div>
                      <p class="mx-0 mt-0 mb-3 text-700 line-height-3">
                         {{ member.interests }}
@@ -126,7 +98,7 @@
                </ul>
             </p-tabPanel>
 
-            <p-tabPanel header="Fotos">
+            <p-tabPanel header="{{ text.picturesTab }}">
                <p-galleria
                   [value]="images"
                   [responsiveOptions]="responsiveOptions"
@@ -148,8 +120,9 @@
                </p-galleria>
             </p-tabPanel>
 
-            <p-tabPanel header="Mensajes">
+            <p-tabPanel header="{{ text.msgTab }}">
                <app-member-messages
+                  [lang]="lang"
                   [username]="member.userName"
                   [messages]="messages"
                ></app-member-messages>

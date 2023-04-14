@@ -15,6 +15,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PhotoEditorComponent implements OnInit {
    @Input() member: Member | undefined;
+   @Input() lang: string = 'Eng';
 
    uploader: FileUploader | undefined;
    hasBaseDropZoneOver = false;

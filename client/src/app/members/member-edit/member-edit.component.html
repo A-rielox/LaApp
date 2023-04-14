@@ -4,7 +4,7 @@
          <div
             class="flex align-items-center text-3xl font-medium text-900 mb-4"
          >
-            Tu Perfil
+            {{ text.title }}
          </div>
       </div>
 
@@ -18,7 +18,7 @@
             ></i>
             <div class="ml-3">
                <p class="m-0 p-0 text-yellow-700 line-height-3">
-                  Cualquier cambio no guardado se perderá.
+                  {{ text.warning }}
                </p>
             </div>
          </div>
@@ -58,26 +58,15 @@
             }}</span>
          </div>
 
-         <!--                 Nivel -->
-         <!-- <p-divider align="center">
-            <div class="inline-flex align-items-center">
-               <i class="pi pi-chart-line mr-2 text-cyan-500"></i>
-               <b class="text-500">Nivel</b>
-            </div>
-         </p-divider>
-         
-         <div class="flex align-items-center justify-content-start mb-5">
-            <div class="font-bold text-900 mr-3">Plata</div>
-            <div
-               class="w-2rem h-2rem flex-shrink-0 border-circle bg-green-500"
-            ></div>
-         </div> -->
-
          <!--                 Activo por última vez -->
          <p-divider align="center">
             <div class="inline-flex align-items-center">
-               <i class="pi pi-map-marker mr-2 text-cyan-500"></i>
-               <!-- <b class="text-500">Activo por última vez</b> -->
+               <i class="pi pi-stopwatch mr-2 text-cyan-500"></i>
+               <b class="text-500 text-xs"
+                  >({{
+                     lang === "Esp" ? "Activo por última vez" : "Last active"
+                  }})</b
+               >
             </div>
          </p-divider>
 
@@ -94,7 +83,7 @@
          <!-- "form="editForm"" es referencia al "id" de la form -->
          <button
             pButton
-            label="Guardar"
+            label="{{ text.saveBtn }}"
             icon="pi pi-save"
             class="p-button w-12"
             [disabled]="!editForm.dirty"
@@ -108,7 +97,7 @@
       <!--                 TABS -->
       <div class="col-12 lg:col-8 lg:pl-6">
          <p-tabView>
-            <p-tabPanel header="Acerca de {{ member.knownAs }}">
+            <p-tabPanel header="{{ text.aboutTab }} {{ member.knownAs }}">
                <form
                   #editForm="ngForm"
                   id="editForm"
@@ -117,9 +106,9 @@
                   <div class="grid formgrid p-fluid">
                      <!--        NICKNAME -->
                      <div class="field col-12 md:col-6">
-                        <label for="knownAs" class="font-medium text-900"
-                           >Nickname</label
-                        >
+                        <label for="knownAs" class="font-medium text-900">{{
+                           text.Nickname
+                        }}</label>
                         <input
                            id="knownAs"
                            type="text"
@@ -131,9 +120,9 @@
 
                      <!--        EMAIL -->
                      <div class="field col-12 md:col-6">
-                        <label for="email" class="font-medium text-900"
-                           >Email</label
-                        >
+                        <label for="email" class="font-medium text-900">{{
+                           text.Email
+                        }}</label>
                         <input
                            id="email"
                            type="text"
@@ -147,8 +136,10 @@
 
                      <!--        INTRODUCTION -->
                      <div class="field col-12 md:col-6">
-                        <label for="introduction" class="font-medium text-900"
-                           >Introducción</label
+                        <label
+                           for="introduction"
+                           class="font-medium text-900"
+                           >{{ text.Introduccion }}</label
                         >
                         <textarea
                            id="introduction"
@@ -163,9 +154,9 @@
 
                      <!--        INTERESTS -->
                      <div class="field col-12 md:col-6">
-                        <label for="interests" class="font-medium text-900"
-                           >Intereses</label
-                        >
+                        <label for="interests" class="font-medium text-900">{{
+                           text.Intereses
+                        }}</label>
                         <textarea
                            id="interests"
                            type="text"
@@ -181,9 +172,9 @@
 
                      <!--        COUNTRY -->
                      <div class="field col-12 md:col-6">
-                        <label for="country" class="font-medium text-900"
-                           >País</label
-                        >
+                        <label for="country" class="font-medium text-900">{{
+                           text.Pais
+                        }}</label>
                         <input
                            id="country"
                            type="text"
@@ -195,9 +186,9 @@
 
                      <!--        CITY -->
                      <div class="field col-12 md:col-6">
-                        <label for="city" class="font-medium text-900"
-                           >Ciudad</label
-                        >
+                        <label for="city" class="font-medium text-900">{{
+                           text.Ciudad
+                        }}</label>
                         <input
                            id="city"
                            type="text"
@@ -210,8 +201,11 @@
                </form>
             </p-tabPanel>
 
-            <p-tabPanel header="Editar Fotos">
-               <app-photo-editor [member]="member"></app-photo-editor>
+            <p-tabPanel header="{{ text.picturesTab }}">
+               <app-photo-editor
+                  [lang]="lang"
+                  [member]="member"
+               ></app-photo-editor>
             </p-tabPanel>
          </p-tabView>
       </div>

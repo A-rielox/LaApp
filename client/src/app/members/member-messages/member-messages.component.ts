@@ -12,13 +12,13 @@ export class MemberMessagesComponent implements OnInit {
    @ViewChild('messageForm') messageForm?: NgForm; // p' el reset()
    @Input() username?: string;
    @Input() messages: Message[] = [];
+   @Input() lang: string = 'Eng';
 
    messageContent = '';
 
    constructor(
-      private messageService: MessageService
-   ) // private intl: TimeagoIntl
-   {
+      private messageService: MessageService // private intl: TimeagoIntl
+   ) {
       // p' timeAgo en español
       // this.intl.strings = englishStrings;
       // this.intl.changes.next();

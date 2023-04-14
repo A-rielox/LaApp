@@ -1,6 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { text, textEng, textEsp } from './heroLang';
-import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
    selector: 'app-hero',

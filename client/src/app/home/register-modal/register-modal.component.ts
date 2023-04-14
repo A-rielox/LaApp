@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
    AbstractControl,
    FormBuilder,
@@ -19,6 +19,8 @@ export class RegisterModalComponent implements OnInit {
    visibleRegister = false;
    registerForm: FormGroup = new FormGroup({});
    validationErrors: string[] | undefined;
+
+   @Input() lang: string = 'Eng';
 
    constructor(
       private accountService: AccountService,

@@ -6,6 +6,7 @@ import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
 import { NotificationsService } from 'src/app/notifications/notifications.service';
+import { text, textEng, textEsp } from './memberEditLang';
 
 @Component({
    selector: 'app-member-edit',
@@ -16,6 +17,9 @@ export class MemberEditComponent implements OnInit {
    @ViewChild('editForm') editForm: NgForm | undefined;
    member: Member | undefined;
    user: User | null = null;
+
+   lang: string = 'Eng';
+   text: text = textEng;
 
    constructor(
       private accountService: AccountService,
@@ -29,6 +33,13 @@ export class MemberEditComponent implements OnInit {
       this.accountService.currentUser$.pipe(take(1)).subscribe({
          next: (user) => {
             this.user = user;
+         },
+      });
+
+      this.accountService.selectedLang$.subscribe({
+         next: (lang) => {
+            this.lang = lang;
+            this.text = lang === 'Esp' ? textEsp : textEng;
          },
       });
    }
