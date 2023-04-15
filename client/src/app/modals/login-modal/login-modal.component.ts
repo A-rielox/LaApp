@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/_services/account.service';
 import { MembersService } from 'src/app/_services/members.service';
@@ -19,6 +19,9 @@ interface LoginForm {
 export class LoginModalComponent implements OnInit {
    loginForm: LoginForm = {} as LoginForm;
    visibleLogin = false;
+
+   @Input() lang: string = 'Eng';
+   // text: text = textEsp;
 
    constructor(
       private accountService: AccountService,
@@ -56,14 +59,7 @@ export class LoginModalComponent implements OnInit {
                detail: 'Que bueno tenerte de vuelta.',
             });
          },
-         error: (err) => {
-            // ahora mando el error desde el interceptor
-            // this.notification.addNoti({
-            //    severity: 'error',
-            //    summary: 'Error al entrar.',
-            //    detail: err.error,
-            // });
-         },
+         error: (err) => {},
       });
 
       this.visibleLogin = false;

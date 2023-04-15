@@ -1,11 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-   AbstractControl,
-   FormBuilder,
-   FormGroup,
-   ValidatorFn,
-   Validators,
-} from '@angular/forms';
+// prettier-ignore
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from 'src/app/_services/account.service';
 import { NotificationsService } from 'src/app/notifications/notifications.service';
@@ -83,13 +78,6 @@ export class RegisterModalComponent implements OnInit {
          error: (error) => {
             // los errores q vienen del interceptor
             this.validationErrors = error;
-
-            // estoy mandando notificacion desde el interceptor de errores
-            // this.notification.addNoti({
-            //    severity: 'error',
-            //    summary: 'Error al entrar.',
-            //    detail: error.error,
-            // });
          },
       });
    }

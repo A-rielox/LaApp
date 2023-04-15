@@ -17,7 +17,7 @@
          id="{{ label }}-help"
          class="p-error block"
       >
-         Por favor ingrese un{{ label === "Ciudad" ? "a" : "" }}
+         {{ text.required }} {{ label === "Ciudad" ? "a" : "" }}
          {{ label | lowercase }}</small
       >
 
@@ -26,8 +26,9 @@
          id="{{ label }}-help"
          class="p-error block"
       >
-         {{ label }} debe tener al menos
-         {{ control.errors["minlength"].requiredLength }} caracteres</small
+         {{ label }} {{ text.least }}
+         {{ control.errors["minlength"].requiredLength }}
+         {{ text.chars }}</small
       >
 
       <small
@@ -35,8 +36,9 @@
          id="{{ label }}-help"
          class="p-error block"
       >
-         {{ label }} debe ser máximo
-         {{ control.errors["maxlength"].requiredLength }} caracteres</small
+         {{ label }} {{ text.max }}
+         {{ control.errors["maxlength"].requiredLength }}
+         {{ text.chars }}</small
       >
 
       <small
@@ -44,7 +46,7 @@
          id="{{ label }}-help"
          class="p-error block"
       >
-         Los passwords no coinciden</small
+         {{ text.passNotMatch }}</small
       >
    </ng-container>
 </div>

@@ -8,7 +8,7 @@
 ></button>
 
 <p-dialog
-   header="Bienvenida!"
+   header="{{ lang === 'Esp' ? 'Bienvenido!' : 'Welcome!' }}"
    [(visible)]="visibleRegister"
    appendTo="body"
    [modal]="true"
@@ -29,7 +29,7 @@
 
             <app-text-input
                [formControl]="$any(registerForm.controls['username'])"
-               [label]="'Nombre de usuario'"
+               [label]="lang === 'Esp' ? 'Nombre de usuario' : 'Username'"
             ></app-text-input>
 
             <!--              knownAs -->
@@ -41,13 +41,13 @@
             <!--              city -->
             <app-text-input
                [formControl]="$any(registerForm.controls['city'])"
-               [label]="'Ciudad'"
+               [label]="lang === 'Esp' ? 'Ciudad' : 'City'"
             ></app-text-input>
 
             <!--              country -->
             <app-text-input
                [formControl]="$any(registerForm.controls['country'])"
-               [label]="'País'"
+               [label]="lang === 'Esp' ? 'País' : 'Country'"
             ></app-text-input>
 
             <!--              PASS -->
@@ -61,7 +61,9 @@
             <!--              CONFIRMAR PASS -->
             <app-text-input
                [formControl]="$any(registerForm.controls['confirmPassword'])"
-               [label]="'Confirmar password'"
+               [label]="
+                  lang === 'Esp' ? 'Confirmar password' : 'Confirm password'
+               "
                [type]="'password'"
             ></app-text-input>
 
@@ -101,7 +103,7 @@
             <!-- BOTON -->
             <button
                pButton
-               label="Unirme"
+               label="{{ lang === 'Esp' ? 'Unirme' : 'Join' }}"
                icon="pi pi-user-plus"
                class="w-full p-3"
                type="submit"

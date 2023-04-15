@@ -171,6 +171,7 @@
             <!-- DROPDOWN -->
             <li *ngIf="!(accountService.currentUser$ | async)">
                <app-login-modal
+                  [lang]="selectedLang"
                   buttonText="Login"
                   title="{{ text.logBtnPop }}"
                ></app-login-modal>
