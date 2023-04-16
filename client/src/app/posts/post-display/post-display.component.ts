@@ -5,6 +5,8 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Post } from 'src/app/_models/post';
 import { PostsService } from 'src/app/_services/posts.service';
 import { NotificationsService } from 'src/app/notifications/notifications.service';
+import { text, textEng, textEsp } from './postDisplayLang';
+import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
    selector: 'app-post-display',
@@ -14,6 +16,7 @@ import { NotificationsService } from 'src/app/notifications/notifications.servic
 })
 export class PostDisplayComponent implements OnInit {
    post?: Post;
+   text: text = textEng;
 
    constructor(
       public postsService: PostsService,
@@ -21,9 +24,15 @@ export class PostDisplayComponent implements OnInit {
       public config: DynamicDialogConfig,
       private confirmationService: ConfirmationService,
       private notification: NotificationsService,
-      ////
-      private router: Router
-   ) {}
+      private router: Router,
+      private accountService: AccountService
+   ) {
+      this.accountService.selectedLang$.subscribe({
+         next: (lang) => {
+            this.text = lang === 'Eng' ? textEng : textEsp;
+         },
+      });
+   }
 
    ngOnInit(): void {
       this.post = this.config.data;
@@ -45,9 +54,9 @@ export class PostDisplayComponent implements OnInit {
 
       this.confirmationService.confirm({
          target: event.target,
-         message: 'Confirmas que quieres borrar ?',
-         acceptLabel: 'Si',
-         rejectLabel: 'No',
+         message: this.text.confirmMsg,
+         acceptLabel: this.text.confirmAccept,
+         rejectLabel: this.text.confirmReject,
          icon: 'pi pi-exclamation-triangle',
          accept: () => {
             if (!this.post) return;
@@ -57,8 +66,8 @@ export class PostDisplayComponent implements OnInit {
                next: (_) => {
                   this.notification.addNoti({
                      severity: 'success',
-                     summary: 'Listo.',
-                     detail: 'Post borrado con éxito.',
+                     summary: this.text.notificationSummary,
+                     detail: this.text.notificationDetail,
                   });
 
                   // red red mientras casheo

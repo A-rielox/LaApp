@@ -71,25 +71,17 @@ export class AddRecipeComponent implements OnInit {
          this.defineList();
       }
    }
-
+   // prettier-ignore
    initializeForm() {
       this.registerForm = this.fb.group({
          id: [-1, Validators.required],
          title: [
             '',
-            [
-               Validators.required,
-               Validators.minLength(5),
-               Validators.maxLength(50),
-            ],
+            [ Validators.required, Validators.minLength(5), Validators.maxLength(50) ],
          ],
          content: [
             '',
-            [
-               Validators.required,
-               Validators.minLength(50),
-               Validators.maxLength(1300),
-            ],
+            [ Validators.required, Validators.minLength(50), Validators.maxLength(1300) ],
          ],
          oilsList: [[], Validators.required],
          category: [[], Validators.required],
@@ -116,7 +108,7 @@ export class AddRecipeComponent implements OnInit {
          this.recipesService.addRecipe(newRecipe).subscribe({
             next: (recetaNueva) => {
                //no estoy ocupando la respuesta hasta que cashee en front
-               this.callNotificationAndLoadRecipes('Receta añadida.');
+               this.callNotificationAndLoadRecipes(this.text.recipeAdded);
                this.registerForm.reset();
             },
          });
@@ -131,7 +123,7 @@ export class AddRecipeComponent implements OnInit {
 
          this.recipesService.editRecipe(editedRecipe).subscribe({
             next: (_) => {
-               this.callNotificationAndLoadRecipes('Receta editada.');
+               this.callNotificationAndLoadRecipes(this.text.recipeEdited);
                this.registerForm.reset();
                this.router.navigateByUrl('/recetas');
             },
@@ -142,7 +134,7 @@ export class AddRecipeComponent implements OnInit {
    callNotificationAndLoadRecipes(detail: string) {
       this.notification.addNoti({
          severity: 'success',
-         summary: 'Listo.',
+         summary: this.text.recipeSummary,
          detail: detail,
       });
    }

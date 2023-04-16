@@ -103,7 +103,7 @@ export class AddPostComponent implements OnInit {
          this.postsService.addPost(newPost).subscribe({
             next: (postNuevo) => {
                //no estoy ocupando la respuesta hasta que cashee en front
-               this.callNotificationAndLoadRecipes('Post añadido.');
+               this.callNotificationAndLoadRecipes(this.textL.postAdded);
                this.PostsForm.reset();
             },
          });
@@ -117,7 +117,7 @@ export class AddPostComponent implements OnInit {
 
          this.postsService.editPost(editedPost).subscribe({
             next: (_) => {
-               this.callNotificationAndLoadRecipes('Post editado.');
+               this.callNotificationAndLoadRecipes(this.textL.postEdited);
                this.PostsForm.reset();
                this.router.navigateByUrl('/posts');
             },
@@ -128,7 +128,7 @@ export class AddPostComponent implements OnInit {
    callNotificationAndLoadRecipes(detail: string) {
       this.notification.addNoti({
          severity: 'success',
-         summary: 'Listo.',
+         summary: this.textL.postSummary,
          detail: detail,
       });
    }

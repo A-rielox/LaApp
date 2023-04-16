@@ -11,6 +11,10 @@ export interface text {
    btn: string;
 
    requiredField: string;
+
+   recipeSummary: string;
+   recipeAdded: string;
+   recipeEdited: string;
 }
 export const textEsp = {
    list: 'Lista de Aceites',
@@ -27,6 +31,10 @@ export const textEsp = {
    btn: 'Guardar',
 
    requiredField: 'Este campo es requerido',
+
+   recipeSummary: 'Listo.',
+   recipeAdded: 'Receta añadida.',
+   recipeEdited: 'Receta editada.',
 };
 export const textEng = {
    list: 'List of Oils',
@@ -43,4 +51,8 @@ export const textEng = {
    btn: 'Save',
 
    requiredField: 'This field is required',
+
+   recipeSummary: 'Ready.',
+   recipeAdded: 'Recipe added.',
+   recipeEdited: 'Recipe Edited.',
 };

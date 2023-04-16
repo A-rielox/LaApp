@@ -3,8 +3,10 @@ import { NavigationExtras, Router } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Recipe } from 'src/app/_models/recipe';
+import { AccountService } from 'src/app/_services/account.service';
 import { RecipesService } from 'src/app/_services/recipes.service';
 import { NotificationsService } from 'src/app/notifications/notifications.service';
+import { text, textEng, textEsp } from './recipeDisplayLang';
 
 @Component({
    selector: 'app-recipe-display',
@@ -14,6 +16,7 @@ import { NotificationsService } from 'src/app/notifications/notifications.servic
 })
 export class RecipeDisplayComponent implements OnInit {
    recipe?: Recipe;
+   text: text = textEng;
 
    constructor(
       public recipesService: RecipesService,
@@ -21,9 +24,15 @@ export class RecipeDisplayComponent implements OnInit {
       public config: DynamicDialogConfig,
       private confirmationService: ConfirmationService,
       private notification: NotificationsService,
-      ////
-      private router: Router
-   ) {}
+      private router: Router,
+      private accountService: AccountService
+   ) {
+      this.accountService.selectedLang$.subscribe({
+         next: (lang) => {
+            this.text = lang === 'Eng' ? textEng : textEsp;
+         },
+      });
+   }
 
    ngOnInit(): void {
       this.recipe = this.config.data;
@@ -45,9 +54,9 @@ export class RecipeDisplayComponent implements OnInit {
 
       this.confirmationService.confirm({
          target: event.target,
-         message: 'Confirmas que quieres borrar ?',
-         acceptLabel: 'Si',
-         rejectLabel: 'No',
+         message: this.text.confirmMsg,
+         acceptLabel: this.text.confirmAccept,
+         rejectLabel: this.text.confirmReject,
          icon: 'pi pi-exclamation-triangle',
          accept: () => {
             if (!this.recipe) return;
@@ -57,8 +66,8 @@ export class RecipeDisplayComponent implements OnInit {
                next: (_) => {
                   this.notification.addNoti({
                      severity: 'success',
-                     summary: 'Listo.',
-                     detail: 'Receta borrada con éxito.',
+                     summary: this.text.notificationSummary,
+                     detail: this.text.notificationDetail,
                   });
 
                   // red red mientras casheo
@@ -75,20 +84,4 @@ export class RecipeDisplayComponent implements OnInit {
          reject: () => {},
       });
    }
-
-   // borderColor(category: string) {
-   //    switch (category) {
-   //       case 'Bebes':
-   //          return 'background: linear-gradient(15deg, #06d465, #06b6d4); border-left: 10px solid transparent;';
-
-   //       case 'Salud':
-   //          return 'background: linear-gradient(15deg, #f91616, #f97316); border-left: 10px solid transparent;';
-
-   //       case 'Belleza':
-   //          return 'background: linear-gradient(15deg, #cc63f1, #6366f1); border-left: 10px solid transparent;';
-
-   //       default:
-   //          return 'background: linear-gradient(15deg, #eae91c, #6d1e70); border-left: 10px solid transparent;';
-   //    }
-   // }
 }

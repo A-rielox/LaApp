@@ -41,7 +41,7 @@
       <button
          pButton
          icon="pi pi-trash"
-         label="Borrar"
+         label="{{ text.modalDelete }}"
          class="p-button-outlined mr-2"
          (click)="confirm($event)"
       ></button>
@@ -49,7 +49,7 @@
       <button
          pButton
          icon="pi pi-file-edit"
-         label="Editar"
+         label="{{ text.modalEdit }}"
          (click)="onEdit()"
       ></button>
    </div>

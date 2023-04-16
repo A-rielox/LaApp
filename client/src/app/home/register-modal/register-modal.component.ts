@@ -63,14 +63,18 @@ export class RegisterModalComponent implements OnInit {
    }
 
    register() {
+      let notSummary = this.lang === 'Eng' ? 'Hello' : 'Hola.';
+      let notDetail =
+         this.lang === 'Eng' ? "It's good to have you." : 'Que bueno tenerte.';
+
       this.accountService.register(this.registerForm.value).subscribe({
          next: (res) => {
             this.router.navigateByUrl('/members');
 
             this.notification.addNoti({
                severity: 'success',
-               summary: 'Bienvenido.',
-               detail: 'Que bueno tenerte.',
+               summary: notSummary,
+               detail: notDetail,
             });
 
             this.visibleRegister = false;

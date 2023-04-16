@@ -59,12 +59,16 @@ export class MemberEditComponent implements OnInit {
    }
 
    updateMember() {
+      let notSummary = this.lang === 'Eng' ? 'Ready.' : 'Listo.';
+      let notDetail =
+         this.lang === 'Eng' ? 'Edited profile.' : 'Perfil Editado.';
+
       this.memberService.updateMember(this.editForm?.value).subscribe({
          next: () => {
             this.notification.addNoti({
                severity: 'success',
-               summary: 'Listo.',
-               detail: 'Perfil Editado.',
+               summary: notSummary,
+               detail: notDetail,
             });
 
             // p' quitar mensaje de advertencia y disabled el btn de guardar

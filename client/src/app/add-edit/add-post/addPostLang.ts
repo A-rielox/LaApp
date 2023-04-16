@@ -11,6 +11,10 @@ export interface text {
    btn: string;
 
    requiredField: string;
+
+   postSummary: string;
+   postAdded: string;
+   postEdited: string;
 }
 export const textEsp = {
    category: 'Categoría',
@@ -27,6 +31,10 @@ export const textEsp = {
    btn: 'Guardar',
 
    requiredField: 'Este campo es requerido',
+
+   postSummary: 'Listo.',
+   postAdded: 'Post añadido.',
+   postEdited: 'Post editado.',
 };
 export const textEng = {
    category: 'Category',
@@ -43,4 +51,8 @@ export const textEng = {
    btn: 'Save',
 
    requiredField: 'This field is required',
+
+   postSummary: 'Ready.',
+   postAdded: 'Post added.',
+   postEdited: 'Post Edited.',
 };
