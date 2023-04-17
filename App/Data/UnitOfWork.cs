@@ -24,6 +24,10 @@ public class UnitOfWork : IUnitOfWork
 
     public ILikesRepository LikesRepository => new LikesRepository(_context);
 
+    public IPostRepository PostRepository => new PostRepository(_context, _mapper);
+
+    public IRecipeRepository RecipeRepository => new RecipeRepository(_context, _mapper);
+
 
     ////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////

@@ -52,7 +52,18 @@ app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin(
 app.UseAuthentication();
 app.UseAuthorization();
 
+
+
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+
+
 app.MapControllers();
+
+
+
+app.MapFallbackToController("Index", "Fallback");
 
 
 

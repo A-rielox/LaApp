@@ -12,15 +12,12 @@ namespace App.Controllers;
 [Authorize]
 public class RecipesController : BaseController
 {
-    private readonly IUserRepository _userRepository;
-    private readonly IRecipeRepository _recipeRepository;
+    private readonly IUnitOfWork _uow;
     private readonly IMapper _mapper;
 
-    public RecipesController(IUserRepository userRepository,
-                             IRecipeRepository recipeRepository, IMapper mapper)
+    public RecipesController(IUnitOfWork uow, IMapper mapper)
     {
-        _userRepository = userRepository;
-        _recipeRepository = recipeRepository;
+        _uow = uow;
         _mapper = mapper;
     }
 
@@ -33,7 +30,7 @@ public class RecipesController : BaseController
     {
         var username = User.GetUsername();
 
-        var createdBy = await _userRepository.GetUserByUsernameAsync(username);
+        var createdBy = await _uow.UserRepository.GetUserByUsernameAsync(username);
 
         if (createdBy == null) return NotFound("Usuario no encontrado.");
 
@@ -46,9 +43,9 @@ public class RecipesController : BaseController
             CreatedBy = createdBy,
         };
 
-        _recipeRepository.AddRecipe(recipe);
+        _uow.RecipeRepository.AddRecipe(recipe);
 
-        if (await _recipeRepository.SaveAllAsync())
+        if (await _uow.Complete())
         {
             var recipeDto = _mapper.Map<RecipeDto>(recipe);
 
@@ -65,7 +62,7 @@ public class RecipesController : BaseController
     public async Task<ActionResult<PagedList<RecipeDto>>> GetRecipes(
                                         [FromQuery] RecipeParams recipeParams)
     {
-        var pagedRecipes = await _recipeRepository.GetRecipesAsync(recipeParams);
+        var pagedRecipes = await _uow.RecipeRepository.GetRecipesAsync(recipeParams);
 
         Response.AddPaginationHeader(new PaginationHeader(pagedRecipes.CurrentPage,
                                 pagedRecipes.PageSize, pagedRecipes.TotalCount, pagedRecipes.TotalPages));
@@ -88,7 +85,7 @@ public class RecipesController : BaseController
     {
         var username = User.GetUsername();
 
-        var recipe = await _recipeRepository.GetRecipeAsync(id);
+        var recipe = await _uow.RecipeRepository.GetRecipeAsync(id);
 
         if (recipe == null)
         {
@@ -100,9 +97,9 @@ public class RecipesController : BaseController
             return Unauthorized("Solo puedes borrar tus recetas.");
         }
 
-        _recipeRepository.DeleteRecipe(recipe);
+        _uow.RecipeRepository.DeleteRecipe(recipe);
 
-        if (await _recipeRepository.SaveAllAsync()) return Ok();
+        if (await _uow.Complete()) return Ok();
 
         return BadRequest("No se pudo borrar la receta.");
     }
@@ -116,7 +113,7 @@ public class RecipesController : BaseController
         var username = User.GetUsername();
 
         // GetRecipeAsync incluye el AppUser que en este caso no necesito
-        var recipe = await _recipeRepository.GetRecipeAsync(recipeUpdateDto.Id);
+        var recipe = await _uow.RecipeRepository.GetRecipeAsync(recipeUpdateDto.Id);
 
         if (recipe == null)
         {
@@ -132,7 +129,7 @@ public class RecipesController : BaseController
         _mapper.Map(recipeUpdateDto, recipe);
 
         // NO necesito el UpdateRecipe del repository xq ya la trackea cuando " var reicpe = ... "
-        if (await _recipeRepository.SaveAllAsync()) return NoContent();
+        if (await _uow.Complete()) return NoContent();
 
         return BadRequest("No se pudo editar la receta.");
     }

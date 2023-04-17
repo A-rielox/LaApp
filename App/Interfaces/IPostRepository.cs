@@ -20,5 +20,5 @@ public interface IPostRepository
     void UpdatePost(Post post);
 
 
-    Task<bool> SaveAllAsync();
+    //Task<bool> SaveAllAsync();
 }

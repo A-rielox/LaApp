@@ -20,5 +20,5 @@ public interface IRecipeRepository
     void UpdateRecipe(Recipe recipe);
 
 
-    Task<bool> SaveAllAsync();
+    //Task<bool> SaveAllAsync();
 }

@@ -12,15 +12,12 @@ namespace App.Controllers;
 [Authorize]
 public class PostsController : BaseController
 {
-    private readonly IUserRepository _userRepository;
-    private readonly IPostRepository _postRepository;
+    private readonly IUnitOfWork _uow;
     private readonly IMapper _mapper;
 
-    public PostsController(IUserRepository userRepository,
-                             IPostRepository postRepository, IMapper mapper)
+    public PostsController(IUnitOfWork uow, IMapper mapper)
     {
-        _userRepository = userRepository;
-        _postRepository = postRepository;
+        _uow = uow;
         _mapper = mapper;
     }
 
@@ -33,7 +30,7 @@ public class PostsController : BaseController
     {
         var username = User.GetUsername();
 
-        var createdBy = await _userRepository.GetUserByUsernameAsync(username);
+        var createdBy = await _uow.UserRepository.GetUserByUsernameAsync(username);
 
         if (createdBy == null) return NotFound("Usuario no encontrado.");
 
@@ -45,9 +42,9 @@ public class PostsController : BaseController
             CreatedBy = createdBy,
         };
 
-        _postRepository.AddPost(post);
+        _uow.PostRepository.AddPost(post);
 
-        if (await _postRepository.SaveAllAsync())
+        if (await _uow.Complete())
         {
             var postDto = _mapper.Map<PostDto>(post);
 
@@ -64,7 +61,7 @@ public class PostsController : BaseController
     public async Task<ActionResult<PagedList<PostDto>>> GetPosts(
                                         [FromQuery] PostParams postParams)
     {
-        var pagedPosts = await _postRepository.GetPostsAsync(postParams);
+        var pagedPosts = await _uow.PostRepository.GetPostsAsync(postParams);
 
         Response.AddPaginationHeader(new PaginationHeader(pagedPosts.CurrentPage,
             pagedPosts.PageSize,pagedPosts.TotalCount,pagedPosts.TotalPages));
@@ -87,7 +84,7 @@ public class PostsController : BaseController
     {
         var username = User.GetUsername();
 
-        var post = await _postRepository.GetPostAsync(id);
+        var post = await _uow.PostRepository.GetPostAsync(id);
 
         if (post == null)
         {
@@ -99,9 +96,9 @@ public class PostsController : BaseController
             return Unauthorized("Solo puedes borrar tus posts.");
         }
 
-        _postRepository.DeletePost(post);
+        _uow.PostRepository.DeletePost(post);
 
-        if (await _postRepository.SaveAllAsync()) return Ok();
+        if (await _uow.Complete()) return Ok();
 
         return BadRequest("No se pudo borrar el post.");
     }
@@ -113,7 +110,7 @@ public class PostsController : BaseController
     public async Task<ActionResult> UpdatePost([FromBody] PostUpdateDto postUpdateDto)
     {
         var username = User.GetUsername();
-        var post = await _postRepository.GetPostAsync(postUpdateDto.Id);
+        var post = await _uow.PostRepository.GetPostAsync(postUpdateDto.Id);
 
         if (post == null)
         {
@@ -132,7 +129,7 @@ public class PostsController : BaseController
 
         //if (await _postRepository.SaveAllAsync()) return NoContent(); X LO DEL EDITOR
 
-        await _postRepository.SaveAllAsync();
+        await _uow.Complete();
         return NoContent();
 
         //return BadRequest("No se pudo editar el post.");

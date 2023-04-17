@@ -105,4 +105,35 @@ public class MsgRepository : IMsgRepository
 
         return _mapper.Map<IEnumerable<MsgDto>>(messages);
     }
+
+    /*      previo projectTo
+    public async Task<IEnumerable<MsgDto>> GetMessageThread(string currentUserName, string recipientUserName)
+    {
+        var messages = await _context.Messages
+                        .Include(m => m.Sender).ThenInclude(u => u.Photos)
+                        .Include(m => m.Recipient).ThenInclude(u => u.Photos)
+                        .Where(
+                            m => m.RecipientUsername == currentUserName && m.RecipientDeleted == false &&
+                                 m.SenderUsername == recipientUserName ||
+                                 m.RecipientUsername == recipientUserName && m.SenderDeleted == false &&
+                                 m.SenderUsername == currentUserName)
+                        .OrderBy(m => m.MessageSent)
+                        .ToListAsync();
+
+        var unreadMessages = messages.Where(m => m.DateRead == null &&
+                m.RecipientUsername == currentUserName).ToList();
+
+        if(unreadMessages.Any())
+        {
+            foreach (var message in unreadMessages)
+            {
+                message.DateRead = DateTime.UtcNow;
+            }
+
+            //await _context.SaveChangesAsync();  ---- x UnitOfWork guardo en el controller (MessagesController)
+        }
+
+        return _mapper.Map<IEnumerable<MsgDto>>(messages);
+    }
+    */
 }
