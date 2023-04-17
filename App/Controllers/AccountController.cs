@@ -30,7 +30,7 @@ public class AccountController : BaseController
     [HttpPost("register")]
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
-        if (await UserExists(registerDto.Username)) return BadRequest("Este nombre ya está tomado.");
+        if (await UserExists(registerDto.Username)) return BadRequest("This name is already taken.");
 
         var user = _mapper.Map<AppUser>(registerDto);
 
@@ -62,7 +62,7 @@ public class AccountController : BaseController
                                   .SingleOrDefaultAsync(u =>
                                       u.UserName == loginDto.Username);
 
-        if (user == null) return Unauthorized("Nombre invalido.");
+        if (user == null) return Unauthorized("Invalid name.");
 
         var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
 

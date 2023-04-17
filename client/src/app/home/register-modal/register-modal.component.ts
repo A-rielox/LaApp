@@ -63,6 +63,8 @@ export class RegisterModalComponent implements OnInit {
    }
 
    register() {
+      this.validationErrors = undefined;
+
       let notSummary = this.lang === 'Eng' ? 'Hello' : 'Hola.';
       let notDetail =
          this.lang === 'Eng' ? "It's good to have you." : 'Que bueno tenerte.';
@@ -81,7 +83,12 @@ export class RegisterModalComponent implements OnInit {
          },
          error: (error) => {
             // los errores q vienen del interceptor
-            this.validationErrors = error;
+            if (!Array.isArray(error)) return;
+
+            this.validationErrors = [];
+            for (const err of error) {
+               this.validationErrors.push(err.description);
+            }
          },
       });
    }
