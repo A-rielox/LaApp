@@ -9,13 +9,11 @@ namespace App.Controllers;
 
 public class LikesController : BaseController
 {
-    private readonly IUserRepository _userRepository;
-    private readonly ILikesRepository _likesRepository;
+    private readonly IUnitOfWork _uow;
 
-    public LikesController(IUserRepository userRepository, ILikesRepository likesRepository)
+    public LikesController(IUnitOfWork uow)
 	{
-        _userRepository = userRepository;
-        _likesRepository = likesRepository;
+        _uow = uow;
     }
 
 
@@ -31,10 +29,10 @@ public class LikesController : BaseController
         var sourceUserId = User.GetUserId();
 
         // user al q le doy el like
-        var likedUser = await _userRepository.GetUserByUsernameAsync(username);
+        var likedUser = await _uow.UserRepository.GetUserByUsernameAsync(username);
 
         // el user logeado con su lista de likes
-        var sourceUser = await _likesRepository.GetUserWithLikes(sourceUserId);
+        var sourceUser = await _uow.LikesRepository.GetUserWithLikes(sourceUserId);
 
         // no se encontro el user al q le quieren dar el like
         if (likedUser == null) return NotFound();
@@ -43,7 +41,7 @@ public class LikesController : BaseController
         if (sourceUser.UserName == username) return BadRequest("No te puedes dar likes a ti.");
 
         // para ver si ya se le habia dado like
-        var userLike = await _likesRepository.GetUserLike(sourceUserId, likedUser.Id);
+        var userLike = await _uow.LikesRepository.GetUserLike(sourceUserId, likedUser.Id);
 
         if (userLike != null) return BadRequest("Ya le habias dado like a este usuario.");
 
@@ -59,7 +57,7 @@ public class LikesController : BaseController
         // checar si tambien se rellena el LikedByUsers de el q se le da el like
         // xq este solo llena el LikedUsers
 
-        if (await _userRepository.SaveAllAsync()) return Ok();
+        if (await _uow.Complete()) return Ok();
 
         return BadRequest("No se pudo dar el like.");
     }
@@ -74,7 +72,7 @@ public class LikesController : BaseController
         // id del q da el like
         likesParams.UserId = User.GetUserId();
 
-        var pagedUsers = await _likesRepository.GetUserLikes(likesParams);
+        var pagedUsers = await _uow.LikesRepository.GetUserLikes(likesParams);
 
         Response.AddPaginationHeader(new PaginationHeader(pagedUsers.CurrentPage,
                 pagedUsers.PageSize, pagedUsers.TotalCount, pagedUsers.TotalPages));

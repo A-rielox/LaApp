@@ -29,7 +29,6 @@ public static class AppServiceExtensions
 
 
         services.AddScoped<ITokenService, TokenService>();
-        services.AddScoped<IUserRepository, UserRepository>();
 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -38,15 +37,10 @@ public static class AppServiceExtensions
 
         services.AddScoped<LogUserActivity>();
 
-        services.AddScoped<ILikesRepository, LikesRepository>();
-        services.AddScoped<IMsgRepository, MsgRepository>();
-
-        //services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-
         services.AddScoped<IRecipeRepository, RecipeRepository>();
         services.AddScoped<IPostRepository, PostRepository>();
 
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
     }

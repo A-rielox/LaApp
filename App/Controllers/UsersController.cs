@@ -12,15 +12,15 @@ namespace App.Controllers;
 [Authorize]
 public class UsersController : BaseController
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IUnitOfWork _uow;
     private readonly IMapper _mapper;
     private readonly IPictureService _photoService;
 
-    public UsersController(IUserRepository userRepository,
+    public UsersController(IUnitOfWork uow,
                            IMapper mapper,
                            IPictureService photoService)
     {
-        _userRepository = userRepository;
+        _uow = uow;
         _mapper = mapper;
         _photoService = photoService;
     }
@@ -34,10 +34,10 @@ public class UsersController : BaseController
     [HttpGet]
     public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
     {
-        var currentUser = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+        var currentUser = await _uow.UserRepository.GetUserByUsernameAsync(User.GetUsername());
         userParams.CurrentUsername = currentUser.UserName;
 
-        var pagedMembers = await _userRepository.GetMembersAsync(userParams);
+        var pagedMembers = await _uow.UserRepository.GetMembersAsync(userParams);
 
         Response.AddPaginationHeader(new PaginationHeader(pagedMembers.CurrentPage,
                           pagedMembers.PageSize, pagedMembers.TotalCount, pagedMembers.TotalPages));
@@ -51,7 +51,7 @@ public class UsersController : BaseController
     [HttpGet("{username}")]
     public async Task<ActionResult<MemberDto>> GetUser(string username)
     {
-        var member = await _userRepository.GetMemberAsync(username);
+        var member = await _uow.UserRepository.GetMemberAsync(username);
 
         return Ok(member);
     }
@@ -65,14 +65,14 @@ public class UsersController : BaseController
         //var username = User.FindFirst(ClaimTypes.Name)?.Value;
         var username = User.GetUsername();
 
-        var user = await _userRepository.GetUserByUsernameAsync(username);
+        var user = await _uow.UserRepository.GetUserByUsernameAsync(username);
 
         if (user == null) return NotFound();
 
         // hace el update en el user con lo q tiene el memberUpdateDto
         _mapper.Map(memberUpdateDto, user);
 
-        if (await _userRepository.SaveAllAsync()) return NoContent();
+        if (await _uow.Complete()) return NoContent();
 
         return BadRequest("Problemas editando el usuario.");
     }
@@ -86,7 +86,7 @@ public class UsersController : BaseController
         var username = User.GetUsername();
         // p'q funcione el resto debo hacer eagerLoading de las fotos con el GetUserByUsernameAsync
         // p'q luego checo el " if(user.Photos.Count == 0) "
-        var user = await _userRepository.GetUserByUsernameAsync(username);
+        var user = await _uow.UserRepository.GetUserByUsernameAsync(username);
         if (user == null) return NotFound();
 
         var result = await _photoService.AddPhotoAsync(file);
@@ -106,7 +106,7 @@ public class UsersController : BaseController
 
         user.Photos.Add(photo);
 
-        if (await _userRepository.SaveAllAsync())
+        if (await _uow.Complete())
         {
             //                        <-------
             //return _mapper.Map<PhotoDto>(photo);
@@ -125,7 +125,7 @@ public class UsersController : BaseController
     [HttpPut("set-main-photo/{photoId}")]
     public async Task<ActionResult> SetMainPhoto(int photoId)
     {
-        var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+        var user = await _uow.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
         if (user == null) return NotFound();
 
@@ -141,7 +141,7 @@ public class UsersController : BaseController
 
         photo.IsMain = true;
 
-        if (await _userRepository.SaveAllAsync()) return NoContent();
+        if (await _uow.Complete()) return NoContent();
 
         return BadRequest("Problem setting the main photo");
     }
@@ -153,7 +153,7 @@ public class UsersController : BaseController
     public async Task<ActionResult> DeletePhoto(int photoId)
     {
         // saco el usernane del token
-        var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
+        var user = await _uow.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
         var photo = user.Photos.FirstOrDefault(p => p.Id == photoId);
 
@@ -171,7 +171,7 @@ public class UsersController : BaseController
 
         user.Photos.Remove(photo);
 
-        if (await _userRepository.SaveAllAsync()) return Ok();
+        if (await _uow.Complete()) return Ok();
 
         return BadRequest("Problemas borrando tu foto.");
     }

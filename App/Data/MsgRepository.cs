@@ -100,17 +100,9 @@ public class MsgRepository : IMsgRepository
                 message.DateRead = DateTime.UtcNow;
             }
 
-            await _context.SaveChangesAsync();
+            //await _context.SaveChangesAsync();  ---- x UnitOfWork guardo en el controller (MessagesController)
         }
 
         return _mapper.Map<IEnumerable<MsgDto>>(messages);
-    }
-
-    ////////////////////////////////////////////////
-    ///////////////////////////////////////////////////
-    //
-    public async Task<bool> SaveAllAsync()
-    {
-        return await _context.SaveChangesAsync() > 0;
     }
 }

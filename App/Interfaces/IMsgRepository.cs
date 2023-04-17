@@ -12,6 +12,5 @@ public interface IMsgRepository
 
     Task<PagedList<MsgDto>> GetMessagesForUser(MsgParams messageParams);
     Task<IEnumerable<MsgDto>> GetMessageThread(string currentUserName, string recipientUserName);
-    Task<bool> SaveAllAsync();
 }
     
