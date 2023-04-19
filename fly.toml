@@ -1,0 +1,28 @@
+# fly.toml app configuration file generated for socioil-app on 2023-04-18T17:32:14-06:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "socioil-app"
+primary_region = "qro"
+
+[build]
+  image = "arielox/laapp:latest"
+
+[env]
+  ASPNETCORE_URLS="http://+:8080"
+  CloudinarySettings__CloudName="dxrrk3nvu"
+  CloudinarySettings__ApiKey="821345596142225"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+
+[checks]
+  [checks.alive]
+    type = "tcp"
+    interval = "15s"
+    timeout = "2s"
+    grace_period = "5s"

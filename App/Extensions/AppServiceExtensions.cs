@@ -13,10 +13,15 @@ public static class AppServiceExtensions
                         IConfiguration config
                     )
     {
-        services.AddDbContext<DataContext>(opt =>
-        {
-            opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
-        });
+        //services.AddDbContext<DataContext>(opt =>
+        //{
+        //    opt.UseSqlite(config.GetConnectionString("DefaultConnection"));
+        //});
+
+        //services.AddDbContext<DataContext>(options =>
+        //{
+        //    options.UseNpgsql(config.GetConnectionString("DefaultConnection"));
+        //});
 
 
         services.AddCors();

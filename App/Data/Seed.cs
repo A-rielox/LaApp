@@ -1,9 +1,6 @@
 ﻿using App.Entities;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using System.Security.Cryptography;
-using System.Text;
-using System.Text.Json;
 using Microsoft.AspNetCore.Identity;
 
 namespace App.Data;
@@ -37,6 +34,9 @@ public class Seed
         {
 
             user.UserName = user.UserName.ToLower();
+
+            user.LastActive = DateTime.SpecifyKind(user.LastActive, DateTimeKind.Utc);
+
             await userManager.CreateAsync(user, "P@ssword1");
             await userManager.AddToRoleAsync(user, "Member");
         }
@@ -63,6 +63,7 @@ public class Seed
        
         foreach (var recipe in recipes)
         {
+            recipe.Created = DateTime.SpecifyKind(recipe.Created, DateTimeKind.Utc);
             context.Recipes.Add(recipe);
         }
 
@@ -81,6 +82,7 @@ public class Seed
 
         foreach (var post in posts)
         {
+            post.Created = DateTime.SpecifyKind(post.Created, DateTimeKind.Utc);
             context.Posts.Add(post);
         }
 
