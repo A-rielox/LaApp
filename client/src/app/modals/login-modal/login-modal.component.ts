@@ -33,7 +33,7 @@ export class LoginModalComponent implements OnInit {
 
    ngOnInit(): void {
       // yellow QUITAR
-      this.loginForm.username = 'lisa';
+      this.loginForm.username = 'mariah';
       this.loginForm.password = 'P@ssword1';
       // yellow QUITAR
    }
